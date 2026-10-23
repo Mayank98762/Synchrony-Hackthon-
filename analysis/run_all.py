@@ -24,6 +24,11 @@ MODULES = [
     "analysis.economics",        # Shreyash
 ]
 
+# Chart modules run after export (they read key_numbers.json); each exposes run() and writes PNGs.
+CHART_MODULES = [
+    "analysis.charts_ml",        # Devansh: slides 8-9
+]
+
 
 def _merge(numbers, new, source, owner):
     clash = set(numbers) & set(new)
@@ -62,6 +67,17 @@ def main():
     export.write_key_numbers(numbers, report, status)
     export.write_experiment_log(numbers)
     export.write_impact_ledger(numbers)
+
+    for name in CHART_MODULES:
+        try:
+            module = importlib.import_module(name)
+        except ModuleNotFoundError as e:
+            if e.name != name:
+                raise
+            print(f"{name}: pending")
+            continue
+        paths, _ = module.run()
+        print(f"{name}: {len(paths)} charts -> outputs/charts/")
 
     counts = report.status.value_counts().to_dict()
     print(f"\n{len(numbers)} numbers -> outputs/key_numbers.md | checks: {counts} | {time.time() - t0:.0f}s")

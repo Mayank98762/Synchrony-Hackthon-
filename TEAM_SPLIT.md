@@ -34,7 +34,7 @@ Status as of 23 Oct, night: everything Mayank and Shreyash need from Devansh is 
 | Segmentation: K-means negative control (ARI, outcome separation), frequency × card-age 2×2, segments A–F, per-box table, boundary sensitivity | `analysis/segments.py` | ☑ |
 | `export.py`, `run_all.py` (one command rebuilds everything, fails on any assert), `key_numbers.md`, `experiment_log.csv`, `impact_ledger.csv` | `analysis/` | ◐ built and run (18 pass, 0 fail, 21 pending); final run after Mayank's and Shreyash's modules land |
 | **Dashboard** (§11): 4 pages, React + Vite + TS + Tailwind + ECharts, JSON contract. Built after charts exist; dropped if late | `dashboard/` | ☐ |
-| **Slides 8 and 9** and their charts (closures; who to prioritise) | deck | ☐ next |
+| **Slides 8 and 9** and their charts (closures; who to prioritise) | deck | ◐ 6 charts in `outputs/charts/08_*`, `09_*` (`analysis/charts_ml.py`); slide content next |
 
 ## Mayank: analytics and the story
 
