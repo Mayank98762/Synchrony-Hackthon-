@@ -73,12 +73,37 @@ GATE = {
     "min_rows": 4,                   # customers need this many active rows in the period to enter the gate
 }
 
-# ---------------------------------------------------------------- modelling
+# ---------------------------------------------------------------- modelling (selection_log.md §5-§6)
 BOOTSTRAP_N = 1000
+CV_FOLDS = 5
+HGB_GRID = {"max_depth": [2, 3], "learning_rate": [0.05, 0.1], "l2_regularization": [0.0, 1.0]}
+HGB_MAX_ITER = 200
+MONTHS_SINCE_NONE = 13               # months since last HSIC row when there is none in the lookback
+USAGE_SIGNAL_MIN_AUC = 0.55          # LR-usage must reach this lower CI bound to count as closure signal
+
 KMEANS_K_RANGE = range(3, 9)
 KMEANS_N_INIT = 20
 KMEANS_STABILITY_RESAMPLES = 20
+KMEANS_ARI_MIN = 0.70
+KMEANS_ETA2_MIN = 0.01
 BOUNDARY_SHIFT = 0.10                # +/-10% move of the tercile and 12-month cuts
+SOW_SAME_TOL = 0.02                  # boxes "don't differ on SoW" if every pairwise gap is within 2pp
+
+# ---------------------------------------------------------------- hypothesis verdicts (selection_log.md §3-§4, §7)
+VERDICT = {
+    "x3_excess_min": 0.02,           # time-aware excess for "concentrated" silent attrition
+    "x3_cutoffs_needed": 2,
+    "x4_excess_max": -0.02,          # adjusted excess over months 0-2 for "decay"
+    "x8_gap_max": 0.02,
+    "x9_spread_max": 0.03,
+    "x10_month_share_max": 0.01,
+    "x10_utilisation": 0.50,
+    "x11_index_max": 115,
+    "x12_wallet_share_max": 0.25,
+    "x13_excess_max": 0.02,
+    "x14_persistence_min": 0.20,
+    "x17_spread_max": 0.01,
+}
 
 # ---------------------------------------------------------------- pilot design (plan §8)
 HOLDOUT_SHARE = 0.10
