@@ -33,7 +33,7 @@ Status as of 23 Oct, night: everything Mayank and Shreyash need from Devansh is 
 | Closure model: B0, B1, B2 (card age), LR, HGB; out-of-time train and test; bootstrap CIs; ship-the-rule decision | `analysis/closure_model.py` | ☑ card-age rule ships (AUC 0.672) |
 | Segmentation: K-means negative control (ARI, outcome separation), frequency × card-age 2×2, segments A–F, per-box table, boundary sensitivity | `analysis/segments.py` | ☑ |
 | `export.py`, `run_all.py` (one command rebuilds everything, fails on any assert), `key_numbers.md`, `experiment_log.csv`, `impact_ledger.csv` | `analysis/` | ◐ built and run (18 pass, 0 fail, 21 pending); final run after Mayank's and Shreyash's modules land |
-| **Dashboard** (§11): 4 pages, React + Vite + TS + Tailwind + ECharts, JSON contract. Built after charts exist; dropped if late | `dashboard/` | ☐ |
+| **Dashboard** (§11): 4 pages, React + Vite + TS + ECharts, JSON contract. Built after charts exist; dropped if late | `dashboard/`, `analysis/dashboard_data.py` | ☑ 4 pages built and pushed; plain CSS on the taste-skill app base instead of Tailwind; data rebuilt by `run_all.py`; lint and browser inspector 0 fail at 1440, 768, 390. Break-even column fills when `economics.py` lands; publishing and slide-12 screenshots left |
 | **Slides 8 and 9** and their charts (closures; who to prioritise) | deck | ☑ 5 charts in `outputs/charts/08_*`, `09_*` (K-means is on Mayank's slide 7) (`analysis/charts_ml.py`); content, layout, speaker notes and Q&A in `deck/slides_08_09.md`. Pasting into the template waits on Shreyash's template |
 
 ## Mayank: analytics and the story
@@ -67,7 +67,7 @@ Status as of 24 Oct: everything below is done and merged to `main`, rebuilt on D
 
 | | Code | Slides | Other |
 |---|---|---|---|
-| Devansh | Foundation, ML, segmentation, pipeline, dashboard | 2 | Compute |
+| Devansh | Foundation, ML, segmentation, pipeline, dashboard (all done) | 2 (done) | Compute; final run after Shreyash's modules |
 | Mayank | F and hypothesis tests (pandas) | 4 | Verification |
 | Shreyash | Economics, F12/F15 | 6 + appendix | Style guide, integration, submission |
 
