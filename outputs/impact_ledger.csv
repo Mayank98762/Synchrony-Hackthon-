@@ -1,4 +1,8 @@
 metric,value,unit,type,source_key
+SoW FY25,0.289095280596921,share,Measured,f1_sow_fy25
+SoW FY26,0.1948042888436566,share,Measured,f1_sow_fy26
+Post-closure MetroMart spend (closers still shopping),91227701.08,₹,Measured,f11_post_close_net
+"Prime G+E cashback left on the table, FY26",1603018.6419,₹,Measured,f8_prime_ge_left_on_table
 "Segment A spend after closure (5,903 customers)",92282525.94999999,₹,Measured,seg_A_post_close_net
 Closers caught in top decile by card age,0.25514174541411894,share,Measured,cm_b2_top_decile
 interchange conservative,0.015,share,Assumed,assumed_interchange_conservative

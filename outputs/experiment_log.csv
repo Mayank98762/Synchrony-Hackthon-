@@ -1,18 +1,18 @@
 id,expected,verdict,result
 X1,Clustering customers on SoW reveals low-SoW segments,no customer-level differences beyond chance,x1_variance_ratio_fy25 = 1.001; x1_split_half_r = -0.005091; x1_persistence_r = 0.003725
 X2,A detector can flag individual customers whose SoW is declining,nothing to detect,x2_naive_flag_rate_observed = 0.4728; x2_naive_flag_rate_null = 0.4814
-X3,Silent attrition is concentrated in some cardholders,pending,pending
-X4,HSIC use decays before a card closes,pending,pending
+X3,Silent attrition is concentrated in some cardholders,universal,x3_excess_time_2026_01_31 = -0.002665; x3_excess_fixed_2026_01_31 = 0.215
+X4,HSIC use decays before a card closes,no decay beyond the calendar trend,x4_slope_pp_per_month = 0.08143
 X5,Recent card usage predicts closure,usage adds no closure signal beyond card age,x5_usage_roc_auc = 0.567; x5_usage_increment_roc = -0.0004065
 X6,Gradient boosting beats logistic regression,HGB does not beat LR,x6_hgb_minus_lr = -0.008627; x6_ci_lo = -0.01392; x6_ci_hi = -0.003713
 X7,New cards show an onboarding usage cliff,no onboarding usage cliff,x7_slope_pp_per_month = -0.03027; x7_max_abs_excess_pp = 1.463
-X8,Non-Prime members drop off because 1% is too little,pending,pending
-X9,Customers keep Grocery on HSIC and move other categories away,pending,pending
-X10,Credit limits bind during sale events,pending,pending
-X11,Festive peaks drive switching,pending,pending
-X12,MetroMart's Wallet is cannibalising the card,pending,pending
-X13,A never-activated segment exists,pending,pending
-X14,Ticket-size or category mix makes good segments,pending,pending
+X8,Non-Prime members drop off because 1% is too little,rejected,
+X9,Customers keep Grocery on HSIC and move other categories away,rejected,
+X10,Credit limits bind during sale events,rejected,
+X11,Festive peaks drive switching,rejected,
+X12,MetroMart's Wallet is cannibalising the card,rejected,
+X13,A never-activated segment exists,rejected,
+X14,Ticket-size or category mix makes good segments,rejected,
 X15,Predict an SoW drop in the next 60 days,infeasible: SoW is undefined for most customers in a 60-day window,x15_rows_per_60d = 0.8112; x15_sow_undefined_share_last_60d = 0.5372
 X16,Uplift model for offer response,infeasible: no offer history,x16_offer_fields = 0
-X17,Returns behave differently by payment method,pending,pending
+X17,Returns behave differently by payment method,no signal,
