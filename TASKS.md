@@ -62,12 +62,13 @@ Tasks come from [PROJECT_PLAN.md](PROJECT_PLAN.md) §13. Claim a task by putting
 | C06 | Email the PDF to analyticshiring@syf.com (subject = roll number only; attach the file, no Drive link) | P0 | C05 | 0.1 | Shreyash | ☐ |
 
 ## Dashboard (Devansh with Claude, optional)
+Live in `dashboard/`; see README → Getting started, step 4.
 | ID | Task | P | Depends on | Est. | Done |
 |---|---|---|---|---|---|
-| W01 | Scaffold Vite + React 18.3 + TS + Tailwind 3.4 + ECharts 5.5 (Node from the conda env); shell, navigation, light/dark tokens, badges | P1 | A08 | 0.5 | ☐ |
-| W02 | Page 1 Story + page 2 "Is it a segment problem?" | P1 | W01 | 1 | ☐ |
-| W03 | Page 3 Silent attrition & closures (raw / adjusted toggle) + page 4 Who to prioritise & offers (2×2, break-even sliders) | P1 | W01 | 1.5 | ☐ |
-| W04 | QA (phone width, both themes, no console errors); publish; screenshots for slide 12 | P1 | W02, W03 | 0.5 | ☐ |
+| W01 | Scaffold Vite + React 18.3 + TS + Tailwind 3.4 + ECharts 5.5 (Node from the conda env); shell, navigation, light/dark tokens, badges | P1 | A08 | 0.5 | ☑ Vite 5.4 + React 18.3 + TS + ECharts 5.5 (plain CSS on the taste-skill app base instead of Tailwind) |
+| W02 | Page 1 Story + page 2 "Is it a segment problem?" | P1 | W01 | 1 | ☑ |
+| W03 | Page 3 Silent attrition & closures (raw / adjusted toggle) + page 4 Who to prioritise & offers (2×2, break-even sliders) | P1 | W01 | 1.5 | ☑ break-even sliders replaced by a measured shift simulator until `economics.py` lands |
+| W04 | QA (phone width, both themes, no console errors); publish; screenshots for slide 12 | P1 | W02, W03 | 0.5 | ◐ QA done: taste-skill lint 0 fail, inspector 0 fail / 0 warn at 1440, 768, 390 on all 4 pages; publish and slide-12 screenshots left |
 
 ## Stretch (P2)
 | ID | Task | Depends on | Est. |

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-10-24 01:52",
+  "generated": "2026-10-24 02:00",
   "data_window": "2024-08-01 to 2026-07-31",
   "customers": 45000,
   "source": "outputs/key_numbers.json and outputs/tables (run_all.py)"
@@ -158,6 +158,16 @@
   "seg_A_post_close_net": {
    "key": "seg_A_post_close_net",
    "value": 92282525.94999999,
+   "label": "Measured"
+  },
+  "seg_A_n": {
+   "key": "seg_A_n",
+   "value": 4075,
+   "label": "Measured"
+  },
+  "seg_A_horizon_net_per_cust": {
+   "key": "seg_A_horizon_net_per_cust",
+   "value": 5941.06163190184,
    "label": "Measured"
   },
   "f11_still_shopping": {

@@ -41,7 +41,9 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
 | Heterogeneity gate | `analysis/experiments_ml.py` | Customer SoW fails all three tests (variance ratio 1.00, split-half r −0.005, persistence r 0.004). X2, X7, X15 and X16 also done |
 | Closure model | `analysis/closure_model.py` | Card age alone (ROC-AUC 0.672) beats every learned model, so the card-age rule ships. Its top 10% riskiest cards close at 15.7% vs 6.2% overall. Usage adds nothing beyond card age |
 | Segmentation | `analysis/segments.py` | K-means looks stable (ARI 0.89) but explains 0.04% of next year's SoW. 2×2 boxes: SoW within 1.7pp; young cards close 7.7pp more often; high-frequency customers spend ₹2,255 more off-card |
-| Pipeline | `analysis/run_all.py`, `export.py`, `checks.py` | One command, about 3 minutes, deterministic. 39 reproduction checks: 18 pass, 0 fail, 21 pending on teammates' modules |
+| Pipeline | `analysis/run_all.py`, `export.py`, `checks.py` | One command, about 3 minutes, deterministic. 39 reproduction checks: 37 pass, 0 fail, 2 pending on Shreyash's F12, F15 |
+| Slides 8–9 | `deck/slides_08_09.md`, `analysis/charts_ml.py` | Content, layout, speaker notes and judge Q&A; 5 charts in `outputs/charts/08_*`, `09_*` |
+| Dashboard | `dashboard/`, `analysis/dashboard_data.py` | 4 pages (share of wallet, segments, attrition & closures, priorities & offers) in React + Vite + TypeScript + ECharts, styled to the taste-skill app rules. Data: 35 kB of JSON rebuilt by `run_all.py`. Passes the skill's lint and browser inspector (0 fail) at 1440, 768 and 390px |
 | Handoffs | `HANDOFF_MAYANK.md`, `HANDOFF_SHREYASH.md` | What each teammate uses, from which file, for which slide |
 
 **Done (Mayank, merged to `main` on 24 Oct)**
@@ -57,7 +59,7 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
 **In progress / next**
 - **Mayank:** swap the charts to Shreyash's `style.py` when it lands.
 - **Shreyash:** `style.py`, `economics.py` (with the 3 review fixes in his handoff), F12 and F15, slides 1–3 and 10–12, deck integration and submission.
-- **Devansh:** charts and content for slides 8–9; the final `run_all.py` once the teammates' modules land; the 4-page dashboard (optional, cut first).
+- **Devansh:** the final `run_all.py` once Shreyash's modules land (the dashboard's break-even column fills in then); publish the dashboard and take screenshots for slide 12.
 
 ## Repository structure
 ```
@@ -67,7 +69,8 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
 ├── analysis/        # Python pipeline; run_all.py rebuilds every output; INTERFACE.md lists helpers and key names
 ├── notebooks/       # story.ipynb: narrative walk-through, imports analysis/
 ├── outputs/         # key_numbers.md/.json, impact_ledger.csv, experiment_log.csv, tables/, model_eval/, charts/
-└── dashboard/       # optional 4-page React + Vite + ECharts app; reads dashboard/public/data/*.json
+├── deck/            # slide content per owner (slides_04-07.md, slides_08_09.md)
+└── dashboard/       # 4-page React + Vite + ECharts app; reads dashboard/public/data/*.json
 ```
 `synchrony_hackathon_strategy_blueprint.md` is an earlier brainstorm, kept for reference. Plan v5.3 supersedes it.
 
@@ -80,13 +83,13 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
    ```
 2. **Add the data:** put `Customer Data.csv`, `Transactions Data.csv`, `Category Code.csv` and `Payment Code.csv` in `data/`, keeping the original file names.
 3. **Run the analysis:** `python analysis/run_all.py` from the repo root, inside the `synchrony` env (about 3 minutes). It fails on any failed check; checks whose module doesn't exist yet show as pending. Outputs go to `outputs/`; the deck takes every number from `outputs/key_numbers.md`.
-4. **(Optional) run the dashboard:**
+4. **(Optional) run the dashboard** (Node 20 from the `synchrony` env; packages install into `dashboard/node_modules` only):
    ```bash
    cd dashboard
    npm install
    npm run dev
    ```
-   For a static build, run `npm run build`; the output goes to `dashboard/dist/`.
+   For a static build, run `npm run build`; the output goes to `dashboard/dist/` and works from any folder. The data it shows is `dashboard/public/data/*.json`, rebuilt by step 3.
 
 ## Team workflow
 - **Pick a task** from [TASKS.md](TASKS.md), put your name in the Owner column and respect its dependencies. There are three tracks: Analysis, Charts & polish, and Deck. **The deck comes first.**
