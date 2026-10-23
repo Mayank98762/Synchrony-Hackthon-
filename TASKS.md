@@ -54,7 +54,7 @@ Tasks come from [PROJECT_PLAN.md](PROJECT_PLAN.md) §13. Claim a task by putting
 |---|---|---|---|---|---|---|
 | C01 | Slide template + storyline for the 12 slides in §12, with placeholder numbers marked `[KN]` | P0 | — | 1 | Shreyash | ☐ |
 | C02 | Slides 1–6: executive summary leading with *universal* silent attrition, data and rules, the decline, where it went (H-imm labelled), silent attrition is universal | P0 | C01 | 1 | Shreyash (1–3); Mayank (4–6) | ☐ |
-| C03 | Slides 7–12 + appendix: three common hypotheses tested, closures, who to prioritise (2×2), offers with reward visibility as the hero, economics and pilot, roadmap and asks; full 17-row table in the appendix | P0 | C01 | 1.5 | Mayank (7); Devansh (8–9); Shreyash (10–12, appendix) | ☐ |
+| C03 | Slides 7–12 + appendix: three common hypotheses tested, closures, who to prioritise (2×2), offers with reward visibility as the hero, economics and pilot, roadmap and asks; full 17-row table in the appendix | P0 | C01 | 1.5 | Mayank (7); Devansh (8–9); Shreyash (10–12, appendix) | ◐ slides 8–9 written in `deck/slides_08_09.md`; 7 and 10–12 pending |
 | C04 | Replace every `[KN]` with values from `key_numbers.md`; insert the final charts and (if built) dashboard screenshots | P0 | A08, B04 | 1 | Shreyash | ☐ |
 | C05 | Review against the brief and the plan:<br>• all 4 objectives covered, assumptions stated, every number traceable;<br>• silent attrition framed as universal (never "rejected");<br>• every "why" labelled Hypothesis;<br>• no mention of v4, the blueprint or pre-registration.<br>Then export the PDF | P0 | C04, B05 | 0.5 | Shreyash | ☐ |
 | C06 | Email the PDF to analyticshiring@syf.com (subject = roll number only; attach the file, no Drive link) | P0 | C05 | 0.1 | Shreyash | ☐ |

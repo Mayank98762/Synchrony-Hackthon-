@@ -58,7 +58,7 @@ Use `config.CHARTS` for the folder.
 | Post-closure spend, closers still shopping | ₹91.2M, 6,227 | F11 (Mayank) | `f11_*` |
 | Ticket-band mix (O4 ≥ ₹3k, O5 < ₹1k eligible spend) | see F5 in the plan | F5 (Mayank) | `f5_*` |
 | Box sizes, closure rate, non-HSIC ₹ / customer, Prime share | B 2,226 · 11.6% · ₹6,235; C 4,942 · 12.1% · ₹3,976; D 6,744 · 4.2% · ₹6,393; E 15,286 · 4.3% · ₹4,139 (built at 2026-01-31) | `segments.py` (Devansh) | `seg_<B..E>_n`, `_closure_6m`, `_nonhsic_per_cust`, `_prime_share` |
-| Segment A size and spend after close | **5,903 · ₹92.3M** at 2026-07-31 (pipeline). F11's 6,227 / ₹91.2M also counts return-only customers; use 5,903 on slides 9–11 | `segments.py` (Devansh) | `seg_A_n_score`, `seg_A_post_close_net` |
+| Segment A size and spend after close | **5,903 · ₹92.3M** at 2026-07-31 (pipeline). F11's 6,227 / ₹91.2M also counts 324 customers whose post-closure net spend is ≤ 0 (returns ≥ purchases); use 5,903 on slides 9–11 | `segments.py` (Devansh) | `seg_A_n_score`, `seg_A_post_close_net` |
 | Box sizes at production assignment (2026-07-31) | B 1,961 · C 4,352 · D 7,486 · E 16,720 · F 6,836 | `segments.py` (Devansh) | `seg_<X>_n_score` |
 | HSIC row share p and purchases per customer per 3 months, per box (for the MDE) | p ≈ 0.16; n from segments | `segments.py` (Devansh) | `seg_<box>_p_hsic`, `seg_<box>_rows_3m` |
 
