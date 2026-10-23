@@ -2,17 +2,17 @@
 
 Our entry for the **Synchrony Analytics Hackathon 2026** case study. HSIC Bank and MetroMart issue a co-branded credit card, and cardholders are paying for more of their MetroMart shopping with other methods. We measure the loss in **Share of Wallet (SoW)**, test where it comes from, segment customers and design offers to win the spend back.
 
-> **Status:** plan v5 is final, and implementation is starting.
+> **Status:** plan v5.1 is final, and implementation is starting. Two independent EDAs agree on every core number.
 > **Deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only.
 > **Full plan:** [PROJECT_PLAN.md](PROJECT_PLAN.md) · **Task board:** [TASKS.md](TASKS.md)
 
 ## The answer
-SoW fell from **28.9% (FY25) to 19.5% (FY26)**, and it fell at the **same rate for every kind of customer**. The data shows customers don't differ in how often they use the card: the spread between them is what coin flips would produce, and this year's share doesn't predict next year's. So HSIC has a **product problem, not a targeting problem**. The card is losing mainly to **Cash/UPI**, which took 47% of the lost share.
+SoW fell from **28.9% (FY25) to 19.5% (FY26)**. Customers didn't shop less: MetroMart spend per card stayed flat while HSIC spend per card halved (₹356 → ₹167). The decline happened at the **same rate for every kind of customer**. The data shows customers don't differ in how often they use the card: the spread between them is what coin flips would produce, and this year's share doesn't predict next year's. So HSIC has a **product problem, not a targeting problem**. The card is losing mainly to **Cash/UPI**, which took 47% of the lost share.
 
 Our recommendation:
 1. **Fix the product for everyone:** instant cashback at the till, reward visibility at checkout, and the card on UPI.
 2. **Trigger offers on the purchase itself:** no-cost EMI on big baskets, a streak bonus on small ones.
-3. **Target only groups that are real:** 6,227 closed cardholders who still shop (₹91.2M of spend after closure), and first-year cardholders, whose closure rate is 3× that of mature cards.
+3. **Target only groups that are real:** 6,227 closed cardholders who still shop (₹91.2M of spend after closure), and young cards. Cards under 6 months old close at 14.7% within six months, about 5× the rate of cards over 3 years old.
 
 ## What makes this entry different
 - **We test before we segment.** A three-part heterogeneity gate (variance ratio 1.00, split-half r ≈ 0, year-over-year r = 0.00) shows that clustering customers on SoW would produce confident-looking noise.

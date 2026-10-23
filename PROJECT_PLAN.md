@@ -1,7 +1,11 @@
-# MetroMart–HSIC Silent Attrition & Share of Wallet: Project Plan (v5)
+# MetroMart–HSIC Silent Attrition & Share of Wallet: Project Plan (v5.1)
 
 > Synchrony Analytics Hackathon 2026. **Required deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only. Attach the file; do not use Google Drive.
 > v5 replaces v4 and `synchrony_hackathon_strategy_blueprint.md`. Both earlier plans were tested against the data on 23 Oct, and most of their core ideas failed. §4 records what failed and why. That record is now part of the pitch.
+> **v5.1 (23 Oct):** a teammate's independent EDA reproduced the core numbers exactly (§2). It also:
+> - strengthened the first-year closure finding (F10);
+> - added two clearer views: per-card spend (F14) and the SoW-band movement table (X1);
+> - led us to fix shared definitions so that every output agrees (§3, rule 9).
 
 ## Contents
 1. [The answer in one paragraph](#1-the-answer-in-one-paragraph)
@@ -23,10 +27,10 @@
 
 ## 1. The answer in one paragraph
 
-HSIC's Share of Wallet at MetroMart fell from **28.9% in FY25 to 19.5% in FY26**, and it fell at the same rate for **every** kind of customer: Prime and Non-Prime, every age, credit limit, APR band, card vintage and category. Statistically, individual customers don't differ in how often they reach for the card. Usage varies between customers no more than coin flips would, and a customer's share this year predicts nothing about next year. So there is no hidden group of "low-SoW customers" to find. **HSIC has a product problem, not a targeting problem.** The card is losing ground mainly to **Cash/UPI**, which took 47% of the lost share, across every ticket size. Our recommendation therefore has three layers:
+HSIC's Share of Wallet at MetroMart fell from **28.9% in FY25 to 19.5% in FY26**. Customers aren't shopping less: MetroMart spend per card was flat (₹1,036.8 in Aug 2024 vs ₹1,028.9 in May 2026), while HSIC spend per card halved (₹356.2 → ₹166.7). The decline happened at the same rate for **every** kind of customer: Prime and Non-Prime, every age, credit limit, APR band, card vintage and category. Statistically, individual customers don't differ in how often they reach for the card. Usage varies between customers no more than coin flips would, and a customer's share this year predicts nothing about next year. So there is no hidden group of "low-SoW customers" to find. **HSIC has a product problem, not a targeting problem.** The card is losing ground mainly to **Cash/UPI**, which took 47% of the lost share, across every ticket size. Our recommendation therefore has three layers:
 1. **Fix the product for everyone:** instant cashback at the till, reward visibility at checkout, and the card on UPI.
 2. **Trigger offers at the moment of purchase**, using the one real behavioural signal: ticket size.
-3. **Target only groups defined by traits that actually persist:** closed cards whose owners still shop (₹91.2M of spend after closure) and first-year cardholders, whose closure rate is 3× that of mature cards.
+3. **Target only groups defined by traits that actually persist:** closed cards whose owners still shop (₹91.2M of spend after closure) and young cards. Cards under 6 months old close at 14.7% within six months, about 5× the rate of cards over 3 years old.
 
 Every claim is backed by a test in §4–§5, and every test has a baseline or a null model.
 
@@ -49,6 +53,15 @@ Every claim is backed by a test in §4–§5, and every test has a baseline or a
 - **Transactions:** 444,118 rows from 2024-08-01 to 2026-07-31. 44,814 are Returns, all with null `Number_of_Transactions`. 21,235 rows sit at exactly ₹9,999.99 (a cap).
 - **Integrity:** no duplicate IDs and no orphan rows. No HSIC transaction falls outside an active card window.
 - **Sparsity:** about 9.9 rows per customer over two years, i.e. 0.82 rows per 60 days.
+- **Independent cross-check:** a second EDA, written separately by a teammate, matches ours exactly on:
+  - pooled SoW (0.289 / 0.195);
+  - all eight FY payment-mix shares;
+  - the Aug 2024 and May 2026 per-card figures;
+  - open cards at both cutoffs (26,749 / 29,198);
+  - closers at 2026-01-31 (1,799);
+  - card-age AUC (0.611 / 0.672).
+
+  The remaining differences come from definitions, not errors, and are resolved by §3 rule 9.
 
 ---
 
@@ -69,6 +82,17 @@ These rules apply to every experiment, whether it was already run (§4) or is st
 6. **Uncertainty is reported.** 95% CIs (bootstrap or normal approximation) on every headline comparison.
 7. **Every ₹ figure is labelled** Measured, Simulated or Assumed, in the deck and on the dashboard.
 8. **Gender is never a model feature.** It is used only for the fairness slice check.
+9. **Shared definitions.** These are fixed in `selection_log.md` before coding, and every script, chart and slide uses them. The two EDAs differed only where these were not yet fixed (e.g. 1,281 vs 1,257 closers at 2025-07-31, from calendar months vs a fixed number of days).
+
+   | Term | Definition |
+   |---|---|
+   | 6-month window | (cutoff, cutoff + 6 calendar months], end date inclusive. 2025-07-31 → 2026-01-31; 2026-01-31 → 2026-07-31 |
+   | Card age | Days from open date to cutoff ÷ 365.25. Bins: < 6m, 6–12m, 1–2y, 2–3y, 3y+ |
+   | Closure-model universe | **All** cards open at the cutoff (open ≤ cutoff, not closed on or before it), including cards under 6 months old. Card age is a feature |
+   | "Purchase" | An active-window Sale row |
+   | Customer-level SoW filter | ≥ 3 purchases in each period compared |
+   | SoW bands | Zero = 0; Low / Mid / High = terciles of the non-zero FY25 SoW values, with the same cut points applied in FY26 |
+   | Silent-attrition universe | Card open from the lookback start (cutoff − 12 months) to the horizon end; ≥ 1 HSIC row in the lookback; ≥ 1 active row in the horizon |
 
 ---
 
@@ -78,11 +102,11 @@ Ideas came from three sources: **v4** (the previous project plan), **BP** (the s
 
 | # | Source | What we expected | Test | What we found | Verdict |
 |---|---|---|---|---|---|
-| X1 | v4 C3, BP Model 2 | Clustering customers on SoW would reveal low-SoW segments | Heterogeneity gate on per-customer HSIC share | Variance ratio **1.001** (FY25) and **0.996** (FY26): exactly the spread chance produces. Split-half r = **−0.007** (n = 22,320). FY25 → FY26 r = **0.00** | **Rejected.** SoW clusters would be clusters of noise |
+| X1 | v4 C3, BP Model 2 | Clustering customers on SoW would reveal low-SoW segments | Heterogeneity gate on per-customer HSIC share | Variance ratio **1.001** (FY25) and **0.996** (FY26): exactly the spread chance produces. Split-half r = **−0.007** (n = 22,320). FY25 → FY26 r = **0.00** (second EDA: 0.002, 95% range −0.018 to 0.020). SoW-band movement: whichever FY25 band a customer starts in, 39–43% land in "Zero" in FY26 | **Rejected.** SoW clusters would be clusters of noise |
 | X2 | v4 C2 | A detector could flag individual customers whose SoW is declining | Same gate | Every customer's usage falls at the portfolio rate; nothing customer-specific remains to detect | **Rejected.** Dropped |
-| X3 | v4 #21 | Silent attrition is real: more cardholders go quiet than chance predicts | Zero-HSIC rate in the next 6 months vs two nulls, at 3 cutoffs | Fixed-share null: excess **+21.6 / +17.5 / +21.5pp**. Time-aware null: excess **+0.7 / +0.1 / +0.0pp** (CI ±1pp) | **Rejected.** The "excess" is the portfolio trend. Customer-level silent attrition beyond the trend is zero |
+| X3 | v4 #21 | Silent attrition is real: more cardholders go quiet than chance predicts | Zero-HSIC rate in the next 6 months vs two nulls, at 3 cutoffs | Fixed-share null: excess **+21.6 / +17.5 / +21.5pp**. Time-aware null: excess **+0.7 / +0.1 / +0.0pp** (CI ±1pp). Second EDA, different universe: excess +0.1 / +0.2pp | **Rejected.** The "excess" is the portfolio trend. Customer-level silent attrition beyond the trend is zero |
 | X4 | v4 #4 | HSIC use decays in the months before a card closes | Closers' HSIC share by months before closure, raw vs calendar-adjusted | Raw: 27.0% at −12 months → 20.5% at closure, which *looks* like decay. Calendar-adjusted excess: between −1.4 and +2.3pp with no trend | **Rejected.** Closures cluster late in the window, when everyone's SoW is lower |
-| X5 | v4 C1-B1, BP Model 1 | Recent card usage predicts closure | Out-of-time test, 25,468 cards, 1,246 closures | Recency rule ROC-AUC **0.519**. Usage features only: **0.523** (≈ random). Profile features: **0.619** | **Rejected.** Usage carries no closure signal |
+| X5 | v4 C1-B1, BP Model 1 | Recent card usage predicts closure | Out-of-time test on cards with ≥ 6 months' tenure (25,468 cards, 1,246 closures); second EDA on all open cards, one feature at a time | Recency rule ROC-AUC **0.519**. Usage features only: **0.523** (≈ random). Profile features: **0.619**. Second EDA: every feature except card age scores 0.50–0.55 | **Rejected.** Usage carries no closure signal |
 | X6 | v4 C1-M2 | Gradient boosting beats logistic regression | Same test | HGB 0.606 vs LR 0.620 ROC-AUC; top-decile capture 18.4% vs 18.5% | **Rejected.** Ship LR |
 | X7 | v4 #12 | New cards show an onboarding usage cliff | Calendar-adjusted HSIC share by months since opening | Within ±1.5pp for months 0–18, no trend | **Rejected for usage.** But closure *is* tenure-driven (§5) |
 | X8 | BP H2 | Non-Prime members drop off because 1% is too little | SoW by membership by quarter; logistic model of HSIC use | Non-Prime 32.8 → 15.5%, Prime 32.7 → 15.6%. Prime coefficient **0.000** | **Rejected.** Also confirms the reward paradox (§5) |
@@ -120,10 +144,14 @@ Ideas came from three sources: **v4** (the previous project plan), **BP** (the s
 | F7 | **MetroMart Wallet carries about half of all capped (₹9,999.99) purchases** (48.5 → 51.1%), even though HSIC is the product with financing | Ticket-band mix | Measured |
 | F8 | **Reward paradox.** Prime members earn 5%/3% but use HSIC exactly like Non-Prime members. In FY26, Prime cardholders spent ₹47.4M on Grocery + Electronics with other methods, missing **₹1.60M** of cashback. Across all cardholders, missed cashback was **₹3.98M**, against ₹0.96M actually paid | Derived rewards | Measured |
 | F9 | **Closures per open card doubled** from 1.7% a quarter (Jul–Sep 2024) to 3.4% (Apr–Jun 2026) | Closures ÷ cards open at quarter start | Measured |
-| F10 | **Closure is a first-year problem.** 6-month closure rate by tenure: 8.7% (≤ 12 months), 6.4% (12–24), 4.1% (24–36), 3.1% (36–48), 2.9% (48+). Tenure is the dominant model coefficient (−0.29 standardised). The LR model captures 18.5% of closers in its top decile, 1.85× random | Out-of-time test | Measured |
+| F10 | **Closure is a young-card problem.** 6-month closure rate by card age, all open cards: | Rule 9 definitions; both EDAs | Measured |
+| | &nbsp;&nbsp;• 2025-07-31 cutoff: 8.3% (< 6m), 6.6% (6–12m), 4.6% (1–2y), 3.8% (2–3y), 2.8% (3y+) | | |
+| | &nbsp;&nbsp;• 2026-01-31 cutoff: **14.7%**, 9.0%, 6.3%, 4.0%, **3.0%**, i.e. about 5× from youngest to oldest | | |
+| | Card age alone scores ROC-AUC 0.611 / 0.672 at the two cutoffs. On the ≥ 6-month universe, tenure was the dominant LR coefficient (−0.29 standardised) and the model captured 18.5% of closers in its top decile (1.85× random). The notebook re-runs the model on the rule-9 universe | | |
 | F11 | **Closed cards keep shopping.** 6,227 of 7,664 closers still shop at MetroMart, spending **₹91.2M** net after closure. Their mix after closure (Wallet 46%, Cash/UPI 28%, Debit 13%, Other CC 13%) matches non-cardholders, so HSIC's share is simply redistributed | Post-close transactions | Measured |
 | F12 | **HSIC spend shrank while MetroMart spend grew.** HSIC net spend fell from ₹85.7M to ₹68.9M while active cardholder spend rose from ₹296.3M to ₹353.8M. At FY25's SoW, FY26 HSIC spend would have been about ₹102M, so the gap is **about ₹33M** | Counterfactual at constant SoW | Measured (gap is derived) |
 | F13 | **Only frequency and spend persist** year to year (r = 0.44 for transaction count, 0.22 for net spend). These are the only behaviour variables allowed into segments | Persistence test | Measured |
+| F14 | **Customers kept shopping and changed how they pay.** Cards active in the month went from 21,514 (Aug 2024) to 30,742 (May 2026). MetroMart net spend per card stayed flat (₹1,036.8 → ₹1,028.9). HSIC spend per card more than halved (₹356.2 → ₹166.7), taking monthly SoW from 34.4% to 16.2% | Per-card monthly view; both EDAs | Measured |
 
 ---
 
@@ -164,7 +192,7 @@ Expected result: little or no separation. If it *does* separate, the gate has fa
 | Segment | Rule | Size | Why it's real | Lever |
 |---|---|---|---|---|
 | A. Closed, still shopping | Card closed and MetroMart spend after closure | 6,227 | ₹91.2M of post-closure spend (F11) | Win-back (O6) |
-| B. First-year cardholders | Open card with tenure < 12 months | 6,297 of 30,519 open cards at 2026-07-31 | 3× the closure rate of mature cards (F10) | Onboarding protection (O7) |
+| B. First-year cardholders | Open card with card age < 12 months | 6,297 of 30,519 open cards at 2026-07-31 | 6-month closure of 14.7% (< 6m) and 9.0% (6–12m) vs 3.0% for 3y+ (F10). The notebook splits B into B1 (< 6m) and B2 (6–12m) if their outcomes differ with a CI | Onboarding protection (O7) |
 | C. High-frequency established | Tenure ≥ 12 months and top tercile of transaction count | Notebook | Frequency persists (r = 0.44); largest ₹ at stake | Threshold bonus (O8) |
 | D. Prime established | Tenure ≥ 12 months, Prime, not in C | Notebook | Prime status is a fixed attribute; ₹1.60M missed (F8) | Reward visibility (O3) |
 | E. Everyone else open | — | Notebook | — | Product fixes only (O1–O5), no paid targeting |
@@ -184,7 +212,7 @@ Expected result: little or no separation. If it *does* separate, the gate has fa
 | O4 | **No-cost EMI on baskets ≥ ₹3,000** at MetroMart | Moment | Basket ≥ ₹3k | Wallet holds ~half of capped tickets (F7); ticket-size signal (F6) | Subvention %, co-funded by MetroMart (Assumed) |
 | O5 | **Small-basket streak**: 5 HSIC purchases under ₹1,000 in a month earns a ₹50 bonus | Moment | Baskets < ₹1k | Lowest HSIC share (17.1%) | Bonus paid only above the threshold |
 | O6 | **Win-back**: instant re-approval and 5% on everything for 90 days (capped) | Segment A | 6,227 closers | ₹91.2M post-closure spend | Boost cost on recovered spend |
-| O7 | **First-year protection**: activation milestone (3 swipes in 60 days) plus a 3-month Prime trial for Non-Prime | Segment B | 6,297 new cards | 3× closure risk (F10) | Trial cost co-funded by MetroMart (Assumed) |
+| O7 | **First-year protection**: activation milestone (3 swipes in 60 days) plus a 3-month Prime trial for Non-Prime | Segment B | 6,297 new cards | Up to 5× closure risk (F10) | Trial cost co-funded by MetroMart (Assumed) |
 | O8 | **Threshold bonus**: extra 1% only on HSIC spend above the customer's own trailing 3-month average | Segment C | High-frequency | Avoids paying for spend that would happen anyway | Bonus on the increment only |
 
 **Economics (per offer, in the notebook and the dashboard simulator)**
@@ -264,11 +292,11 @@ Synchrony-Hackthon-/
 
 | # | Page | Content | Interaction |
 |---|---|---|---|
-| 1 | **Story** | The answer (§1), 4 KPI tiles (SoW 28.9 → 19.5%, ₹33M gap, ₹91.2M post-closure spend, closure rate 1.7 → 3.4%), 3 recommendations | Each tile links to its evidence page |
-| 2 | **The decline** | Monthly SoW with FY bands; Bridge waterfall; stayers' method shift | Toggle ₹ / pp |
+| 1 | **Story** | The answer (§1), 5 KPI tiles (SoW 28.9 → 19.5%; HSIC spend per card ₹356 → ₹167 while MetroMart spend per card stays flat; ₹33M gap; ₹91.2M post-closure spend; closure rate 1.7 → 3.4%), 3 recommendations | Each tile links to its evidence page |
+| 2 | **The decline** | Monthly SoW with FY bands; per-card monthly spend, MetroMart vs HSIC (F14); Bridge waterfall; stayers' method shift | Toggle ₹ / pp |
 | 3 | **Is it a segment problem?** | Quarterly SoW lines for any slice: membership, age, limit, APR, vintage, category, gender, future closers | Dropdown: every slice gives the same overlapping lines |
-| 4 | **Noise check** | Real customers vs simulated customers who all share the same probability: dispersion, split-half scatter, FY25 vs FY26 scatter, variance ratio | Re-simulate button; slider for rows per customer |
-| 5 | **Attrition** | Closures per open card by quarter; closure rate by tenure; pre-closure curve; fixed vs time-aware silent-attrition null | **Raw / calendar-adjusted toggle** (U3) |
+| 4 | **Noise check** | Real customers vs simulated customers who all share the same probability: dispersion, split-half scatter, FY25 vs FY26 scatter, variance ratio; SoW-band movement table (FY25 band → FY26 band) | Re-simulate button; slider for rows per customer |
+| 5 | **Attrition** | Closures per open card by quarter; closure rate by card age (rule 9 bins, both cutoffs); pre-closure curve; fixed vs time-aware silent-attrition null | **Raw / calendar-adjusted toggle** (U3) |
 | 6 | **Where the wallet went** | Method mix by ticket band and FY; Sankey of stayers' share shift; cardholders vs non-cardholders | Band filter |
 | 7 | **Expected vs found** | The 17 experiments as cards: belief → test → number → verdict chip; closure-model comparison table | Filter by source / verdict |
 | 8 | **Segments & offers** | Segment cards (size, ₹ at stake, closure rate, offer); offer library; K-means negative-control result | Click a segment to see its offer economics |
@@ -298,11 +326,11 @@ About 12 slides plus an appendix. Built from `outputs/` only; every number comes
 | 1 | Title | — |
 | 2 | Executive summary | The 9.4pp drop is real; "at-risk customers" are not. 3 findings, 3 actions, measured loss + break-even |
 | 3 | Data, rules, assumptions | Brief compliance at a glance |
-| 4 | The decline | 28.9 → 19.5%; the Bridge shows that 100% of it comes from stayers |
+| 4 | The decline | 28.9 → 19.5%; spend per card flat while HSIC spend per card halves (F14); the Bridge shows that 100% of it comes from stayers |
 | 5 | Where it went | Cash/UPI 47%; every ticket band; Wallet owns big tickets |
-| 6 | The twist | Same decline in every slice + the heterogeneity gate |
+| 6 | The twist | Same decline in every slice + the heterogeneity gate + the SoW-band movement table |
 | 7 | Expected vs found | 8 strongest rejected ideas with their numbers + 3 lessons |
-| 8 | Attrition, corrected | Silent attrition is the trend (time-aware null); closures doubling and tenure-driven; ₹91.2M after closure |
+| 8 | Attrition, corrected | Silent attrition is the trend (time-aware null); closures doubling; cards under 6 months close at 14.7%, about 5× the 3y+ rate; ₹91.2M after closure |
 | 9 | Segments | K-means control fails → ₹-at-stake ranking → 6 persistent segments |
 | 10 | Offers | Product fixes + moment triggers + segment offers |
 | 11 | Economics & pilot | Break-even per offer, simulated range, holdout + MDE |
@@ -344,9 +372,16 @@ Three tracks run in parallel. Hours are counted from the start of implementation
   - Cash/UPI share of the loss: 47%;
   - variance ratio: 1.00 ± 0.02;
   - time-aware null excess: |x| < 1.5pp;
-  - closure LR test ROC-AUC: 0.62 ± 0.01;
   - post-closure spend: ₹91.2M;
   - missed cashback: ₹3.98M.
+- **Exact cross-checks** against both EDAs. Counts must be identical and rates must match to 3 decimals:
+  - pooled SoW 0.289 / 0.195 and the eight FY payment-mix shares;
+  - Aug 2024: 21,514 cards, ₹1,036.8 / ₹356.2 per card, SoW 0.344;
+  - May 2026: 30,742 cards, ₹1,028.9 / ₹166.7 per card, SoW 0.162;
+  - open cards at the two cutoffs: 26,749 / 29,198;
+  - closers: 1,281 / 1,799 under rule 9 (the second EDA's 1,257 used a fixed-day window);
+  - card-age AUC: 0.611 / 0.672.
+- **Closure model:** on the rule-9 universe, the chosen model must beat card age alone (0.611 / 0.672) with a bootstrap CI that excludes 0. Otherwise we ship the card-age rule and say so.
 - **Sanity checks:**
   - random baseline PR-AUC ≈ the base rate;
   - the simulator at 0% shift reproduces the baseline;
