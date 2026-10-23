@@ -70,7 +70,7 @@ The verdict thresholds are in `C.VERDICT` and `selection_log.md` §3, §4 and §
 |---|---|---|---|
 | now | `config.py`, `prep.py`, `INTERFACE.md` | `analysis/` (devansh branch) | Everything |
 | ~4 | `experiments_ml.gate(...)` and the X1 result: variance ratio FY25 / FY26, split-half r, persistence r, SoW-band movement table | `analysis/experiments_ml.py`; keys `x1_*` | **Slide 6** (the gate + band table) and **slide 7** (3 of 3: K-means on noise) |
-| ~4 | X5 / X6: usage features don't predict closure | keys `x5_*`, `x6_*` | Slide 7 lessons, appendix |
+| ~4 | X5 / X6 from `closure_model.py`. **Wording changed from the plan:** on all open cards, usage alone scores ROC-AUC 0.567, but only as a stand-in for card age (0.525 / 0.517 within young / mature cards; adds −0.0004, CI −0.002 to +0.001, beyond the profile). Say "usage adds no closure signal beyond card age", not "usage carries no signal". HGB loses to LR (−0.009, CI −0.014 to −0.004) | keys `x5_*`, `x6_*` | Slide 7 lessons, appendix |
 | 8 | `key_numbers.md` with every key | `outputs/key_numbers.md` | Final numbers on your slides |
 
 Planned keys from Devansh (stub values in brackets):

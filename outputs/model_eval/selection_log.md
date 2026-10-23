@@ -178,4 +178,4 @@ Run on per-customer HSIC row share, customers with ≥ `GATE["min_rows"]` (4) ac
 
 | Date / time | Rule | Change | Reason |
 |---|---|---|---|
-| — | — | — | — |
+| 23 Oct, after the first `closure_model` run | §5 "usage carries closure signal" | **Rule unchanged; two checks added to the report.** (1) Paired bootstrap of LR-all − LR-profile on test ROC-AUC. (2) LR-usage ROC-AUC within young (< 1y) and mature cards. Usage counts as signal only if it clears the existing bar *and* (1)'s CI is above 0 | The rule says "only if", so clearing 0.55 is necessary, not sufficient. On the rule-9 universe, LR-usage scored 0.567 (CI 0.553–0.581), which clears the bar, but it adds −0.0004 (CI −0.0023 to +0.0014) beyond the profile and drops to 0.525 / 0.517 within young / mature cards. Usage is standing in for card age. Both numbers are reported, not just the verdict |
