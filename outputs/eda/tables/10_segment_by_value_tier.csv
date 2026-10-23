@@ -1,0 +1,9 @@
+segment,Low value,Mid value,High value
+Engaged core (SoW >=15%),1695,3220,4240
+High-potential low-SoW,0,5181,4696
+Low-value low-SoW,4736,0,0
+"Dormant (card open, no visits 6m)",2582,820,188
+"New card (<6m, onboarding)",1047,1002,1112
+Closed - still shopping (win-back),1865,2111,2157
+Closed - gone,706,392,288
+No card (acquisition pool),2369,2274,2319

@@ -1,4 +1,4 @@
-# MetroMart–HSIC Silent Attrition & Share of Wallet: Project Plan (v5.2)
+# MetroMart–HSIC Silent Attrition & Share of Wallet: Project Plan (v5.3, final)
 
 > Synchrony Analytics Hackathon 2026. **Required deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only. Attach the file; do not use Google Drive.
 > v5 replaces v4 and `synchrony_hackathon_strategy_blueprint.md`. Both earlier plans were tested against the data on 23 Oct, and most of their core ideas failed. §4 records what failed and why. Internally we track which plan each idea came from; **in the deck they are "common hypotheses we tested"** and our earlier plans are never named.
@@ -15,6 +15,14 @@
 > - the loss is stated in interchange terms;
 > - the pre-registration claim is dropped;
 > - the dashboard is cut to 4 pages and built after the deck charts.
+>
+> **v5.3 (23 Oct), final planning change; implementation starts from this version:**
+> - **Economics are net of rewards.** HSIC already pays an effective 1.39% in rewards against an assumed 1.5–2% interchange, so the gross interchange figure overstated the loss. The value of a shifted ₹ is now interchange + revolve income − the reward share HSIC funds (F15, §8). Offers that can't pay back are reported as "never breaks even".
+> - **O6 win-back is cut from 5% to 3%** and co-funded by MetroMart, because 5% on everything loses money on every recovered ₹.
+> - **Purchase frequency counts all MetroMart purchases**, not only those made while the card was open. The old definition put only 8.7% of young cards in the top tercile vs 30.9% of mature cards, so the "Protect first" box was nearly empty by construction. With the new definition the figures are 31.1% vs 30.9% (checked on the data at 2026-07-31).
+> - **The 2×2 slide shows that SoW doesn't separate the boxes** while closure risk and non-HSIC ₹ do.
+> - **Slide 10 shows three offers** (O3, O1, O2); the rest go on one line and in the appendix.
+> - **The brief's "no fees" detail is used:** it explains why customers keep the card and stop using it rather than close it.
 
 ## Contents
 1. [The answer in one paragraph](#1-the-answer-in-one-paragraph)
@@ -41,7 +49,9 @@ HSIC's Share of Wallet at MetroMart fell from **28.9% in FY25 to 19.5% in FY26**
 Our recommendation has three layers:
 1. **Fix the product for everyone, starting with reward visibility.** No rival card matches HSIC's Grocery and Electronics rates, yet Prime members use the card exactly like Non-Prime members and left ₹1.60M of cashback on the table in FY26. Showing the reward at the till costs almost nothing. Next come instant cashback at the till and the card on UPI.
 2. **Trigger offers at the moment of purchase**, using the one real behavioural signal: ticket size.
-3. **Prioritise with a 2×2 built from traits that persist or predict:** purchase frequency × closure risk (card age). The closed-but-still-shopping group sits outside the grid: ₹91.2M of spend after closure. Young cards matter most: cards under 6 months old close at 14.7% within six months, about 5× the rate of cards over 3 years old.
+3. **Prioritise with a 2×2 built from traits that persist or predict:** purchase frequency at MetroMart × closure risk (card age). SoW is the same in every box; value and risk are not. The closed-but-still-shopping group sits outside the grid: ₹91.2M of spend after closure. Young cards matter most: cards under 6 months old close at 14.7% within six months, about 5× the rate of cards over 3 years old.
+
+The interchange on MetroMart spend is thin once rewards are paid (F15), so the bank's stake is **retention and revolving interest**, and every paid offer must clear a net-of-rewards break-even.
 
 Every claim is backed by a test (§4–§5), and every test has a baseline or a null model. The reasons *behind* the shift are labelled hypotheses that the pilot will test (§5): immediacy for Cash/UPI, awareness for the reward paradox.
 
@@ -101,10 +111,11 @@ These rules apply to every experiment, whether it was already run (§4) or is st
    | Card age | Days from open date to cutoff ÷ 365.25. Bins: < 6m, 6–12m, 1–2y, 2–3y, 3y+ |
    | Closure-model universe | **All** cards open at the cutoff (open ≤ cutoff, not closed on or before it), including cards under 6 months old. Card age is a feature |
    | "Purchase" | An active-window Sale row |
-   | Purchase frequency | Active-window purchases in the 12 months up to the cutoff. Tercile cut points are fixed in `selection_log.md` |
+   | Purchase frequency | **All** MetroMart Sale rows (any payment method, before or after the card opened) in the 12 months up to the cutoff. It measures the customer's value to MetroMart, so it must not depend on card age. Counting only active-window rows caps a young card's count at its age (8.7% of young cards vs 30.9% of mature cards in the top tercile); counting all rows gives 31.1% vs 30.9%. Tercile cut points are fixed in `selection_log.md` |
    | Customer-level SoW filter | ≥ 3 purchases in each period compared |
    | SoW bands | Zero = 0; Low / Mid / High = terciles of the non-zero FY25 SoW values, with the same cut points applied in FY26 |
    | Silent-attrition universe | Card open from the lookback start (cutoff − 12 months) to the horizon end; ≥ 1 HSIC row in the lookback; ≥ 1 active row in the horizon |
+   | Net margin per ₹ of HSIC spend | interchange % + revolve income % − reward rate × (1 − MetroMart co-funding share). Reward rate = the measured FY26 effective rate on HSIC spend (1.39%) unless an offer changes it. All three inputs except the reward rate are Assumed (§9) |
 
 ---
 
@@ -169,7 +180,12 @@ Ideas came from three sources: **v4** (the previous project plan), **BP** (the s
 | F12 | **HSIC spend shrank while MetroMart spend grew.** HSIC net spend fell from ₹85.7M to ₹68.9M while active cardholder spend rose from ₹296.3M to ₹353.8M. At FY25's SoW, FY26 HSIC spend would have been about ₹102M, so the gap is **about ₹33M** | Counterfactual at constant SoW | Measured (gap is derived) |
 | F13 | **Only frequency and spend persist** year to year (r = 0.44 for purchase count, 0.22 for net spend). These are the only behaviour variables allowed into segments | Persistence test | Measured |
 | F14 | **Customers kept shopping and changed how they pay.** Cards active in the month went from 21,514 (Aug 2024) to 30,742 (May 2026). MetroMart net spend per card stayed flat (₹1,036.8 → ₹1,028.9). HSIC spend per card more than halved (₹356.2 → ₹166.7), taking monthly SoW from 34.4% to 16.2% | Per-card monthly view; both EDAs | Measured |
-| F15 | **The loss in the bank's terms.** Lost interchange ≈ ₹33M gap × 1.5–2% (Assumed) ≈ **₹0.50–0.67M**, before the rewards HSIC would have paid on that spend (FY26 effective reward rate on HSIC spend: 1.39%). Also reported per 10,000 cardholders, because the dataset is a 45k-customer sample. Revolving interest (APR 28–35%) is further upside the data can't measure, since there is no balance data | F12 × assumed rate | Measured × Assumed |
+| F15 | **The loss in the bank's terms, net of rewards.** Gross interchange on the ₹33M gap at 1.5–2% (Assumed) is ₹0.50–0.67M, but HSIC would also have paid 1.39% in rewards on that spend (measured FY26 effective rate), i.e. ₹0.46M. Net lost margin (rule 9 definition, no revolve income): | F12 × rule-9 net margin | Measured × Assumed |
+| | &nbsp;&nbsp;• HSIC funds all rewards: **₹0.04–0.20M** | | |
+| | &nbsp;&nbsp;• MetroMart co-funds 50% of rewards: **₹0.27–0.43M** | | |
+| | So the interchange on MetroMart spend is thin; the bank's real stake is **retention** (closures doubled, F9) and **revolving interest** (APR 28–35%, but there is no balance data, so revolve income is an Assumed scenario: 0 / 1 / 2% of spend). The deck leads the value story with those two, never with gross interchange. Every figure is also reported per 10,000 cardholders, because the dataset is a 45k-customer sample | | |
+
+**A clue from the brief: no fees.** The card has no joining or annual fee, so keeping an unused card costs the customer nothing. That fits what the data shows: the main loss is cards kept open and used less (F2: −9.54pp from stayers vs +0.26pp from closures), not cards closed. It also means closure isn't driven by cost, which is consistent with usage not predicting closure (X5). Labelled Hypothesis on slide 6.
 
 **Why, not just what: hypotheses for the pilot**
 
@@ -195,7 +211,7 @@ Each USP exists because of a finding; none were added for show.
 | U5 | **"Target moments, not people."** Offers fire on the purchase (ticket size, basket), not on a customer label | Follows directly from the data: ticket size is the only behavioural signal, and customer traits don't persist | F6, X14 |
 | U6 | **Common hypotheses we tested.** Three on the main slide, 17 in the appendix, each with its test and number | Shows judgement, not just output | §4 |
 | U7 | **Reward visibility as the hero offer**, followed by instant cashback | No rival card matches HSIC's Grocery/Electronics rates, yet Prime members left ₹1.60M on the table. Showing the reward at the till costs almost nothing; crediting it at the till instead of next month is the second lever. Both rest on hypotheses the pilot tests | F8, H-aware, H-imm |
-| U8 | **Break-even-first economics, in the bank's terms.** Every offer shows the shift rate it needs to pay for itself, and the loss is stated as lost interchange | No invented response rates in the headline | §8, F15 |
+| U8 | **Break-even-first economics, net of rewards.** Every offer shows the shift rate it needs to pay for itself after the rewards HSIC funds, and says "never breaks even" when it can't | Most teams will count gross interchange or gross spend as "value". We show the margin is thin and price offers accordingly | §8, F15 |
 
 Deliberately left out: GenAI/RAG assistants, AI-written marketing copy, uplift models (no treatment data), real-time streaming and deep-learning CLV. None has supporting data, and they would look like filler to judges hiring analysts.
 
@@ -213,7 +229,7 @@ The brief asks for "segments using a model or method to identify low-SoW custome
 If K-means *does* separate outcomes, the gate has failed and we switch to a customer-level design. That rule goes into `selection_log.md` before the final run.
 
 **Step 2: who is low-SoW?** Every open card's expected SoW is the portfolio's current level (15.6% in Q4 FY26), so SoW can't separate customers. Two things can, because the data shows they're real:
-- **Value = purchase frequency.** It is the most persistent behaviour (FY25 → FY26 r = 0.44); net spend (r = 0.22) is the tiebreak. We don't dress this up as "₹ at stake": with equal usage odds that would be spend × a constant, so we call it what it is.
+- **Value = purchase frequency at MetroMart** (all payment methods, rule 9, so it doesn't depend on card age). It is the most persistent behaviour (FY25 → FY26 r = 0.44); net spend (r = 0.22) is the tiebreak. We don't dress this up as "₹ at stake": with equal usage odds that would be spend × a constant, so we call it what it is.
 - **Closure risk = card age.** It predicts out of time: 14.7% six-month closure under 6 months vs 3.0% at 3y+; AUC 0.611 / 0.672.
 
 | | **Mature card** (card age ≥ 12 months) | **Young card** (card age < 12 months) |
@@ -236,19 +252,26 @@ If K-means *does* separate outcomes, the gate has failed and we switch to a cust
 | E. Nudge | Open, card age ≥ 12m, other frequency | From the pipeline | O1–O5 only |
 | F. Non-cardholders | No card | 6,836 | Stretch |
 
-- B + C = 6,297 young cards at 2026-07-31, out of 30,519 open cards. If the < 6m and 6–12m groups differ with a CI, they are reported separately within B and C.
+- B + C = 6,297 young cards at 2026-07-31, out of 30,519 open cards (the 23 Oct check counted 6,313 with card age < 1 year, so the pipeline fixes the exact count under rule 9). About a third of them fall in B. If the < 6m and 6–12m groups differ with a CI, they are reported separately within B and C.
 - Within every box, reward-visibility messaging (O3) goes to Prime members first. Prime is a fixed attribute, and the ₹1.60M left on the table is theirs.
+
+**How the slide shows it.** One table, one row per box (A–E), three columns:
+- **FY26 SoW:** expected to be about the same in every box. This *is* the answer to "identify low-SoW customers": SoW can't separate them;
+- **6-month closure rate** and **non-HSIC ₹ per customer:** expected to differ clearly between boxes. That is why we prioritise on value and risk.
+
+If SoW *does* differ between boxes with a CI, we report it and the slide says so.
 
 **Segment checks:**
 - sizes add up to the universe;
-- each box's FY26 outcomes (closure rate, non-HSIC ₹) differ with a CI;
+- the axes are independent: the share of young cards in the top frequency tercile is within ±3pp of the share of mature cards (31.1% vs 30.9% on 23 Oct);
+- each box's 6-month closure rate and non-HSIC ₹ differ with a CI; FY26 SoW per box is reported with its CI either way;
 - boundary sensitivity: share of customers who change box when the tercile or the 12-month cut moves by ±10%.
 
 ---
 
 ## 8. Offers & economics (brief item 4)
 
-Ordered by priority. O3 is the hero offer.
+Ordered by priority. O3 is the hero offer. **Slide 10 shows only O3, O1 and O2**; O4–O8 get one line each there, with full detail in the appendix.
 
 | # | Offer | Layer | Who / trigger | Addresses | Cost model |
 |---|---|---|---|---|---|
@@ -257,16 +280,26 @@ Ordered by priority. O3 is the hero offer.
 | O2 | **HSIC card on UPI** (credit card linked to UPI) | Product (strategic) | All | Cash/UPI took 47% of the loss | Partnership and network cost (qualitative) |
 | O4 | **No-cost EMI on baskets ≥ ₹3,000** at MetroMart | Moment | Basket ≥ ₹3k | Wallet holds ~half of capped tickets (F7); ticket-size signal (F6) | Subvention %, co-funded by MetroMart (Assumed) |
 | O5 | **Small-basket streak:** 5 HSIC purchases under ₹1,000 in a month earn a ₹50 bonus | Moment | Baskets < ₹1k | Lowest HSIC share (17.1%) | Bonus paid only above the threshold |
-| O6 | **Win-back:** instant re-approval and 5% on everything for 90 days (capped) | Segment A | 6,227 closers | ₹91.2M post-closure spend | Boost cost on recovered spend |
+| O6 | **Win-back:** instant re-approval and 3% on everything for 90 days (capped per customer), then the normal rates | Segment A | 6,227 closers | ₹91.2M post-closure spend | Boost cost on recovered spend, co-funded by MetroMart (Assumed share). Value includes the card's ongoing net margin after the 90 days. Was 5%; cut because 5% exceeds any assumed per-₹ margin |
 | O7 | **Young-card protection:** activation milestone (3 swipes in 60 days) plus a 3-month Prime trial for Non-Prime | Segments B, C | 6,297 young cards | Up to 5× closure risk (F10) | Trial cost co-funded by MetroMart (Assumed) |
 | O8 | **Threshold bonus:** extra 1% only on HSIC spend above the customer's own trailing 3-month average | Segment D | High-frequency mature cards | Avoids paying for spend that would happen anyway | Bonus on the increment only |
 
 **Economics (per offer, in the pipeline and the dashboard simulator)**
-- **Value per ₹ shifted to HSIC** = interchange % (Assumed 1.5–2%) + other income % (Assumed), in three scenarios.
-- **Cost** is split into incentive on *incremental* spend vs incentive on spend that would have happened anyway (cannibalisation).
-- **Break-even shift rate** = the share of eligible non-HSIC ₹ that must move for net value ≥ 0. This is assumption-light and is the headline number.
-- **Scenario range** (conservative / base / optimistic) is labelled **Simulated**.
-- **Headline wording:** "₹33M of HSIC spend lost (measured), about ₹0.50–0.67M of interchange a year at an assumed 1.5–2%. Offer X pays back if Y% of eligible spend moves (break-even). Base case ₹Z (simulated)." Never "we will recover ₹Z".
+- **Value per ₹ shifted to HSIC** = the rule-9 **net margin**: interchange % + revolve income % − reward rate × (1 − MetroMart co-funding share). The base reward rate is the measured 1.39%; for Prime Grocery + Electronics baskets it is the 5% / 3% the customer would earn.
+- **Retention value** (O6, O7) = the expected net margin over the card's next 12 months × the change in closure probability (Simulated). This, not interchange on one month's spend, is where young-card offers earn their keep.
+- **Cost** is split into incentive on *incremental* spend vs incentive on spend that would have happened anyway (cannibalisation), net of MetroMart's co-funded share.
+- **Break-even shift rate** = the share of eligible non-HSIC ₹ that must move for net value ≥ 0. This is the headline number.
+- **"Never breaks even"** is a valid output. If an offer's incentive per incremental ₹ is at or above the net margin per ₹ in a scenario (or the required shift rate is above 100%), `economics.py` returns `never` for that scenario and the slide says so. It is never hidden or forced positive.
+- **Scenarios** (all Assumed inputs, results labelled **Simulated**):
+
+  | Input | Conservative | Base | Optimistic |
+  |---|---|---|---|
+  | Interchange | 1.5% | 1.75% | 2.0% |
+  | Revolve income (% of spend) | 0% | 1% | 2% |
+  | MetroMart co-funding of rewards and boosts | 0% | 50% | 50% |
+
+  Expected: in the conservative scenario, reward-heavy offers don't break even on Grocery + Electronics. That is reported honestly, and it is why O3 (no extra cost) leads.
+- **Headline wording:** "₹33M of HSIC spend lost (measured). Net of the rewards HSIC pays, that is ₹0.04–0.43M of margin (assumed rates), so the bank's real stake is retention and revolving balances. Offer X pays back if Y% of eligible spend moves (break-even). Base case ₹Z (simulated)." Never "we will recover ₹Z", and never gross interchange on its own.
 
 **Pilot design (turns simulated numbers into measured ones, and tests the hypotheses)**
 - A randomised 10% holdout per offer and segment.
@@ -294,7 +327,8 @@ Ordered by priority. O3 is the hero offer.
 - Calendar adjustment uses the portfolio's monthly HSIC row share.
 
 **Business (labelled Assumed)**
-- Interchange 1.5–2%, MetroMart co-funding %, cost of funds, EMI subvention %, response scenarios.
+- Interchange 1.5–2%, revolve income 0–2% of spend, MetroMart co-funding of rewards and boosts 0–50%, cost of funds, EMI subvention %, response scenarios (scenario table in §8).
+- The measured 1.39% FY26 effective reward rate is a *derived* figure (Measured), not an assumption.
 
 **Hypotheses (labelled Hypothesis)**
 - H-imm and H-aware (§5). Neither is claimed as a finding.
@@ -312,14 +346,14 @@ Ordered by priority. O3 is the hero offer.
 ```
 Synchrony-Hackthon-/
 ├── README.md, PROJECT_PLAN.md, TASKS.md, requirements.txt
-├── data/                      # the 4 case CSVs (not committed unless the owner decides)
+├── data/                      # the 4 case CSVs, moved here from the repo root in A01; never committed (.gitignore blocks *.csv)
 ├── analysis/
 │   ├── config.py              # paths, SEED=42, cutoffs, ASSUMPTIONS, gate thresholds, rule-9 definitions
 │   ├── prep.py                # load, clean, enrich (§2 rules) + validation asserts
 │   ├── experiments.py         # X1–X17 and F1–F15, each a function returning a dict
 │   ├── closure_model.py       # out-of-time closure model (B0, B1, B2 card age, LR, HGB)
 │   ├── segments.py            # K-means negative control, frequency × card-age 2×2, segments A–F
-│   ├── economics.py           # offer economics, interchange, break-even, scenarios, MDE
+│   ├── economics.py           # offer economics, net margin after rewards, break-even (or `never`), scenarios, MDE
 │   ├── export.py              # outputs/*.csv, charts/*.png, key_numbers.md, dashboard JSON
 │   └── run_all.py             # one command rebuilds everything; fails loudly on any assert
 ├── notebooks/story.ipynb      # narrative walk-through that imports analysis/ (no logic of its own)
@@ -347,7 +381,7 @@ Synchrony-Hackthon-/
 
 | # | Page | Content | Interaction |
 |---|---|---|---|
-| 1 | **Story** | The answer (§1); 5 KPI tiles: SoW 28.9 → 19.5%; HSIC spend per card ₹356 → ₹167 while MetroMart spend per card stays flat; ₹33M gap (≈ ₹0.50–0.67M interchange, Assumed rate); ₹91.2M post-closure spend; closure rate 1.7 → 3.4%. Then 3 recommendations, reward visibility first | — |
+| 1 | **Story** | The answer (§1); 5 KPI tiles: SoW 28.9 → 19.5%; HSIC spend per card ₹356 → ₹167 while MetroMart spend per card stays flat; ₹33M gap (₹0.04–0.43M net margin after rewards, Assumed rates); ₹91.2M post-closure spend; closure rate 1.7 → 3.4%. Then 3 recommendations, reward visibility first | — |
 | 2 | **Is it a segment problem?** | Quarterly SoW lines for any slice (membership, age, limit, APR, vintage, category, gender, future closers); heterogeneity-gate numbers; SoW-band movement table | Slice dropdown |
 | 3 | **Silent attrition & closures** | Fixed vs time-aware silent-attrition null; pre-closure curve; closure rate by card age (both cutoffs) | **Raw / calendar-adjusted toggle** (U3) |
 | 4 | **Who to prioritise & offers** | The frequency × card-age 2×2 + closed-but-shopping group, with sizes and outcomes; offer library (O3 first); break-even per offer | Shift-rate slider per offer; every output carries a **Simulated** badge; hypotheses carry a **Hypothesis** badge |
@@ -363,16 +397,16 @@ About 12 slides plus an appendix. Built from `outputs/` only; every number comes
 | # | Slide | Message |
 |---|---|---|
 | 1 | Title | — |
-| 2 | Executive summary | Silent attrition is real and universal: HSIC lost 9.4pp of SoW (₹33M of spend, ≈ ₹0.50–0.67M interchange at an assumed rate), evenly across every customer type. 3 findings, 3 actions with reward visibility first, measured loss + break-even |
+| 2 | Executive summary | Silent attrition is real and universal: HSIC lost 9.4pp of SoW (₹33M of spend), evenly across every customer type. Net of rewards the margin on that spend is thin, so the stake is retention and revolving balances. 3 findings, 3 actions with reward visibility first, measured loss + break-even |
 | 3 | Data, rules, assumptions | Brief compliance at a glance; Measured / Simulated / Assumed / Hypothesis labels explained |
 | 4 | The decline | 28.9 → 19.5%; spend per card flat while HSIC spend per card halves (F14); the Bridge shows that 100% of it comes from stayers |
 | 5 | Where it went | Cash/UPI 47%; every ticket band; Wallet owns big tickets. "Why Cash/UPI?" shown as hypothesis H-imm |
-| 6 | Silent attrition is universal | Same decline in every slice + the heterogeneity gate + the SoW-band movement table |
+| 6 | Silent attrition is universal | Same decline in every slice + the heterogeneity gate + the SoW-band movement table. One line: with no fees, keeping an unused card costs nothing, so customers stop using it rather than close it (Hypothesis) |
 | 7 | Common hypotheses we tested | Three: silent attrition vs the trend (+21pp → 0), the decay curve that disappears, K-means on noise. Plus 3 lessons |
 | 8 | Closures | Closures per open card doubling; cards under 6 months close at 14.7%, about 5× the 3y+ rate; usage doesn't predict closure; ₹91.2M after closure |
-| 9 | Who to prioritise | "Low-SoW = the whole book." K-means control as setup → frequency × card-age 2×2 + closed-but-shopping group, with sizes and outcomes |
-| 10 | Offers | Hero: reward visibility (₹1.60M left on the table; H-aware). Then instant cashback (H-imm), UPI, moment triggers, segment offers |
-| 11 | Economics & pilot | Break-even per offer, interchange view, simulated range; holdout + MDE; which hypothesis each arm tests |
+| 9 | Who to prioritise | "Low-SoW = the whole book." K-means control as setup → frequency × card-age 2×2 + closed-but-shopping group. Table per box: size, FY26 SoW (same everywhere), closure rate and non-HSIC ₹ (different) |
+| 10 | Offers | Three offers only: hero reward visibility (₹1.60M left on the table; H-aware), instant cashback (H-imm), card on UPI. O4–O8 on one line each |
+| 11 | Economics & pilot | Net margin per ₹ after rewards; break-even per offer by scenario, including any "never breaks even"; retention value; holdout + MDE; which hypothesis each arm tests |
 | 12 | Roadmap & asks | What HSIC and MetroMart decide; dashboard link + screenshots (if built) |
 | App. | — | Full table of 17 hypotheses tested, closure-model table, gate details, assumptions, limitations |
 
@@ -391,7 +425,7 @@ Hours are counted from the start of implementation.
 | 0–1 | Env, `config.py` (incl. rule-9 definitions), `prep.py` + asserts, `selection_log.md` | Chart style guide (palette, fonts, 16:9 sizes); slide-ready chart templates | Slide template, storyline, assumptions slide |
 | 1–4 | Reproduce F1–F15 and X1–X17 in `experiments.py` | Draft charts for slides 4–8 from the 23 Oct numbers | Slides 1–6 with `[KN]` placeholders |
 | 4–6 | Closure model; segments (K-means control, 2×2, A–F) | Draft charts for slides 9–11 | Slides 7–9 |
-| 6–8 | Economics, interchange, MDE, `export.py`, final charts, `key_numbers.md` | Swap draft charts for pipeline charts; visual QA | Slides 10–12 + appendix |
+| 6–8 | Economics (net margin, retention value, break-even incl. `never`), MDE, `export.py`, final charts, `key_numbers.md` | Swap draft charts for pipeline charts; visual QA | Slides 10–12 + appendix |
 | 8–10 | Verification (§14), spot checks | Slide polish; consistency pass on labels and badges | Insert real numbers; full read-through |
 | **Freeze ~5 PM IST, 24 Oct** | — | — | **Export the PDF; email by 7 PM** |
 
@@ -423,7 +457,9 @@ Hours are counted from the start of implementation.
   - time-aware null excess: |x| < 1.5pp;
   - post-closure spend: ₹91.2M;
   - Prime Grocery + Electronics left on the table: ₹1.60M;
-  - FY26 effective reward rate on HSIC spend: 1.39%.
+  - FY26 effective reward rate on HSIC spend: 1.39%;
+  - net lost margin (F15, no revolve income): ₹0.04–0.20M with no co-funding, ₹0.27–0.43M with 50% co-funding (±₹0.02M);
+  - young vs mature share in the top frequency tercile: 31.1% / 30.9% (±1pp).
 - **Exact cross-checks** against both EDAs. Counts must be identical and rates must match to 3 decimals:
   - pooled SoW 0.289 / 0.195 and the eight FY payment-mix shares;
   - Aug 2024: 21,514 cards, ₹1,036.8 / ₹356.2 per card, SoW 0.344;
@@ -435,7 +471,9 @@ Hours are counted from the start of implementation.
 - **Sanity checks:**
   - random baseline PR-AUC ≈ the base rate;
   - the simulator at 0% shift reproduces the baseline;
-  - break-even and the interchange line worked out by hand for one offer.
+  - break-even and the net-margin line worked out by hand for one offer;
+  - a deliberately loss-making test offer (incentive above the net margin) returns `never`, not a number;
+  - no slide or tile quotes gross interchange without the net-of-rewards figure beside it.
 - **Spot checks:** 3 customers (closed-and-shopping, young card, high-frequency mature card) traced through raw rows → segment → offer.
 - **Labels:** every causal "why" in the deck and the UI carries a Hypothesis label; no slide names v4 or the blueprint, or claims pre-registration.
 - **Deck:** every number appears in `key_numbers.md`, and every slide maps to one step of the storyline.

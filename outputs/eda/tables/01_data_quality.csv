@@ -1,0 +1,11 @@
+check,value
+customers,45000
+transactions,444118
+returns (rows),44814
+returns with null n_txn,44814
+customers without card,6836
+closed cards,7664
+cards opened after data end,126
+"rows capped at 9,999.99",21235
+duplicate transaction rows (excl. ID),0
+customers without transactions,0

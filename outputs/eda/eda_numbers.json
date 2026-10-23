@@ -1,0 +1,361 @@
+{
+  "rows_active": 261418,
+  "rows_total": 444118,
+  "cardholders": 38164.0,
+  "phase_rows": {
+    "active": 261418,
+    "before open": 77700,
+    "no card": 67119,
+    "after close": 37881
+  },
+  "sow_fy25": 0.2890952805969209,
+  "sow_fy26": 0.1948042888436566,
+  "sow_first_month": 0.3435136535623088,
+  "sow_last_month": 0.14649738864967607,
+  "sow_slope_pp_per_month": -0.8019015121023338,
+  "mix_change_pp": {
+    "Cash/UPI": 4.5,
+    "Debit Card": 1.9,
+    "HSIC Bank Credit Card": -9.43,
+    "MetroMart Wallet": 1.29,
+    "Other Bank Credit Card": 1.74
+  },
+  "bench_change_pp": {
+    "Cash/UPI": 1.84,
+    "Debit Card": 0.74,
+    "MetroMart Wallet": -3.99,
+    "Other Bank Credit Card": 1.41
+  },
+  "attr_change_pp_range": [
+    -10.7,
+    -7.3
+  ],
+  "full_window_customers": 18070,
+  "dispersion_by_method": {
+    "Debit Card": 1.006,
+    "Other Bank Credit Card": 1.002,
+    "HSIC Bank Credit Card": 1.005,
+    "Cash/UPI": 1.03,
+    "MetroMart Wallet": 0.997
+  },
+  "corr_customer_sow_fy25_fy26": -0.001453380263907832,
+  "corr_n": 10788,
+  "persistence": {
+    "HSIC SoW (cardholders, full window)": -0.001,
+    "Visit rows per FY": 0.461,
+    "Net spend per FY": 0.237,
+    "Grocery share of rows": -0.003,
+    "Average ticket": 0.013
+  },
+  "eb_between_customer_var": 0.00017587860951510242,
+  "eb_reliability_median": 0.007017138370032014,
+  "null_model": [
+    {
+      "window": "Feb 2025-Jul 2025",
+      "customers": 11349,
+      "observed_zero_hsic": 0.4032,
+      "expected_time_adjusted": 0.3963,
+      "se_time_adjusted": 0.0044,
+      "expected_fixed_history": 0.5189,
+      "excess_vs_time_adjusted_pp": 0.689,
+      "excess_vs_fixed_history_pp": -11.569
+    },
+    {
+      "window": "Aug 2025-Jan 2026",
+      "customers": 13042,
+      "observed_zero_hsic": 0.4739,
+      "expected_time_adjusted": 0.4723,
+      "se_time_adjusted": 0.0042,
+      "expected_fixed_history": 0.5795,
+      "excess_vs_time_adjusted_pp": 0.1644,
+      "excess_vs_fixed_history_pp": -10.5619
+    },
+    {
+      "window": "Feb 2026-Jul 2026",
+      "customers": 14118,
+      "observed_zero_hsic": 0.5638,
+      "expected_time_adjusted": 0.5664,
+      "se_time_adjusted": 0.004,
+      "expected_fixed_history": 0.6482,
+      "excess_vs_time_adjusted_pp": -0.2558,
+      "excess_vs_fixed_history_pp": -8.4405
+    }
+  ],
+  "closure_hazard_first_q": 0.017657764005705574,
+  "closure_hazard_last_q": 0.0401477005706613,
+  "hazard_0_6m": 0.06543677073478397,
+  "hazard_24_30m": 0.03208421476780498,
+  "closure_rate_by_attr": {
+    "Membership_Type": {
+      "Non-Prime": 0.203,
+      "Prime": 0.199
+    },
+    "Gender": {
+      "Female": 0.202,
+      "Male": 0.2
+    },
+    "age_band": [
+      0.205,
+      0.198,
+      0.197,
+      0.205
+    ]
+  },
+  "closed_cards": 7664,
+  "closed_still_shopping": 6227,
+  "closed_in_window": 5815.0,
+  "post_close_net_fy26": 60742030.15,
+  "post_close_mix": {
+    "Cash/UPI": 0.281,
+    "Debit Card": 0.13,
+    "MetroMart Wallet": 0.458,
+    "Other Bank Credit Card": 0.131
+  },
+  "rows_per_month_before_close": 0.40892640125415286,
+  "rows_per_month_after_close": 0.40939176334465527,
+  "rows_per_month_all_customers": 0.41122037037037035,
+  "closure_models": {
+    "tenure only (LR)": {
+      "test_auc": 0.672,
+      "test_pr_auc": 0.125,
+      "top_decile_lift": 2.552
+    },
+    "behaviour only (LR)": {
+      "test_auc": 0.581,
+      "test_pr_auc": 0.088,
+      "top_decile_lift": 1.768
+    },
+    "all features (LR)": {
+      "test_auc": 0.668,
+      "test_pr_auc": 0.114,
+      "top_decile_lift": 2.435
+    },
+    "all features (GBM)": {
+      "test_auc": 0.656,
+      "test_pr_auc": 0.11,
+      "top_decile_lift": 2.341
+    }
+  },
+  "closure_base_rate_test": 0.0616138091650113,
+  "prime_did_pp": 0.09599478029626851,
+  "prime_did_ci_pp": [
+    -1.1120114522503701,
+    1.3591656936014134
+  ],
+  "rewards_fy25": 1189256.7286,
+  "rewards_fy26": 964279.5058,
+  "forgone_fy26": 3978023.9648,
+  "forgone_fy26_prime_grocery_electronics": 1603018.6419,
+  "reinforcement_diff_pp": 0.19483318967175844,
+  "reinforcement_pairs": 71621,
+  "hsic_share_small_ticket": 0.1232328869047619,
+  "debit_share_small_ticket": 0.39025297619047616,
+  "wallet_share_capped": 0.5003567181926278,
+  "hsic_share_capped": 0.2562029330162505,
+  "big_ticket_cat_sow": 0.23866083930692222,
+  "ticket_median_by_method": {
+    "Cash/UPI": 1959.0,
+    "Debit Card": 1389.0,
+    "HSIC Bank Credit Card": 2222.0,
+    "MetroMart Wallet": 2598.0,
+    "Other Bank Credit Card": 1656.0
+  },
+  "stayers": 20779,
+  "bridge": {
+    "FY25 SoW": 28.91,
+    "Leaver/closer effect": -0.02,
+    "Stayer behaviour": -9.14,
+    "Joiner effect": -0.26,
+    "FY26 SoW": 19.48
+  },
+  "stayer_mix_change_pp": {
+    "Cash/UPI": 4.2,
+    "Debit Card": 1.86,
+    "HSIC Bank Credit Card": -9.14,
+    "MetroMart Wallet": 1.24,
+    "Other Bank Credit Card": 1.83
+  },
+  "tag_backtest": [
+    {
+      "level_0": "value_tier",
+      "level_1": "Low value",
+      "customers": "6096",
+      "fwd_net_per_cust": "5171.8975",
+      "fwd_sow": "0.1735"
+    },
+    {
+      "level_0": "value_tier",
+      "level_1": "Mid value",
+      "customers": "7680",
+      "fwd_net_per_cust": "5807.081",
+      "fwd_sow": "0.1709"
+    },
+    {
+      "level_0": "value_tier",
+      "level_1": "High value",
+      "customers": "8454",
+      "fwd_net_per_cust": "7369.3058",
+      "fwd_sow": "0.1709"
+    },
+    {
+      "level_0": "sow_state",
+      "level_1": "engaged",
+      "customers": "7109",
+      "fwd_net_per_cust": "6590.3256",
+      "fwd_sow": "0.17"
+    },
+    {
+      "level_0": "sow_state",
+      "level_1": "low",
+      "customers": "2689",
+      "fwd_net_per_cust": "7022.3479",
+      "fwd_sow": "0.1657"
+    },
+    {
+      "level_0": "sow_state",
+      "level_1": "zero HSIC 6m",
+      "customers": "12432",
+      "fwd_net_per_cust": "5847.2218",
+      "fwd_sow": "0.1739"
+    },
+    {
+      "level_0": "declining",
+      "level_1": "False",
+      "customers": "17072",
+      "fwd_net_per_cust": "6007.2781",
+      "fwd_sow": "0.17"
+    },
+    {
+      "level_0": "declining",
+      "level_1": "True",
+      "customers": "5158",
+      "fwd_net_per_cust": "6954.2706",
+      "fwd_sow": "0.1756"
+    },
+    {
+      "level_0": "Membership_Type",
+      "level_1": "Non-Prime",
+      "customers": "9009",
+      "fwd_net_per_cust": "6259.0659",
+      "fwd_sow": "0.168"
+    },
+    {
+      "level_0": "Membership_Type",
+      "level_1": "Prime",
+      "customers": "13221",
+      "fwd_net_per_cust": "6205.1626",
+      "fwd_sow": "0.1739"
+    }
+  ],
+  "customers_with_enough_rows_to_test": 6882,
+  "confident_zero_hsic_observed": 147,
+  "confident_zero_hsic_expected_by_chance": 156.04551749505512,
+  "min_rows_to_prove_silence": 18,
+  "median_active_rows_per_open_card_6m": 2.0,
+  "segments_now": {
+    "Engaged core (SoW >=15%)": 9155,
+    "High-potential low-SoW": 9877,
+    "Low-value low-SoW": 4736,
+    "Dormant (card open, no visits 6m)": 3590,
+    "New card (<6m, onboarding)": 3161,
+    "Closed - still shopping (win-back)": 6133,
+    "Closed - gone": 1386,
+    "No card (acquisition pool)": 6962
+  },
+  "high_value_share_of_open_card_non_hsic_spend": 0.6578452044377427,
+  "kmeans_k": 3,
+  "kmeans_silhouette": {
+    "3": 0.22,
+    "4": 0.219,
+    "5": 0.181,
+    "6": 0.177,
+    "7": 0.188
+  },
+  "kmeans_fwd_sow_range": [
+    0.16834768676836945,
+    0.17377271532582161
+  ],
+  "kmeans_insample_sow_range": [
+    0.24074910169137984,
+    0.2758062791970267
+  ],
+  "backtest": [
+    {
+      "segment": "Engaged core (SoW >=15%)",
+      "customers": 10284,
+      "fwd_net_per_cust": 6457.5269,
+      "fwd_shopping": 0.8939,
+      "fwd_closure_rate": 0.0471,
+      "fwd_sow": 0.1698
+    },
+    {
+      "segment": "High-potential low-SoW",
+      "customers": 7780,
+      "fwd_net_per_cust": 6505.7204,
+      "fwd_shopping": 0.8936,
+      "fwd_closure_rate": 0.0469,
+      "fwd_sow": 0.1734
+    },
+    {
+      "segment": "Low-value low-SoW",
+      "customers": 4166,
+      "fwd_net_per_cust": 5137.4624,
+      "fwd_shopping": 0.831,
+      "fwd_closure_rate": 0.0571,
+      "fwd_sow": 0.1721
+    },
+    {
+      "segment": "Dormant (card open, no visits 6m)",
+      "customers": 3262,
+      "fwd_net_per_cust": 4153.5047,
+      "fwd_shopping": 0.7826,
+      "fwd_closure_rate": 0.0509,
+      "fwd_sow": 0.1749
+    },
+    {
+      "segment": "New card (<6m, onboarding)",
+      "customers": 3706,
+      "fwd_net_per_cust": 5957.5446,
+      "fwd_shopping": 0.8729,
+      "fwd_closure_rate": 0.1473,
+      "fwd_sow": 0.1664
+    },
+    {
+      "segment": "Closed - still shopping (win-back)",
+      "customers": 4285,
+      "fwd_net_per_cust": 5928.3072,
+      "fwd_shopping": 0.8681,
+      "fwd_closure_rate": 0.0,
+      "fwd_sow": NaN
+    },
+    {
+      "segment": "Closed - gone",
+      "customers": 768,
+      "fwd_net_per_cust": 4557.6214,
+      "fwd_shopping": 0.7995,
+      "fwd_closure_rate": 0.0,
+      "fwd_sow": NaN
+    },
+    {
+      "segment": "No card (acquisition pool)",
+      "customers": 10749,
+      "fwd_net_per_cust": 5958.3852,
+      "fwd_shopping": 0.8699,
+      "fwd_closure_rate": 0.0621,
+      "fwd_sow": 0.1594
+    }
+  ],
+  "category_mix": {
+    "Electronics": 0.225,
+    "Large Applicances": 0.175,
+    "Furniture": 0.154,
+    "Travel": 0.128,
+    "Apparel": 0.078,
+    "Outdoor": 0.069,
+    "Grocery": 0.054,
+    "Kids And Toys": 0.051,
+    "Beauty": 0.044,
+    "Bill Payments": 0.024
+  },
+  "return_rate_rows": 0.10090561517434556
+}
