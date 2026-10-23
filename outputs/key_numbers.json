@@ -1,0 +1,878 @@
+{
+ "assumed_cofunding_base": {
+  "value": 0.5,
+  "label": "Assumed"
+ },
+ "assumed_cofunding_conservative": {
+  "value": 0.0,
+  "label": "Assumed"
+ },
+ "assumed_cofunding_optimistic": {
+  "value": 0.5,
+  "label": "Assumed"
+ },
+ "assumed_interchange_base": {
+  "value": 0.0175,
+  "label": "Assumed"
+ },
+ "assumed_interchange_conservative": {
+  "value": 0.015,
+  "label": "Assumed"
+ },
+ "assumed_interchange_optimistic": {
+  "value": 0.02,
+  "label": "Assumed"
+ },
+ "assumed_revolve_income_base": {
+  "value": 0.01,
+  "label": "Assumed"
+ },
+ "assumed_revolve_income_conservative": {
+  "value": 0.0,
+  "label": "Assumed"
+ },
+ "assumed_revolve_income_optimistic": {
+  "value": 0.02,
+  "label": "Assumed"
+ },
+ "base_card_age_auc_train": {
+  "value": 0.6105852538833689,
+  "label": "Measured"
+ },
+ "base_mix_fy25_cash_upi": {
+  "value": 0.18893794101208458,
+  "label": "Measured"
+ },
+ "base_mix_fy25_debit": {
+  "value": 0.08754513225847568,
+  "label": "Measured"
+ },
+ "base_mix_fy25_hsic": {
+  "value": 0.28909528059692097,
+  "label": "Measured"
+ },
+ "base_mix_fy25_other_cc": {
+  "value": 0.09047966719973531,
+  "label": "Measured"
+ },
+ "base_mix_fy25_wallet": {
+  "value": 0.3439419789327836,
+  "label": "Measured"
+ },
+ "base_mix_fy26_cash_upi": {
+  "value": 0.2339630241432497,
+  "label": "Measured"
+ },
+ "base_mix_fy26_debit": {
+  "value": 0.1065571705597481,
+  "label": "Measured"
+ },
+ "base_mix_fy26_hsic": {
+  "value": 0.1948042888436566,
+  "label": "Measured"
+ },
+ "base_mix_fy26_other_cc": {
+  "value": 0.10786166479905415,
+  "label": "Measured"
+ },
+ "base_mix_fy26_wallet": {
+  "value": 0.3568138516542914,
+  "label": "Measured"
+ },
+ "base_sow_fy25": {
+  "value": 0.289095280596921,
+  "label": "Measured"
+ },
+ "base_sow_fy26": {
+  "value": 0.1948042888436566,
+  "label": "Measured"
+ },
+ "cm_b0_pr_auc": {
+  "value": 0.06423319981583256,
+  "label": "Measured"
+ },
+ "cm_b0_roc_auc": {
+  "value": 0.5072972541062986,
+  "label": "Measured"
+ },
+ "cm_b0_top_decile": {
+  "value": 0.10894941634241245,
+  "label": "Measured"
+ },
+ "cm_b1_pr_auc": {
+  "value": 0.07130230596031982,
+  "label": "Measured"
+ },
+ "cm_b1_roc_auc": {
+  "value": 0.5470067021227754,
+  "label": "Measured"
+ },
+ "cm_b1_top_decile": {
+  "value": 0.13173985547526404,
+  "label": "Measured"
+ },
+ "cm_b2_pr_auc": {
+  "value": 0.12503654364688704,
+  "label": "Measured"
+ },
+ "cm_b2_roc_auc": {
+  "value": 0.6717856948601829,
+  "label": "Measured"
+ },
+ "cm_b2_top_decile": {
+  "value": 0.25514174541411894,
+  "label": "Measured"
+ },
+ "cm_chosen_learned": {
+  "value": "LR-all",
+  "label": "Measured"
+ },
+ "cm_female_roc_auc": {
+  "value": 0.6670561294368337,
+  "label": "Measured"
+ },
+ "cm_female_top_decile": {
+  "value": 0.24900398406374502,
+  "label": "Measured"
+ },
+ "cm_hgb_params": {
+  "value": "{'max_depth': 3, 'learning_rate': 0.05, 'l2_regularization': 0.0}",
+  "label": "Measured"
+ },
+ "cm_hgb_pr_auc": {
+  "value": 0.1112119414564046,
+  "label": "Measured"
+ },
+ "cm_hgb_roc_auc": {
+  "value": 0.6603056115886614,
+  "label": "Measured"
+ },
+ "cm_hgb_top_decile": {
+  "value": 0.22679266259032796,
+  "label": "Measured"
+ },
+ "cm_lr_all_pr_auc": {
+  "value": 0.11410910067161278,
+  "label": "Measured"
+ },
+ "cm_lr_all_roc_auc": {
+  "value": 0.6689326878660381,
+  "label": "Measured"
+ },
+ "cm_lr_all_top_decile": {
+  "value": 0.2406892718176765,
+  "label": "Measured"
+ },
+ "cm_lr_profile_pr_auc": {
+  "value": 0.11640702918605342,
+  "label": "Measured"
+ },
+ "cm_lr_profile_roc_auc": {
+  "value": 0.6693391531616619,
+  "label": "Measured"
+ },
+ "cm_lr_profile_top_decile": {
+  "value": 0.2473596442468038,
+  "label": "Measured"
+ },
+ "cm_lr_usage_pr_auc": {
+  "value": 0.07763692094387353,
+  "label": "Measured"
+ },
+ "cm_lr_usage_roc_auc": {
+  "value": 0.5669812811522378,
+  "label": "Measured"
+ },
+ "cm_lr_usage_top_decile": {
+  "value": 0.14174541411895497,
+  "label": "Measured"
+ },
+ "cm_male_roc_auc": {
+  "value": 0.6736433561628397,
+  "label": "Measured"
+ },
+ "cm_male_top_decile": {
+  "value": 0.25751734772552043,
+  "label": "Measured"
+ },
+ "cm_score_cards": {
+  "value": 30519,
+  "label": "Measured"
+ },
+ "cm_score_top_decile_card_age_max_years": {
+  "value": 0.48186173853524983,
+  "label": "Measured"
+ },
+ "cm_shipped": {
+  "value": "B2 card age",
+  "label": "Measured"
+ },
+ "cm_test_base_rate": {
+  "value": 0.0616138091650113,
+  "label": "Measured"
+ },
+ "cm_test_cards": {
+  "value": 29198,
+  "label": "Measured"
+ },
+ "cm_test_closers": {
+  "value": 1799,
+  "label": "Measured"
+ },
+ "cm_train_base_rate": {
+  "value": 0.047889640734233054,
+  "label": "Measured"
+ },
+ "cm_train_cards": {
+  "value": 26749,
+  "label": "Measured"
+ },
+ "cm_train_closers": {
+  "value": 1281,
+  "label": "Measured"
+ },
+ "cm_vs_b2_ci_hi": {
+  "value": -0.0006488523760550348,
+  "label": "Measured"
+ },
+ "cm_vs_b2_ci_lo": {
+  "value": -0.00512864199570659,
+  "label": "Measured"
+ },
+ "cm_vs_b2_roc_diff": {
+  "value": -0.0028530069941448133,
+  "label": "Measured"
+ },
+ "seg_A_horizon_net": {
+  "value": 24209826.15,
+  "label": "Measured"
+ },
+ "seg_A_horizon_net_per_cust": {
+  "value": 5941.06163190184,
+  "label": "Measured"
+ },
+ "seg_A_n": {
+  "value": 4075,
+  "label": "Measured"
+ },
+ "seg_A_n_score": {
+  "value": 5903,
+  "label": "Measured"
+ },
+ "seg_A_post_close_net": {
+  "value": 92282525.94999999,
+  "label": "Measured"
+ },
+ "seg_B_closure_6m": {
+  "value": 0.11635220125786164,
+  "label": "Measured"
+ },
+ "seg_B_closure_hi": {
+  "value": 0.1293912848158131,
+  "label": "Measured"
+ },
+ "seg_B_closure_lo": {
+  "value": 0.10287511230907458,
+  "label": "Measured"
+ },
+ "seg_B_n": {
+  "value": 2226,
+  "label": "Measured"
+ },
+ "seg_B_n_score": {
+  "value": 1961,
+  "label": "Measured"
+ },
+ "seg_B_nonhsic_hi": {
+  "value": 6507.069823674753,
+  "label": "Measured"
+ },
+ "seg_B_nonhsic_lo": {
+  "value": 5949.724430480683,
+  "label": "Measured"
+ },
+ "seg_B_nonhsic_per_cust": {
+  "value": 6234.728858939803,
+  "label": "Measured"
+ },
+ "seg_B_p_hsic": {
+  "value": 0.15058199499042288,
+  "label": "Measured"
+ },
+ "seg_B_prime_share": {
+  "value": 0.601078167115903,
+  "label": "Measured"
+ },
+ "seg_B_rows_3m": {
+  "value": 1.5244833782569631,
+  "label": "Measured"
+ },
+ "seg_B_sow": {
+  "value": 0.16055501697032643,
+  "label": "Measured"
+ },
+ "seg_B_sow_hi": {
+  "value": 0.1763512437543285,
+  "label": "Measured"
+ },
+ "seg_B_sow_lo": {
+  "value": 0.14557765002117593,
+  "label": "Measured"
+ },
+ "seg_C_closure_6m": {
+  "value": 0.12120598947794416,
+  "label": "Measured"
+ },
+ "seg_C_closure_hi": {
+  "value": 0.1301092675030352,
+  "label": "Measured"
+ },
+ "seg_C_closure_lo": {
+  "value": 0.11148826386078511,
+  "label": "Measured"
+ },
+ "seg_C_n": {
+  "value": 4942,
+  "label": "Measured"
+ },
+ "seg_C_n_score": {
+  "value": 4352,
+  "label": "Measured"
+ },
+ "seg_C_nonhsic_hi": {
+  "value": 4127.837648269931,
+  "label": "Measured"
+ },
+ "seg_C_nonhsic_lo": {
+  "value": 3826.355618575476,
+  "label": "Measured"
+ },
+ "seg_C_nonhsic_per_cust": {
+  "value": 3976.295938891137,
+  "label": "Measured"
+ },
+ "seg_C_p_hsic": {
+  "value": 0.1563971340839304,
+  "label": "Measured"
+ },
+ "seg_C_prime_share": {
+  "value": 0.612505058680696,
+  "label": "Measured"
+ },
+ "seg_C_rows_3m": {
+  "value": 0.9884662080129503,
+  "label": "Measured"
+ },
+ "seg_C_sow": {
+  "value": 0.1772792692223777,
+  "label": "Measured"
+ },
+ "seg_C_sow_hi": {
+  "value": 0.1895607960175173,
+  "label": "Measured"
+ },
+ "seg_C_sow_lo": {
+  "value": 0.16489472343457148,
+  "label": "Measured"
+ },
+ "seg_D_closure_6m": {
+  "value": 0.041666666666666664,
+  "label": "Measured"
+ },
+ "seg_D_closure_hi": {
+  "value": 0.04611506524317912,
+  "label": "Measured"
+ },
+ "seg_D_closure_lo": {
+  "value": 0.03662514827995255,
+  "label": "Measured"
+ },
+ "seg_D_n": {
+  "value": 6744,
+  "label": "Measured"
+ },
+ "seg_D_n_score": {
+  "value": 7486,
+  "label": "Measured"
+ },
+ "seg_D_nonhsic_hi": {
+  "value": 6559.85897227165,
+  "label": "Measured"
+ },
+ "seg_D_nonhsic_lo": {
+  "value": 6242.879341303382,
+  "label": "Measured"
+ },
+ "seg_D_nonhsic_per_cust": {
+  "value": 6393.2620937129295,
+  "label": "Measured"
+ },
+ "seg_D_p_hsic": {
+  "value": 0.15865722724928502,
+  "label": "Measured"
+ },
+ "seg_D_prime_share": {
+  "value": 0.5898576512455516,
+  "label": "Measured"
+ },
+ "seg_D_rows_3m": {
+  "value": 1.5813315539739028,
+  "label": "Measured"
+ },
+ "seg_D_sow": {
+  "value": 0.1707933935840978,
+  "label": "Measured"
+ },
+ "seg_D_sow_hi": {
+  "value": 0.17961741522713012,
+  "label": "Measured"
+ },
+ "seg_D_sow_lo": {
+  "value": 0.16266256083015873,
+  "label": "Measured"
+ },
+ "seg_E_closure_6m": {
+  "value": 0.043176763051157925,
+  "label": "Measured"
+ },
+ "seg_E_closure_hi": {
+  "value": 0.04631852675650922,
+  "label": "Measured"
+ },
+ "seg_E_closure_lo": {
+  "value": 0.04003663482925553,
+  "label": "Measured"
+ },
+ "seg_E_n": {
+  "value": 15286,
+  "label": "Measured"
+ },
+ "seg_E_n_score": {
+  "value": 16720,
+  "label": "Measured"
+ },
+ "seg_E_nonhsic_hi": {
+  "value": 4229.571243670679,
+  "label": "Measured"
+ },
+ "seg_E_nonhsic_lo": {
+  "value": 4054.25514773322,
+  "label": "Measured"
+ },
+ "seg_E_nonhsic_per_cust": {
+  "value": 4139.111048017794,
+  "label": "Measured"
+ },
+ "seg_E_p_hsic": {
+  "value": 0.16012579019991657,
+  "label": "Measured"
+ },
+ "seg_E_prime_share": {
+  "value": 0.5919795891665577,
+  "label": "Measured"
+ },
+ "seg_E_rows_3m": {
+  "value": 1.0193314143660865,
+  "label": "Measured"
+ },
+ "seg_E_sow": {
+  "value": 0.17171818816552892,
+  "label": "Measured"
+ },
+ "seg_E_sow_hi": {
+  "value": 0.1781459077591119,
+  "label": "Measured"
+ },
+ "seg_E_sow_lo": {
+  "value": 0.16463396197913832,
+  "label": "Measured"
+ },
+ "seg_F_n": {
+  "value": 6836,
+  "label": "Measured"
+ },
+ "seg_F_n_score": {
+  "value": 6836,
+  "label": "Measured"
+ },
+ "seg_Z_n": {
+  "value": 4891,
+  "label": "Measured"
+ },
+ "seg_Z_n_score": {
+  "value": 1742,
+  "label": "Measured"
+ },
+ "seg_age_closure_diff": {
+  "value": 0.0769841804600869,
+  "label": "Measured"
+ },
+ "seg_age_closure_diff_hi": {
+  "value": 0.08507752846159458,
+  "label": "Measured"
+ },
+ "seg_age_closure_diff_lo": {
+  "value": 0.06896087252670872,
+  "label": "Measured"
+ },
+ "seg_age_separates_risk": {
+  "value": true,
+  "label": "Measured"
+ },
+ "seg_boundary_freq_minus10": {
+  "value": 0.12250839098568395,
+  "label": "Measured"
+ },
+ "seg_boundary_freq_plus10": {
+  "value": 0.0,
+  "label": "Measured"
+ },
+ "seg_boundary_young_0_9y": {
+  "value": 0.02520720597301185,
+  "label": "Measured"
+ },
+ "seg_boundary_young_1_1y": {
+  "value": 0.02246729228029317,
+  "label": "Measured"
+ },
+ "seg_build_cutoff": {
+  "value": "2026-01-31",
+  "label": "Measured"
+ },
+ "seg_freq_cut": {
+  "value": 5.0,
+  "label": "Measured"
+ },
+ "seg_freq_cut_score": {
+  "value": 5.0,
+  "label": "Measured"
+ },
+ "seg_freq_nonhsic_diff": {
+  "value": 2254.58749595911,
+  "label": "Measured"
+ },
+ "seg_freq_nonhsic_diff_hi": {
+  "value": 2419.694145237051,
+  "label": "Measured"
+ },
+ "seg_freq_nonhsic_diff_lo": {
+  "value": 2106.19728142043,
+  "label": "Measured"
+ },
+ "seg_freq_separates_value": {
+  "value": true,
+  "label": "Measured"
+ },
+ "seg_independence_gap": {
+  "value": 0.0044188677371765905,
+  "label": "Measured"
+ },
+ "seg_kmeans_ari": {
+  "value": 0.8891010807939892,
+  "label": "Measured"
+ },
+ "seg_kmeans_customers": {
+  "value": 12327,
+  "label": "Measured"
+ },
+ "seg_kmeans_eta2": {
+  "value": 0.00043461904772878714,
+  "label": "Measured"
+ },
+ "seg_kmeans_eta2_hi": {
+  "value": 0.0021324852537040603,
+  "label": "Measured"
+ },
+ "seg_kmeans_eta2_lo": {
+  "value": 0.0003013392585796839,
+  "label": "Measured"
+ },
+ "seg_kmeans_fy25_sow_spread_pp": {
+  "value": 78.70505402365005,
+  "label": "Measured"
+ },
+ "seg_kmeans_fy26_sow_spread_pp": {
+  "value": 2.266884102288505,
+  "label": "Measured"
+ },
+ "seg_kmeans_k": {
+  "value": 8,
+  "label": "Measured"
+ },
+ "seg_kmeans_silhouette": {
+  "value": 0.37622736737290796,
+  "label": "Measured"
+ },
+ "seg_kmeans_verdict": {
+  "value": "clusters do not predict next year's SoW",
+  "label": "Measured"
+ },
+ "seg_mature_top_share": {
+  "value": 0.3061280072628234,
+  "label": "Measured"
+ },
+ "seg_sow_max_gap_pp": {
+  "value": 1.6724252252051264,
+  "label": "Measured"
+ },
+ "seg_sow_separates": {
+  "value": false,
+  "label": "Measured"
+ },
+ "seg_young_split_diff": {
+  "value": 0.05720733907542315,
+  "label": "Measured"
+ },
+ "seg_young_split_hi": {
+  "value": 0.07264308303894915,
+  "label": "Measured"
+ },
+ "seg_young_split_lo": {
+  "value": 0.0423157070692427,
+  "label": "Measured"
+ },
+ "seg_young_split_reported": {
+  "value": true,
+  "label": "Measured"
+ },
+ "seg_young_top_share": {
+  "value": 0.310546875,
+  "label": "Measured"
+ },
+ "x15_open_cards_last_60d": {
+  "value": 30519,
+  "label": "Measured"
+ },
+ "x15_rows_per_60d": {
+  "value": 0.8111744292237443,
+  "label": "Measured"
+ },
+ "x15_rows_per_customer": {
+  "value": 9.869288888888889,
+  "label": "Measured"
+ },
+ "x15_sow_undefined_share_last_60d": {
+  "value": 0.5371735640093057,
+  "label": "Measured"
+ },
+ "x15_verdict": {
+  "value": "infeasible: SoW is undefined for most customers in a 60-day window",
+  "label": "Measured"
+ },
+ "x16_columns_checked": {
+  "value": 41,
+  "label": "Measured"
+ },
+ "x16_offer_fields": {
+  "value": 0,
+  "label": "Measured"
+ },
+ "x16_verdict": {
+  "value": "infeasible: no offer history",
+  "label": "Measured"
+ },
+ "x1_band_edges_low_mid": {
+  "value": 0.22645960947950208,
+  "label": "Measured"
+ },
+ "x1_band_edges_mid_high": {
+  "value": 0.47139865345844995,
+  "label": "Measured"
+ },
+ "x1_band_to_zero_max": {
+  "value": 0.3666771852319344,
+  "label": "Measured"
+ },
+ "x1_band_to_zero_min": {
+  "value": 0.3506944444444444,
+  "label": "Measured"
+ },
+ "x1_gate_n_fy25": {
+  "value": 14796,
+  "label": "Measured"
+ },
+ "x1_gate_pass": {
+  "value": false,
+  "label": "Measured"
+ },
+ "x1_persistence_ci_hi": {
+  "value": 0.023054324581802697,
+  "label": "Measured"
+ },
+ "x1_persistence_ci_lo": {
+  "value": -0.015606546195158394,
+  "label": "Measured"
+ },
+ "x1_persistence_n": {
+  "value": 10281,
+  "label": "Measured"
+ },
+ "x1_persistence_r": {
+  "value": 0.00372528122256921,
+  "label": "Measured"
+ },
+ "x1_sow_filter_n": {
+  "value": 12327,
+  "label": "Measured"
+ },
+ "x1_sow_r_fy25_fy26": {
+  "value": 0.005749033960182846,
+  "label": "Measured"
+ },
+ "x1_sow_values_clipped": {
+  "value": 1885,
+  "label": "Measured"
+ },
+ "x1_split_half_ci_hi": {
+  "value": 0.011023731877336294,
+  "label": "Measured"
+ },
+ "x1_split_half_ci_lo": {
+  "value": -0.021202467867705396,
+  "label": "Measured"
+ },
+ "x1_split_half_n": {
+  "value": 14796,
+  "label": "Measured"
+ },
+ "x1_split_half_r": {
+  "value": -0.005090689735322454,
+  "label": "Measured"
+ },
+ "x1_variance_ratio_fy25": {
+  "value": 1.0009136345043785,
+  "label": "Measured"
+ },
+ "x1_variance_ratio_fy26": {
+  "value": 0.9959614682543424,
+  "label": "Measured"
+ },
+ "x1_verdict": {
+  "value": "no customer-level differences beyond chance",
+  "label": "Measured"
+ },
+ "x2_customers": {
+  "value": 10281,
+  "label": "Measured"
+ },
+ "x2_excess_pp": {
+  "value": -0.8553156307752163,
+  "label": "Measured"
+ },
+ "x2_naive_flag_rate_null": {
+  "value": 0.4813670849139189,
+  "label": "Measured"
+ },
+ "x2_naive_flag_rate_null_hi": {
+  "value": 0.49053107674350743,
+  "label": "Measured"
+ },
+ "x2_naive_flag_rate_null_lo": {
+  "value": 0.47164186363194244,
+  "label": "Measured"
+ },
+ "x2_naive_flag_rate_observed": {
+  "value": 0.4728139286061667,
+  "label": "Measured"
+ },
+ "x2_verdict": {
+  "value": "nothing to detect",
+  "label": "Measured"
+ },
+ "x5_profile_roc_auc": {
+  "value": 0.6693391531616619,
+  "label": "Measured"
+ },
+ "x5_recency_roc_auc": {
+  "value": 0.5470067021227754,
+  "label": "Measured"
+ },
+ "x5_usage_ci_hi": {
+  "value": 0.5807442170503911,
+  "label": "Measured"
+ },
+ "x5_usage_ci_lo": {
+  "value": 0.5528181628106543,
+  "label": "Measured"
+ },
+ "x5_usage_clears_bar": {
+  "value": true,
+  "label": "Measured"
+ },
+ "x5_usage_increment_ci_hi": {
+  "value": 0.0014141247641693024,
+  "label": "Measured"
+ },
+ "x5_usage_increment_ci_lo": {
+  "value": -0.0023194675346036335,
+  "label": "Measured"
+ },
+ "x5_usage_increment_roc": {
+  "value": -0.0004064652956238257,
+  "label": "Measured"
+ },
+ "x5_usage_roc_auc": {
+  "value": 0.5669812811522378,
+  "label": "Measured"
+ },
+ "x5_usage_roc_auc_mature": {
+  "value": 0.5166225332454444,
+  "label": "Measured"
+ },
+ "x5_usage_roc_auc_young": {
+  "value": 0.5248714439284963,
+  "label": "Measured"
+ },
+ "x5_verdict": {
+  "value": "usage adds no closure signal beyond card age",
+  "label": "Measured"
+ },
+ "x6_ci_hi": {
+  "value": -0.003713078562410325,
+  "label": "Measured"
+ },
+ "x6_ci_lo": {
+  "value": -0.013921308260251855,
+  "label": "Measured"
+ },
+ "x6_hgb_minus_lr": {
+  "value": -0.008627076277376688,
+  "label": "Measured"
+ },
+ "x6_hgb_roc_auc": {
+  "value": 0.6603056115886614,
+  "label": "Measured"
+ },
+ "x6_lr_roc_auc": {
+  "value": 0.6689326878660381,
+  "label": "Measured"
+ },
+ "x6_verdict": {
+  "value": "HGB does not beat LR",
+  "label": "Measured"
+ },
+ "x7_max_abs_excess_pp": {
+  "value": 1.4631628636177785,
+  "label": "Measured"
+ },
+ "x7_rows": {
+  "value": 68787,
+  "label": "Measured"
+ },
+ "x7_slope_ci_hi_pp": {
+  "value": 0.024172378383447102,
+  "label": "Measured"
+ },
+ "x7_slope_ci_lo_pp": {
+  "value": -0.08471498602383074,
+  "label": "Measured"
+ },
+ "x7_slope_pp_per_month": {
+  "value": -0.030271303820191817,
+  "label": "Measured"
+ },
+ "x7_verdict": {
+  "value": "no onboarding usage cliff",
+  "label": "Measured"
+ }
+}

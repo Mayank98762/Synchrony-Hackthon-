@@ -1,0 +1,12 @@
+metric,value,unit,type,source_key
+"Segment A spend after closure (5,903 customers)",92282525.94999999,₹,Measured,seg_A_post_close_net
+Closers caught in top decile by card age,0.25514174541411894,share,Measured,cm_b2_top_decile
+interchange conservative,0.015,share,Assumed,assumed_interchange_conservative
+revolve income conservative,0.0,share,Assumed,assumed_revolve_income_conservative
+cofunding conservative,0.0,share,Assumed,assumed_cofunding_conservative
+interchange base,0.0175,share,Assumed,assumed_interchange_base
+revolve income base,0.01,share,Assumed,assumed_revolve_income_base
+cofunding base,0.5,share,Assumed,assumed_cofunding_base
+interchange optimistic,0.02,share,Assumed,assumed_interchange_optimistic
+revolve income optimistic,0.02,share,Assumed,assumed_revolve_income_optimistic
+cofunding optimistic,0.5,share,Assumed,assumed_cofunding_optimistic

@@ -82,6 +82,34 @@ def f1_sow_trend() -> dict:
 
 `export.py` merges every dict into `outputs/key_numbers.md`. Keys are `snake_case`, prefixed with the finding ID (`f1_`, `x3_` …). Values are plain `float` / `int` / `str`, never numpy types.
 
+**Run everything:** `python analysis/run_all.py` (about 3 minutes). Your module is picked up automatically once `analysis/experiments_f.py`, `analysis/experiments_h.py` or `analysis/economics.py` exists and has a `run()` function. If two modules produce the same key, the run stops.
+
+**Labels** come from the key prefix:
+- `o<N>_`, `mde_`, `econ_` → Simulated;
+- `assumed_` → Assumed;
+- `f15_net_margin*`, `f15_gross*` → Measured × Assumed;
+- everything else → Measured.
+
+**Verdicts:** every X test must also return `x<N>_verdict` (a short string), which feeds `outputs/experiment_log.csv`.
+
+### Keys the reproduction checks read (`analysis/checks.py`)
+
+Use exactly these names, or the check stays `pending`. Values are shares (0–1) unless the name ends in `_pp` (percentage points) or is a ₹ amount.
+
+| Owner | Keys |
+|---|---|
+| Mayank: F1 | `f1_sow_fy25`, `f1_sow_fy26` |
+| Mayank: F2 | `f2_leaver_pp`, `f2_stayer_pp`, `f2_joiner_pp` |
+| Mayank: F3 | `f3_cash_upi_share_of_loss` (0.47) |
+| Mayank: F8 | `f8_prime_ge_left_on_table` (₹) |
+| Mayank: F11 | `f11_post_close_net` (₹) |
+| Mayank: F14 | `f14_aug24_cards`, `f14_aug24_net_per_card`, `f14_aug24_hsic_per_card`, `f14_aug24_sow`, and the same four with `may26` |
+| Mayank: X3 | `x3_excess_time_2025_01_31`, `x3_excess_time_2025_07_31`, `x3_excess_time_2026_01_31` (shares, e.g. 0.007); also `x3_excess_fixed_<cutoff>` |
+| Shreyash: F12 | `f12_gap` (₹) |
+| Shreyash: F15 | `f15_reward_rate_fy26`, and for the impact ledger: `f15_net_margin_lo_nocofund`, `f15_net_margin_hi_nocofund`, `f15_net_margin_lo_cofund`, `f15_net_margin_hi_cofund` (₹) |
+
+Results land in `outputs/model_eval/checks.csv` (pass / FAIL / pending). A FAIL stops the run.
+
 ## Checked against the plan (smoke test, 23 Oct)
 
 SoW 0.2891 / 0.1948 · FY payment-mix shares (all 8) · Aug 2024: 21,514 cards, ₹1,036.8 / ₹356.2 per card, SoW 0.344 · May 2026: 30,742 cards, ₹1,028.9 / ₹166.7, SoW 0.162 · open cards 26,749 / 29,198 · closers 1,281 / 1,799 · closure by card age at 2026-01-31: 14.7 / 9.0 / 6.3 / 4.0 / 3.0% · young cards at 2026-07-31: 6,313; top-tercile frequency share young 31.1% vs mature 30.9%.

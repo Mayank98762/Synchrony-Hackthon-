@@ -3,6 +3,8 @@
 *.pdf
 # aggregated results we do want to share
 !outputs/**/*.csv
+# ...but never a customer-level file (one row per customer): the repo is public
+outputs/**/*customer*.csv
 
 .claude/
 __pycache__/

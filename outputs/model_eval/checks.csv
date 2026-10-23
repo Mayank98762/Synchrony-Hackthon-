@@ -1,0 +1,40 @@
+key,check,expected,actual,tolerance,status
+base_sow_fy25,Pooled SoW FY25,0.289,0.289095280596921,0.0005,pass
+base_sow_fy26,Pooled SoW FY26,0.195,0.1948042888436566,0.0005,pass
+base_mix_fy25_debit,FY25 mix: Debit,0.088,0.08754513225847568,0.0005,pass
+base_mix_fy25_other_cc,FY25 mix: Other CC,0.09,0.09047966719973531,0.0005,pass
+base_mix_fy25_cash_upi,FY25 mix: Cash/UPI,0.189,0.18893794101208458,0.0005,pass
+base_mix_fy25_wallet,FY25 mix: Wallet,0.344,0.3439419789327836,0.0005,pass
+base_mix_fy26_debit,FY26 mix: Debit,0.107,0.1065571705597481,0.0005,pass
+base_mix_fy26_other_cc,FY26 mix: Other CC,0.108,0.10786166479905415,0.0005,pass
+base_mix_fy26_cash_upi,FY26 mix: Cash/UPI,0.234,0.2339630241432497,0.0005,pass
+base_mix_fy26_wallet,FY26 mix: Wallet,0.357,0.3568138516542914,0.0005,pass
+cm_train_cards,Open cards at 2025-07-31,26749.0,26749.0,0.0,pass
+cm_test_cards,Open cards at 2026-01-31,29198.0,29198.0,0.0,pass
+cm_train_closers,Closers in 6m after 2025-07-31 (rule 9),1281.0,1281.0,0.0,pass
+cm_test_closers,Closers in 6m after 2026-01-31,1799.0,1799.0,0.0,pass
+base_card_age_auc_train,Card-age AUC at 2025-07-31,0.611,0.6105852538833689,0.0005,pass
+cm_b2_roc_auc,Card-age AUC at 2026-01-31,0.672,0.6717856948601829,0.0005,pass
+f14_aug24_cards,Cards active in Aug 2024,21514.0,,0.0,pending
+f14_aug24_net_per_card,"Net spend per card, Aug 2024",1036.8,,0.05,pending
+f14_aug24_hsic_per_card,"HSIC spend per card, Aug 2024",356.2,,0.05,pending
+f14_aug24_sow,SoW Aug 2024,0.344,,0.0005,pending
+f14_may26_cards,Cards active in May 2026,30742.0,,0.0,pending
+f14_may26_net_per_card,"Net spend per card, May 2026",1028.9,,0.05,pending
+f14_may26_hsic_per_card,"HSIC spend per card, May 2026",166.7,,0.05,pending
+f14_may26_sow,SoW May 2026,0.162,,0.0005,pending
+f1_sow_fy25,F1 SoW FY25,0.2891,,0.002,pending
+f1_sow_fy26,F1 SoW FY26,0.1948,,0.002,pending
+f2_leaver_pp,Bridge: leaver effect (pp),0.26,,0.2,pending
+f2_stayer_pp,Bridge: stayer change (pp),-9.54,,0.2,pending
+f2_joiner_pp,Bridge: joiner effect (pp),-0.15,,0.2,pending
+f3_cash_upi_share_of_loss,Cash/UPI share of HSIC's loss,0.47,,0.01,pending
+x1_variance_ratio_fy25,Variance ratio FY25,1.0,1.0009136345043785,0.02,pass
+x1_variance_ratio_fy26,Variance ratio FY26,1.0,0.9959614682543424,0.02,pass
+x3_excess_time_2025_01_31,"Time-aware silent-attrition excess, 2025-01-31",0.0,,0.015,pending
+x3_excess_time_2025_07_31,"Time-aware silent-attrition excess, 2025-07-31",0.0,,0.015,pending
+x3_excess_time_2026_01_31,"Time-aware silent-attrition excess, 2026-01-31",0.0,,0.015,pending
+f11_post_close_net,Post-closure net spend,91200000.0,,50000.0,pending
+f8_prime_ge_left_on_table,"Prime G+E cashback left on the table, FY26",1600000.0,,5000.0,pending
+f15_reward_rate_fy26,FY26 effective reward rate on HSIC spend,0.01399,,0.0001,pending
+f12_gap,HSIC spend gap at constant SoW,33400000.0,,500000.0,pending
