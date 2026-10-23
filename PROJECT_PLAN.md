@@ -1,628 +1,356 @@
-# MetroMart–HSIC Silent Attrition & Share of Wallet: Project Plan (v4, finalised)
+# MetroMart–HSIC Silent Attrition & Share of Wallet: Project Plan (v5)
 
-> Synchrony Analytics Hackathon 2026. **Required deliverable:** slides as a PDF, emailed to the organisers by **8:00 PM IST, 24 Oct 2026** (the subject line must be the roll number only; do not upload to Google Drive).
-> This document is the single source of truth for scope. It covers the planning iterations v1 (core analysis), v2 (USPs and dashboard), v3 (model comparison) and v4 (business value, failure analysis, storyline).
+> Synchrony Analytics Hackathon 2026. **Required deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only. Attach the file; do not use Google Drive.
+> v5 replaces v4 and `synchrony_hackathon_strategy_blueprint.md`. Both earlier plans were tested against the data on 23 Oct, and most of their core ideas failed. §4 records what failed and why. That record is now part of the pitch.
 
 ## Contents
-1. [Problem & objectives](#1-problem--objectives)
-2. [Scope: mandatory vs optional](#2-scope-mandatory-vs-optional)
-3. [Storyline & hypotheses](#3-storyline--hypotheses)
-4. [Data, definitions & assumptions](#4-data-definitions--assumptions)
-5. [Architecture & workflow](#5-architecture--workflow)
-6. [Core analyses](#6-core-analyses)
-7. [Experiments & evaluation (C1–C4)](#7-experiments--evaluation-c1c4)
-8. [Failure analysis & iteration log](#8-failure-analysis--iteration-log)
-9. [Business value & impact measurement](#9-business-value--impact-measurement)
-10. [USPs](#10-usps)
-11. [Visualisations, website & deck](#11-visualisations-website--deck)
-12. [Pitfalls & controls](#12-pitfalls--controls)
-13. [Implementation phases, dependencies & cut lines](#13-implementation-phases-dependencies--cut-lines)
+1. [The answer in one paragraph](#1-the-answer-in-one-paragraph)
+2. [Brief rules & definitions](#2-brief-rules--definitions)
+3. [Evaluation protocol](#3-evaluation-protocol)
+4. [Experiment log: what we expected vs what we found](#4-experiment-log-what-we-expected-vs-what-we-found)
+5. [What the data does support](#5-what-the-data-does-support)
+6. [USPs](#6-usps)
+7. [Segmentation (brief item 3)](#7-segmentation-brief-item-3)
+8. [Offers & economics (brief item 4)](#8-offers--economics-brief-item-4)
+9. [Assumptions & limitations](#9-assumptions--limitations)
+10. [Architecture](#10-architecture)
+11. [Dashboard (UI)](#11-dashboard-ui)
+12. [Deck](#12-deck)
+13. [Schedule, tracks & cut order](#13-schedule-tracks--cut-order)
 14. [Verification](#14-verification)
-15. [Final deliverables](#15-final-deliverables)
 
 ---
 
-## 1. Problem & objectives
+## 1. The answer in one paragraph
 
-MetroMart Inc. and HSIC Bank issue a co-branded credit card.
+HSIC's Share of Wallet at MetroMart fell from **28.9% in FY25 to 19.5% in FY26**, and it fell at the same rate for **every** kind of customer: Prime and Non-Prime, every age, credit limit, APR band, card vintage and category. Statistically, individual customers don't differ in how often they reach for the card. Usage varies between customers no more than coin flips would, and a customer's share this year predicts nothing about next year. So there is no hidden group of "low-SoW customers" to find. **HSIC has a product problem, not a targeting problem.** The card is losing ground mainly to **Cash/UPI**, which took 47% of the lost share, across every ticket size. Our recommendation therefore has three layers:
+1. **Fix the product for everyone:** instant cashback at the till, reward visibility at checkout, and the card on UPI.
+2. **Trigger offers at the moment of purchase**, using the one real behavioural signal: ticket size.
+3. **Target only groups defined by traits that actually persist:** closed cards whose owners still shop (₹91.2M of spend after closure) and first-year cardholders, whose closure rate is 3× that of mature cards.
 
-- **Reward rates at MetroMart:**
-  - **Prime members:** 5% on Grocery, 3% on Electronics, 1% on everything else.
-  - **Non-Prime members:** 1% on everything.
-- **Reward timing:** rewards are credited in the *next* month's statement.
-- **Fees:** none.
-- **Competition:** no other card matches the Grocery and Electronics rates.
+Every claim is backed by a test in §4–§5, and every test has a baseline or a null model.
 
-HSIC leadership believes cardholders are moving their MetroMart spend to other payment methods. The two concerns are:
-- **silent attrition:** the card stays open but stops being used;
-- **declining Share of Wallet (SoW).**
+---
 
-**SoW** = spend on the HSIC card at MetroMart ÷ the cardholder's total spend at MetroMart. It is calculated on **net** sales, only for the period when the card was **active**.
+## 2. Brief rules & definitions
 
-**Objectives (from the brief)**
-1. Analyse two years of combined MetroMart and HSIC transaction data.
-2. Find insights into silent attrition and declining SoW.
-3. Build customer segments, using a model or method, that identify low-SoW customers.
-4. Design targeted offers and rewards that increase use of the card at MetroMart.
-
-**What the data already shows (read-only profiling)**
-
-| Signal | Value |
+| Rule (from the brief) | How we implement it |
 |---|---|
-| Portfolio SoW (active-card spend only) | **28.9% in FY25 → 19.5% in FY26**. By quarter: 33.3% (Aug–Sep 2024) down to 14.6% (Jul 2026) |
-| Where the HSIC share went | Cash/UPI gained 4.5pp; Debit and Other Bank Credit Card each gained about 2pp; MetroMart Wallet is the largest method overall (about 35%) |
-| Reward paradox | HSIC SoW is about 23–24% in **every** category for **both** Prime and Non-Prime. The 5%/3% Prime rates don't pull in any extra spend |
-| Explicit attrition | 7,664 cards closed, at a rate rising every quarter (1,196 in Apr–Jun 2026). **6,227 of these customers keep shopping at MetroMart** |
-| Zero SoW | About 26% of active cardholders have SoW = 0 |
-| Data consistency | 0 HSIC transactions fall outside the active-card window |
-| **Sparse data** | About 2.5 transaction rows per customer per 6 months (see §3, Iteration 0) |
+| SoW = HSIC spend at MetroMart ÷ total spend at MetroMart | Always a **ratio of sums** in ₹, never an average of per-customer ratios |
+| Net, not gross | `net = +amount` for a Sale, `−amount` for a Return |
+| Returns count as 0 transactions | `n_txn = 0` for Return rows (they are null in the raw data) |
+| Only while the card is active | `open_date ≤ txn_date ≤ close_date`, inclusive at both ends; a null close date means the card is still open |
+| Fiscal year Aug–Jul | FY25 = Aug 2024–Jul 2025, FY26 = Aug 2025–Jul 2026. Fiscal quarters: Q1 = Aug–Oct |
+| Category / payment lookups | Joined on `Category_Code` / `Payment_Code`. HSIC = code 3 |
+| Rewards credited the following month | Derived reward = HSIC net × rate (Prime: 5% Grocery, 3% Electronics, 1% other; Non-Prime: 1%), booked in month + 1 |
+
+**Data facts (all verified on 23 Oct 2026)**
+- **Customers:** 45,000. 6,836 have never held a card; 7,664 cards are closed. 126 cards open after the data ends, and some close dates run to 2026-08-05. Both are handled by the active-window rule.
+- **Transactions:** 444,118 rows from 2024-08-01 to 2026-07-31. 44,814 are Returns, all with null `Number_of_Transactions`. 21,235 rows sit at exactly ₹9,999.99 (a cap).
+- **Integrity:** no duplicate IDs and no orphan rows. No HSIC transaction falls outside an active card window.
+- **Sparsity:** about 9.9 rows per customer over two years, i.e. 0.82 rows per 60 days.
 
 ---
 
-## 2. Scope: mandatory vs optional
+## 3. Evaluation protocol
 
-| Layer | Items | Why |
-|---|---|---|
-| **MANDATORY (case brief)** | **M1** SoW = HSIC net ÷ total net at MetroMart, active window only, fiscal year August–July, returns count as 0 transactions · **M2** insight into silent attrition and declining SoW · **M3** segments from a model or method that identify low-SoW customers · **M4** targeted offers and rewards · **M5** every assumption stated, slides in PDF | Required |
-| **CORE CREDIBILITY (our standard)** | Experiments C1–C3 with baselines, time-based validation and failure analysis · noise-adjusted silent attrition (USP #21) · Impact Ledger tagged Measured / Simulated / Assumed | Makes M2–M4 defensible |
-| **OPTIONAL INNOVATION** | USPs #1–15 (§10), dashboard, simulators | Each must link back to SoW, attrition, rewards or a decision; they are cut in the order given in §13 |
+These rules apply to every experiment, whether it was already run (§4) or is still planned.
+
+1. **The decision rule comes before the result.** Each hypothesis states in advance what counts as supported. Rules live in `outputs/model_eval/selection_log.md`, which is committed before the notebook produces results.
+2. **Every effect is compared with a null.** Nulls are calendar-matched, so a portfolio-wide trend cannot pose as a customer-level effect. This one rule overturned four of our earlier ideas (§4).
+3. **Heterogeneity gate.** Before any customer-level score or segment is used, it must show:
+   - **variance ratio** (observed spread of per-customer HSIC share ÷ spread expected from chance alone) clearly above 1;
+   - **split-half reliability** (odd vs even transactions in the same year) clearly above 0;
+   - **year-over-year persistence** of r ≥ 0.2.
+
+   A variable that fails the gate is not used for targeting.
+4. **Out-of-time validation for prediction.** Train on the 2025-07-31 snapshot, test once on the 2026-01-31 snapshot, and score at 2026-07-31. Features come from the 12 months up to the cutoff; labels from the 6 months after it.
+5. **Baselines are mandatory.** Every model is compared against a simple rule and against random. A model must beat the rule with a bootstrap CI that excludes 0, or we ship the rule.
+6. **Uncertainty is reported.** 95% CIs (bootstrap or normal approximation) on every headline comparison.
+7. **Every ₹ figure is labelled** Measured, Simulated or Assumed, in the deck and on the dashboard.
+8. **Gender is never a model feature.** It is used only for the fairness slice check.
 
 ---
 
-## 3. Storyline & hypotheses
+## 4. Experiment log: what we expected vs what we found
 
-The notebook, the website and the deck all follow one storyline: **Problem → Hypothesis → Experiments → Evidence → Insights → Final Solution → Business Impact**
+Ideas came from three sources: **v4** (the previous project plan), **BP** (the strategy blueprint) and **R** (our own review). Every row below was tested on the full data on 23 Oct 2026. The notebook must reproduce each number (see §14).
 
-Every hypothesis below has a decision rule. These rules were **fixed before the analysis**.
-
-| ID | Hypothesis | Test | Evidence metric | Supported if | If rejected |
+| # | Source | What we expected | Test | What we found | Verdict |
 |---|---|---|---|---|---|
-| H1 | The decline is behavioural (customers who stayed moved their spend elsewhere), not a change in who the customers are | SoW Bridge (#1) | Share of ΔSoW from stayers vs leavers and joiners | Stayers explain ≥ 50% | Focus on acquisition and the closure mix |
-| H2 | Spend moved to specific methods, not evenly | Switching (#5) | Share gained by each method among stayers | 1–2 methods take ≥ 60% of the shift | Offers are not tied to competitors |
-| H3 | Customers don't notice the reward value: Prime members don't use the 5%/3% | Reward paradox (#2) | Prime minus Non-Prime SoW in Grocery and Electronics | Gap ≤ 2pp | Awareness isn't the lever; use economics instead |
-| H4 | Silent attrition is real beyond sampling noise, and it comes before closure | #21 null model + #4 decay curve | Observed minus expected zero-HSIC rate; months of SoW decay before closure | Excess > 0 with CI excluding 0; decay starts ≥ 2 months before closure | No silent-attrition programme; target closure only |
-| H5 | Closure can be predicted earlier and better than a simple recency rule | **C1** | Top-decile capture and PR-AUC vs rule B1 (paired bootstrap) | CI of the difference excludes 0 | Ship the rule, and say so |
-| H6 | A SoW decline can be detected per customer despite sparse data | **C2** | F1 on injected declines; placebo false-positive rate | F1 ≥ 0.6 at k = 50% with false positives ≤ 10% | Report declines only at segment level |
-| H7 | Segments differ in how much spend can be recovered, and they need different offers | **C3** | Outcome separation + low-SoW targeting efficiency | Chosen method passes the gates and separates outcomes | Use fewer, broader segments |
-| H8 | Offers that only reward spend above a baseline beat blanket rate hikes | **C4** (simulated) | Net value and break-even shift rate for each design | The threshold offer has the lower break-even | Recommend the category-boost design |
+| X1 | v4 C3, BP Model 2 | Clustering customers on SoW would reveal low-SoW segments | Heterogeneity gate on per-customer HSIC share | Variance ratio **1.001** (FY25) and **0.996** (FY26): exactly the spread chance produces. Split-half r = **−0.007** (n = 22,320). FY25 → FY26 r = **0.00** | **Rejected.** SoW clusters would be clusters of noise |
+| X2 | v4 C2 | A detector could flag individual customers whose SoW is declining | Same gate | Every customer's usage falls at the portfolio rate; nothing customer-specific remains to detect | **Rejected.** Dropped |
+| X3 | v4 #21 | Silent attrition is real: more cardholders go quiet than chance predicts | Zero-HSIC rate in the next 6 months vs two nulls, at 3 cutoffs | Fixed-share null: excess **+21.6 / +17.5 / +21.5pp**. Time-aware null: excess **+0.7 / +0.1 / +0.0pp** (CI ±1pp) | **Rejected.** The "excess" is the portfolio trend. Customer-level silent attrition beyond the trend is zero |
+| X4 | v4 #4 | HSIC use decays in the months before a card closes | Closers' HSIC share by months before closure, raw vs calendar-adjusted | Raw: 27.0% at −12 months → 20.5% at closure, which *looks* like decay. Calendar-adjusted excess: between −1.4 and +2.3pp with no trend | **Rejected.** Closures cluster late in the window, when everyone's SoW is lower |
+| X5 | v4 C1-B1, BP Model 1 | Recent card usage predicts closure | Out-of-time test, 25,468 cards, 1,246 closures | Recency rule ROC-AUC **0.519**. Usage features only: **0.523** (≈ random). Profile features: **0.619** | **Rejected.** Usage carries no closure signal |
+| X6 | v4 C1-M2 | Gradient boosting beats logistic regression | Same test | HGB 0.606 vs LR 0.620 ROC-AUC; top-decile capture 18.4% vs 18.5% | **Rejected.** Ship LR |
+| X7 | v4 #12 | New cards show an onboarding usage cliff | Calendar-adjusted HSIC share by months since opening | Within ±1.5pp for months 0–18, no trend | **Rejected for usage.** But closure *is* tenure-driven (§5) |
+| X8 | BP H2 | Non-Prime members drop off because 1% is too little | SoW by membership by quarter; logistic model of HSIC use | Non-Prime 32.8 → 15.5%, Prime 32.7 → 15.6%. Prime coefficient **0.000** | **Rejected.** Also confirms the reward paradox (§5) |
+| X9 | BP H4 | Customers keep Grocery on HSIC and move other categories away | SoW by category | 23–24% in all 10 categories; each falls ≈ 32 → 15% | **Rejected** |
+| X10 | BP H3 | Credit limits bind during sale events | Monthly MetroMart spend ÷ card limit | Median **1.2%**, maximum 26.5%. Zero customer-months reach 50% | **Rejected** |
+| X11 | BP H3 | Festive peaks (Diwali) drive switching | Monthly sales index | 92–108 (mean = 100), no festive spike | **Rejected** |
+| X12 | R | MetroMart's own Wallet is cannibalising the card | Stayers' method shift; non-cardholders' method shift | Wallet took only **14%** of HSIC's loss, and Wallet share is *falling* for non-cardholders (48.8 → 44.8%) | **Rejected.** Cash/UPI is the winner |
+| X13 | v4 S1 | A "never-activated" segment exists | Share of active cardholders with zero HSIC rows vs chance | 26.9% observed vs 25.7% expected by chance | **Rejected.** Mostly chance |
+| X14 | R | Ticket-size or category mix would make good segments (big-ticket shopper, grocery shopper) | FY25 → FY26 persistence | Big-ticket share r = **0.008**; Grocery + Electronics share r = **0.000** | **Rejected as segments.** Ticket size works at the *transaction* level instead (§5) |
+| X15 | BP | Predict "SoW drops > 20% in the next 60 days" | Rows available per window | 0.82 rows per customer per 60 days, so SoW is undefined for most customers | **Infeasible** |
+| X16 | BP Model 3 | Uplift model for offer response | Data audit | No historical offers, so no treated or control group | **Infeasible.** Replaced by a pilot design (§8) |
+| X17 | v4 | Returns behave differently by payment method | Return rate by method | 10.1% for every method | **No signal** |
 
-**Final solution:** a monthly **HSIC Wallet-Recovery Engine**, made of:
-- a noise-aware decline detector;
-- an early-warning model chosen through comparison;
-- explainable segments;
-- a Next-Best-Offer engine with holdouts;
-- an Impact Ledger.
-
----
-
-## 4. Data, definitions & assumptions
-
-### Files (in the repo root; see README for data handling)
-| File | Rows | Profile |
-|---|---|---|
-| `Customer Data.csv` | 45,000 | Customer_ID, Age (18–60), Gender, Membership_Type (26,971 Prime / 18,029 Non-Prime), card open and close dates, Credit_Card_Limit, Credit_Card_APR. **6,836 customers have no card** (open date, limit and APR are null). **7,664 cards are closed.** Open dates run to 2026-08-05, which is after the data ends. No close date falls before its open date. No duplicate IDs. |
-| `Transactions Data.csv` | 444,118 | Customer_ID, Transaction_ID, Transaction_Date, Category_Code, Transaction_Type (Sale/Return), Transaction_Amount, Payment_Code, Number_of_Transactions. Dates run **2024-08-01 to 2026-07-31, i.e. FY25 + FY26**. **44,814 rows are Returns, all with a null Number_of_Transactions.** **21,235 rows are capped at ₹9,999.99**, mostly Large Appliances, Furniture, Travel and Electronics. No duplicates and no orphan customers. |
-| `Category Code.csv` | 10 | 1 Grocery, 2 Electronics, 3 Apparel, 4 Beauty, 5 Furniture, 6 Kids And Toys, 7 Large Appliances, 8 Outdoor, 9 Travel, 10 Bill Payments |
-| `Payment Code.csv` | 5 | 1 Debit Card, 2 Other Bank Credit Card, **3 HSIC Bank Credit Card**, 4 Cash/UPI, 5 MetroMart Wallet |
-
-### Cleaning and definition rules
-- `net_amt` = +Amount for a Sale and −Amount for a Return. `n_txn` = 0 for Returns.
-- `FY` = calendar year + 1 if the month is August or later (FY25 = Aug 2024–Jul 2025, FY26 = Aug 2025–Jul 2026). Also add `month` and `half` (H1 = Aug–Jan, H2 = Feb–Jul).
-- `active` = open date ≤ transaction date ≤ close date. Both ends are inclusive; a null close date means the card is still open.
-- `is_hsic` = Payment_Code == 3. `reward_rate` comes from membership × category. `reward_credit_month` = transaction month + 1.
-- SoW is always a **ratio of sums**, never an average of per-customer ratios.
-- Customer-level SoW is undefined when active net spend ≤ 0 or there are fewer than 2 active Sale rows. Values are clipped to [0, 1] and flagged.
-
-### Assumptions (published in the deck appendix and the Methods tab)
-- **Data**
-  - Amounts are in ₹.
-  - Prime status is a single static snapshot.
-  - Bill Payments and Travel bought at MetroMart are "other eligible" purchases at 1%.
-  - A Return reduces the payment method recorded on the Return row, and its rewards are clawed back. Returns are not linked to their original sale.
-  - The card is active on both its open and close dates.
-  - Customers without a card are excluded from SoW and used only as a payment-mix benchmark.
-  - `Number_of_Transactions` is the count of purchases within a row and is used only for frequency. `Transaction_Amount` is the row total.
-  - Reward history is *derived* (HSIC net × rate, credited the following month).
-  - Silent attrition = the card is still open, but HSIC use has stopped or collapsed while the customer keeps shopping at MetroMart.
-- **Modelling**
-  - Look back 12 months and predict 6 months ahead.
-  - A customer can appear in more than one snapshot (time-based testing).
-  - The null model holds each customer's historical HSIC share fixed.
-  - Synthetic declines are injected only to test detectors, never into reported business numbers.
-- **Business (all labelled as assumptions):** interchange %, MetroMart co-funding %, response and save rates, three scenarios (conservative / base / optimistic), and the Prime fee (P2).
-
-### Known limitations
-- The ₹9,999.99 cap means spend is understated. This is disclosed, not corrected.
-- There is no interchange, funding, offer-response or **redemption** data, so response can only be simulated until a pilot runs.
-- Prime status is a snapshot, so any change history is unknown.
+**What the failures taught us (this is slide 7 of the deck)**
+1. **Calendar-adjust everything.** When the whole portfolio drifts, any customer-level metric that ignores the drift will "find" attrition, decay and decliners that aren't there (X3, X4).
+2. **Test whether customers differ before segmenting them.** Two plans, and most competing teams, start with K-means on SoW. The heterogeneity gate takes minutes and showed that approach would have produced confident-looking noise (X1, X2, X14).
+3. **When the drift is portfolio-wide, the fix is portfolio-wide.** Targeting money spent on "low-SoW customers" would land on customers chosen at random.
 
 ---
 
-## 5. Architecture & workflow
+## 5. What the data does support
 
-### Repository layout (planned)
-```
-├── README.md, PROJECT_PLAN.md, TASKS.md
-├── sow_analysis.ipynb                # the ONLY analysis code
-├── outputs/
-│   ├── customer_scores.csv           # id, segment(+prob), risk, reasons, NBO, holdout flag, evidence flag
-│   ├── segment_summary.csv
-│   ├── impact_ledger.csv             # metric, value, type (Measured/Simulated/Assumed), source cell, scenario
-│   ├── key_numbers.md                # every number quoted in the deck, generated by code
-│   ├── charts/*.png                  # deck charts, 200 dpi, 16:9-friendly
-│   └── model_eval/
-│       ├── selection_log.md          # selection rules fixed in advance (written BEFORE any model runs)
-│       ├── iteration_log.md          # trigger → lesson → change → effect
-│       ├── ews_comparison.csv, decline_detection.csv, segmentation_scorecard.csv, offer_design.csv
-│       └── failure_atlas.csv         # per experiment: error type, count, slice, example IDs
-└── dashboard/
-    ├── index.html, app.js            # vanilla JS single-page app
-    └── data/*.json                   # written by the notebook; the dashboard only reads these
-```
-
-### Stack
-- **Python:** Anaconda 3.13 at `C:\Users\asus\anaconda3\python.exe` (the bare `python` on the PATH is the Microsoft Store stub).
-  - Libraries: pandas 2.3, numpy 2.3, matplotlib 3.10, scikit-learn 1.7.2, statsmodels 0.14.5, scipy 1.16.3. **Nothing new needs installing.**
-  - Not installed and not needed: SHAP, LightGBM, lifelines.
-- **Dashboard:** plain HTML + vanilla JS + **ECharts 5.5.0 from cdnjs** (pinned), with no build step. Hosted as a private claude.ai Artifact (multi-file, < 16MB); the owner decides whether to share it.
-- **Database:** none. About 22MB of CSV, so flat CSV and JSON are enough.
-  - Dashboard JSON: aggregates are < 200KB each. `customers.json` is about 38k rows in columnar form (≈ 3–4MB). `txns.json` holds transactions in columnar form, lazy-loaded for Customer 360, with a target of < 8MB.
-  - If the total exceeds 12MB, keep timelines only for the top 5,000 customers by risk/opportunity, plus segment exemplars.
-- `SEED = 42` everywhere.
-
-### Analytical workflow
-```mermaid
-flowchart LR
-  A[Load & clean] --> B[Validation asserts]
-  B --> C[Portfolio SoW, Bridge, switching, paradox<br/>H1–H3]
-  C --> D[Null model, decay curve, vintage<br/>H4]
-  D --> E[build_snapshot<br/>leakage-safe features + labels]
-  E --> F[C2 decline detection]
-  F --> G[Attrition classes]
-  F --> H[C1 closure early-warning]
-  F --> I[C3 segmentation]
-  H --> J[Next-Best-Offer]
-  I --> J
-  J --> K[C4 offer economics<br/>simulated]
-  K --> L[Impact Ledger, iteration log, Failure Atlas]
-  L --> M[Charts, key_numbers.md, dashboard JSON]
-  M --> N[Deck PDF]
-```
-
-### Notebook sections (run in this order)
-| § | Content |
-|---|---|
-| 0 | Config: paths, thresholds, `ASSUMPTIONS`, `SEED`, snapshot cutoffs; **write `selection_log.md` first** |
-| 1 | Load, clean, enrich |
-| 2 | Validation asserts (+ threshold sensitivity table → #20) |
-| 3 | Portfolio SoW (M1): by month and FY, category × membership, cohort, age, limit and APR bands |
-| 4 | SoW Bridge (H1) |
-| 5 | Switching (H2) |
-| 6 | Reward paradox + missed cashback (H3) |
-| 7 | #21 null model + #4 pre-closure decay curve + #12 vintage curves (H4) |
-| 8 | `build_snapshot` + leakage asserts |
-| 9 | **C2** decline detection + failure analysis |
-| 10 | Attrition classes using the C2 winner (M2) |
-| 11 | **C1** closure early-warning + failure analysis |
-| 12 | **C3** segmentation + failure analysis (M3) |
-| 13 | Next-Best-Offer engine (M4) |
-| 14 | **C4** offer economics + sensitivity |
-| 15 | #13 big-ticket gap, #14 seasonality, minimum-detectable-effect (MDE) baselines |
-| 16 | Impact Ledger |
-| 17 | Iteration log + Failure Atlas exports |
-| 18 | Charts, `key_numbers.md`, dashboard JSON |
-
-C2 runs before C1 and C3 because its winning detector defines the "decline" features they use.
-
-### Production blueprint (one slide, conceptual only)
-1. The warehouse holds `fact_txn`, `dim_customer`, `dim_category` and `dim_payment`.
-2. A monthly batch (SQL or PySpark, same logic as the notebook) writes `customer_scores` and `campaign_assignments` (with a holdout flag).
-3. Those feed the CRM or campaign tool (app push, SMS, statement message).
-4. Responses land in `campaign_outcomes`, which is used for measurement and quarterly retraining.
-5. Monitoring tracks PSI drift, calibration and campaign lift.
-
----
-
-## 6. Core analyses
-
-| Analysis | Method |
-|---|---|
-| **Portfolio SoW (M1)** | Monthly and FY trend from active-card rows only, with FY boundary markers. Payment-method mix by FY. Heatmap of category × membership. SoW by card-open cohort, age band, credit-limit band and APR band. |
-| **SoW Bridge (#1, H1)** | An exact, additive breakdown, asserted to reconcile: **FY25 SoW** → *leaver effect* = SoW(stayers, FY25) − SoW(all, FY25) → *stayer behaviour*, split into the share change of each destination method (Debit, Other CC, Cash/UPI, Wallet; together they equal −ΔHSIC share) → *joiner effect* = SoW(all, FY26) − SoW(stayers, FY26) → **FY26 SoW**. |
-| **Switching (#5, H2)** | Each customer's dominant payment method per FY (by net spend). A FY25 → FY26 transition matrix for stayers, drawn as a Sankey. Journey timing: the month of the last HSIC transaction and the next method used. |
-| **Reward paradox / missed cashback (#2, H3)** | Non-HSIC active spend × the customer's own reward rate = "₹ left on the table", rolled up by segment, Prime status and category. P2 (#16): the extra cashback Non-Prime customers would get as Prime. |
-| **Noise-adjusted silent attrition (#21, H4)** | Expected chance of zero HSIC in the next 6 months = (1 − historical HSIC row share)^(future rows), compared with what is observed, at three cutoffs, with a bootstrap CI on the excess. |
-| **Pre-closure decay curve (#4, H4)** | Line up the 7,664 closures on their closing month. Plot HSIC share from month −12 to 0 against the portfolio's SoW in the same calendar months. Also include spend after closure. |
-| **Onboarding cliff (#12)** | SoW by months since opening, for cards opened inside the data window. |
-| **Attrition classes (M2)** | Applied in this order: **Explicit** (closed inside the window; size the spend after closure and the reward credit forfeited) → **Silent** (card open, HSIC used before, zero HSIC net in the last 6 months while still shopping, *and statistically surprising under the null model*) → **Decliner** (flagged by the C2 winner) → **Never-activated** (card open, no HSIC spend ever, still shopping) → **Stable / Grower** → **Insufficient evidence** (below the minimum-evidence rule). Sensitivity: 6 vs 9 months, 10 vs 15pp. |
-| **Next-Best-Offer (#7, M4)** | An offer library: win-back reopen boost; instant-credit reactivation; category boost on the customer's top leaking category; tier bonus on spend above their baseline; streak bonus; 0% EMI on big-ticket purchases (#13); and **no incentive for Loyal core** (a free "₹ left on the table" message only). Per customer: choose the eligible offer with the best expected net value = incremental HSIC spend × margin − incremental reward cost. Output the offer, expected uplift, cost, ROI flag, holdout flag (10% per segment, seeded) and evidence flag. |
-| **Big-ticket financing gap (#13)** | HSIC share of Large Appliances, Furniture and Electronics spend vs other methods, which motivates a 0% EMI offer. Flags the cap. |
-| **Seasonality (#14)** | Net spend and SoW by month × segment, which produces the campaign calendar. |
-| **Simulator baselines (#8–10)** | Per segment: baseline spend by method and category, variance of SoW, reward base. Revenue at risk = HSIC spend lost FY25 → FY26 × interchange % (an assumption). |
-
-### Simulator logic (`app.js`, recomputed live)
-- **#9 SoW simulator.** For segment *p*, moving xₘ% of each non-HSIC method's spend to HSIC gives SoW′ = (H + Σ xₘ·Sₘ) / T. Outputs: SoW, incremental HSIC ₹, and reward cost at the segment's average rate.
-- **#8 Reward what-if.**
-  - Inputs: cashback rate by tier × category, response elasticity, interchange % and co-funding %.
-  - Outputs: incremental spend; reward cost split into **cost on incremental spend** vs **cannibalised cost** (rewards paid on spend that would have happened anyway); net value; break-even response.
-- **#10 Campaign planner.**
-  - Inputs: segment, holdout %, expected uplift.
-  - Outputs: treated and control counts; MDE at 80% power and α = 0.05 using the segment's *real* SoW standard deviation; cost and ROI.
-
----
-
-## 7. Experiments & evaluation (C1–C4)
-
-### Shared protocol
-- **Time-based splits, never random.** Every experiment uses `build_snapshot(cutoff, lookback=12m, horizon=6m)`, which returns features from data ≤ the cutoff and labels from (cutoff, cutoff + 6m].
-  - *Train / tune:* the **2025-07-31** snapshot (labels Aug 2025–Jan 2026), with 5-fold StratifiedGroupKFold inside it.
-  - *Test once:* the **2026-01-31** snapshot (labels Feb–Jul 2026).
-  - *Deploy:* retrain on both snapshots, then score at **2026-07-31**. These scores are predictions, labelled as such.
-- **Leakage controls:**
-  - Assert max feature date ≤ cutoff < min label date.
-  - The close date is used only for the label and for eligibility.
-  - Tenure is measured at the cutoff.
-  - Scalers and imputers live inside sklearn Pipelines.
-  - Segment labels are never used as features.
-  - **Gender is never a model feature**; it is used only in the fairness check.
-  - Prime and age are static fields, used with a caveat.
-- **Selection rules are fixed in advance** and logged in `selection_log.md` before any model runs. The winner is chosen on validation and confirmed once on test, with no re-tuning afterwards.
-- **Uncertainty:** 1,000 bootstrap resamples on test. A method counts as "better" only if the CI of its *paired* difference against the baseline excludes 0.
-- **Explanations are required:** global drivers plus customer-level reason codes, or a faithful rule explanation.
-
-### C1: Closure early-warning (H5 → USP #3)
-- **Target:** the card closes within 6 months.
-  - Base rate 4.1% on train and 4.5% on test (≈ 650 and 870 positives).
-  - Universe: card open at the cutoff, tenure ≥ 6 months, HSIC used before the cutoff.
-- **Features:**
-  - **Recency:** months since the last HSIC transaction and since the last MetroMart transaction.
-  - **HSIC share:** last 6 months vs the 6 months before, *shrunk* with the C2 method.
-  - **Spend and activity:** HSIC row count; log total net spend; Cash/UPI, Wallet, Debit and Other CC shares over the last 6 months; Grocery + Electronics share; return rate.
-  - **Profile:** tenure, Prime, age, limit, APR.
-  - **Missed cashback** over the last 6 months.
-
-| Method | Why it fits | Trade-off |
-|---|---|---|
-| B0 Prevalence / random | Floor (PR-AUC = base rate) | — |
-| **B1 Recency rule** (months since last HSIC use, + v1 attrition class) | What a bank would do without a model; the bar to clear | Ignores everything else |
-| **M1 L2 logistic regression** (standardised) | Odds ratios and exact reason codes; works well with few positives | Linear |
-| **M2 HistGradientBoosting** (small grid: depth, learning rate, l2) | Tests whether non-linear effects and interactions add anything | Less transparent; can overfit ~650 positives |
-| M3 Random Forest (balanced subsample) — P1 | A second non-linear model, to check whether M2's gains are real | Poorly calibrated |
-| M4 Cox proportional hazards (statsmodels `PHReg`) — P1 | Uses *when* customers close, with proper censoring | Proportional-hazards assumption (checked with Schoenfeld residuals) |
-
-- **Metrics:**
-  - *Main:* **PR-AUC**, because positives are rare.
-  - *Business:* **top-decile capture and lift**; contacts needed per closer reached; expected campaign value at top-k.
-  - *Also:* ROC-AUC, Brier score, calibration curve, C-index, and stability of the top decile across folds.
-- **Class imbalance:** use PR-AUC and lift, never accuracy. Classes are weighted, not resampled. Isotonic calibration is used if the winner isn't LR.
-- **Selection rule:** among models within 1 SE of the best validation PR-AUC, take the most interpretable (LR > Cox > HGB > RF). It must beat B1 on top-decile capture with a CI that excludes 0; **otherwise ship B1 and say so**.
-- **Explanations:**
-  - LR odds ratios with 95% CIs (statsmodels `Logit`).
-  - Permutation importance for every model, side by side.
-  - Partial dependence for the top 3 features.
-  - Reason codes = the top 3 contributions of coefficient × (value − mean), or from an LR surrogate with its fidelity reported.
-
-### C2: Customer-level decline detection (H6)
-The goal is to separate a *true* fall in HSIC share from sampling noise. Test compares FY25 with H1 FY26; deployment compares FY25 with FY26.
-
-| Method | Why it fits | Trade-off |
-|---|---|---|
-| **D0 Naive ΔSoW** (≥ 10pp *and* ≥ 30% relative) | Baseline: what most teams do | Very noisy at about 5 rows per period |
-| **D1 Empirical-Bayes beta-binomial shrinkage** (prior fitted by method of moments; flag if the shrunk drop is ≥ 10pp) | Transparent and cheap; small samples are pulled toward the mean | Works on row counts, so ₹ is only approximated |
-| **D2 Bayesian posterior** P(FY26 share < FY25 share − 5pp) ≥ 0.8 (Beta posteriors, 2,000 Monte Carlo draws) | Gives an actual probability of decline | The threshold is a choice |
-| **D3 Fisher exact test + Benjamini–Hochberg FDR** | A classical test with false-discovery control | Very little power with sparse data |
-
-- **Evaluation** (there is no ground truth, so three tests):
-  1. **Semi-synthetic recovery (main):** inject k = 25/50/75/100% switches of HSIC rows to the customer's other main method, into stable customers. Measure precision, recall and F1 at each k, plus the false-positive rate on untouched customers.
-  2. **Placebo:** shuffle period labels within each customer. Anything flagged is a false positive.
-  3. **Predictive validity:** future closure and HSIC share for flagged vs unflagged customers (lift with bootstrap CI).
-- **Selection rule:** the best mean F1 at k = 50 and 75, with placebo false positives ≤ 10%. Ties go to the more explainable method (D1 > D2 > D3).
-
-### C3: Segmentation (H7, M3 → USP #6)
-- **Feature space** (the same for every method): shrunk SoW level, ΔSoW, log of MetroMart net spend, months since last HSIC use, Grocery + Electronics share, Cash/UPI share, Wallet share, Prime, missed cashback. Features are standardised; spend is winsorised at p1/p99.
-
-| Method | Why it fits | Trade-off |
-|---|---|---|
-| **S0 SoW-quartile baseline** | The simplest way to find low-SoW customers | Ignores value, trend and destination method |
-| **S1 Rule-based personas** (first match wins) | Maps to offers by construction; fully explainable | Thresholds set by hand |
-| **S2 K-means** (k = 3–8 by silhouette and elbow; 20 starts) | Finds structure in the data | Hard, spherical clusters |
-| **S3 Gaussian Mixture** (full covariance, k by BIC) | Soft membership probabilities | Less stable |
-| *Explainer* — a depth-3 decision tree trained on S2/S3 labels | Its fidelity measures how explainable the clusters are; its splits can re-tune S1 | — |
-
-**S1 personas (starting rules):**
-
-| Persona | Rule | Lever |
-|---|---|---|
-| Closed but still shopping | Explicit attriter with MetroMart spend after closure | Win-back: reopen + first-90-day boost |
-| Dormant cardholder | Silent attriter or never-activated | Instant-credit reactivation |
-| Prime under-user | Prime, SoW < 20%, Grocery + Electronics spend on other methods ≥ median | Make 5%/3% visible + category boost |
-| High-value split wallet | Top-tercile MetroMart spend, SoW < 20% | Bonus tier above baseline |
-| Fading loyalist | Decliner with FY25 SoW ≥ 30% | Retention nudge + streak bonus |
-| Loyal core | SoW ≥ 50% and stable | **No incentive** (avoid subsidising) |
-
-- **Evaluation:** segments are built at 2026-01-31 and scored on outcomes from Feb–Jul 2026.
-  - **Gates:** bootstrap stability ARI ≥ 0.7 (20 resamples); every segment is 3–50% of customers; explanation fidelity ≥ 85%.
-  - **Ranked criteria:**
-    1. Outcome separation: variance in future HSIC net spend and in closure explained by segment, with CI.
-    2. Low-SoW targeting efficiency.
-    3. Actionability: the number of distinct offers mapped.
-    4. Silhouette, Davies–Bouldin and Calinski–Harabasz, computed for *every* method's labels.
-- **Selection rule:**
-  - If S1 is within the CI of the best method on outcome separation, **S1 wins**.
-  - Otherwise use a **hybrid**: S1 thresholds re-tuned to the explainer tree's splits ("rules calibrated by clustering").
-
-### C4: Offer-design economics (H8 → USP #8) — **simulated, labelled as such**
-| Design | Description |
-|---|---|
-| O0 | Do nothing (baseline) |
-| O1 | Blanket +1pp cashback |
-| O2 | Category boost on the customer's top leaking category |
-| O3 | Bonus only on spend above the customer's baseline (threshold) |
-| O4 | Instant-credit reactivation (Dormant customers) |
-
-- **Inputs:** real baseline spend by segment, method and category. Assumed: response (3 scenarios), interchange % and co-funding %.
-- **Metrics:** incremental HSIC spend; reward cost split into incremental vs cannibalised; net value; ROI; **break-even shift rate**, which needs no assumption about response.
-
----
-
-## 8. Failure analysis & iteration log
-
-### Template (every experiment uses it)
-- **(a)** Error taxonomy, with counts.
-- **(b)** Profiles of correct vs incorrect cases (standardised mean differences).
-- **(c)** Metrics by slice: tenure, activity level, Prime, age band, spend tercile, segment, plus a **gender fairness check**.
-- **(d)** 3 worked customer examples per error type, with their raw rows.
-- **(e)** A "where it breaks" statement.
-- **(f)** The iteration it triggers.
-- **(g)** **What the failure taught us that the aggregate metric could not.**
-
-| Experiment | Failure analysis |
-|---|---|
-| **C1** | **Error types:** **FN-sudden** (stable HSIC use until closure) · **FN-sparse** (≤ 3 rows in the lookback) · **FN-new** (tenure 6–9 months) · **FP-silent** (flagged high-risk and didn't close, but HSIC collapsed: a *useful* false positive) · **FP-noise** (nothing changed).<br>**Also:** calibration by slice; feature drift between snapshots (PSI); profile of FN-sudden vs caught closers.<br>**Lesson:** how much closure risk is invisible in transaction data, which is the ceiling an AUC hides. |
-| **C2** | **Recall by activity level** shows the smallest decline that can be detected at each amount of data. Profile of placebo false positives (large returns, capped purchases, single big-ticket rows). Cases where row-based and ₹-based measures disagree.<br>**Output:** a published **minimum-evidence rule**.<br>**Lesson:** below N rows, a customer-level "decline" flag is misleading. |
-| **C3** | **Contradictions** (e.g. Loyal core who closed; Dormant who came back unprompted). **Boundary sensitivity:** % of customers who change segment at ±5pp thresholds. **Segment purity** on future outcomes. Whether clusters just reproduce spend levels.<br>**Lesson:** which segments are stable enough to fund a campaign. |
-| **C4** | **Where ROI turns negative** (tornado sensitivity chart). Segments that are never profitable to target. Explicit statement: *simulations only — just the pilot can measure the real effect.* |
-
-### Iteration log (`outputs/model_eval/iteration_log.md`)
-Iteration 0 has already happened. The other rows are **planned triggers**: they run only if that failure actually shows up, and their results are never invented in advance.
-
-| Iteration | Trigger | Lesson | Change |
+| # | Finding | Evidence | Label |
 |---|---|---|---|
-| **0 → 1 (observed)** | The naive label "zero HSIC in 6 months" is **62.7% observed vs 43.5% expected by chance** at the 2026-01-31 cutoff (2025-01-31: 47.6% vs 25.8%; 2025-07-31: 54.1% vs 36.0%) | With about 2.5 rows per 6 months, that label is mostly noise. The naive measure overstates silent attrition about 3× | Closure becomes the supervised target; decline detection becomes a statistical problem (C2); #21 added |
-| 1 → 2 (C1) | Missed closers are mostly sudden or sparse | Some closures can't be predicted from transactions | Add an abstain / insufficient-evidence tier; the claim becomes "predictable closures" |
-| 1 → 2 (C2) | Detectors fail at ≤ 3 rows per period | There is a minimum amount of evidence needed | Minimum-evidence rule: report "insufficient data" instead of a flag |
-| 1 → 2 (C3) | More than 15% of customers change segment at ±5pp thresholds | Hard cut-offs are fragile | Use C2 posterior probabilities for membership + a buffer zone; customers on the boundary get the cheaper offer |
-| 1 → 2 (C4) | ROI turns negative under realistic cannibalisation | Blanket offers subsidise spend that would have happened anyway | Threshold-only mechanics; Loyal core excluded |
-| Any | Feature drift PSI > 0.2 or calibration error > 2pp | The model is going stale | Recalibrate on the latest snapshot; monitor |
+| F1 | **SoW fell 28.9% → 19.5% (FY25 → FY26)** in a straight line: 32.7% in Q1 FY25 to 15.6% in Q4 FY26, about −2.4pp per quarter | Active-window, net, ratio of sums | Measured |
+| F2 | **The whole decline comes from customers who stayed.** Of −9.4pp: card closures +0.26pp, change among continuously open cards −9.54pp, new cards −0.15pp | SoW Bridge on 18,111 cards open throughout both FYs (29.2% → 19.6%) | Measured |
+| F3 | **Cash/UPI is the main winner**, taking 47% of HSIC's lost share; Debit took 21%, Other Bank CC 19%, Wallet 14% | Stayers' payment-mix shift | Measured |
+| F4 | **The shift to Cash/UPI is partly market-wide but much stronger for cardholders**: +4.5pp for stayers vs +1.8pp for non-cardholders | Difference in differences | Measured |
+| F5 | **HSIC loses about a third of its share in every ticket band**, and Cash/UPI gains 3.5–4.4pp in every band. Shares in FY25 → FY26: | | Measured |
+| | &nbsp;&nbsp;• under ₹1k: 23.3 → 15.0% | | |
+| | &nbsp;&nbsp;• ₹1–3k: 27.9 → 18.3% | | |
+| | &nbsp;&nbsp;• ₹3–10k: 28.8 → 19.3% | | |
+| | &nbsp;&nbsp;• capped ₹9,999.99: 30.1 → 21.7% | | |
+| F6 | **Ticket size is the only behavioural signal.** Within the same category and quarter, HSIC is used on 17.1% of low tickets vs 25.5% of high tickets. A model of HSIC use goes from AUC 0.592 (month only) to 0.604 (everything); every customer attribute adds ≈ 0 | Within-stratum terciles; logistic model | Measured |
+| F7 | **MetroMart Wallet carries about half of all capped (₹9,999.99) purchases** (48.5 → 51.1%), even though HSIC is the product with financing | Ticket-band mix | Measured |
+| F8 | **Reward paradox.** Prime members earn 5%/3% but use HSIC exactly like Non-Prime members. In FY26, Prime cardholders spent ₹47.4M on Grocery + Electronics with other methods, missing **₹1.60M** of cashback. Across all cardholders, missed cashback was **₹3.98M**, against ₹0.96M actually paid | Derived rewards | Measured |
+| F9 | **Closures per open card doubled** from 1.7% a quarter (Jul–Sep 2024) to 3.4% (Apr–Jun 2026) | Closures ÷ cards open at quarter start | Measured |
+| F10 | **Closure is a first-year problem.** 6-month closure rate by tenure: 8.7% (≤ 12 months), 6.4% (12–24), 4.1% (24–36), 3.1% (36–48), 2.9% (48+). Tenure is the dominant model coefficient (−0.29 standardised). The LR model captures 18.5% of closers in its top decile, 1.85× random | Out-of-time test | Measured |
+| F11 | **Closed cards keep shopping.** 6,227 of 7,664 closers still shop at MetroMart, spending **₹91.2M** net after closure. Their mix after closure (Wallet 46%, Cash/UPI 28%, Debit 13%, Other CC 13%) matches non-cardholders, so HSIC's share is simply redistributed | Post-close transactions | Measured |
+| F12 | **HSIC spend shrank while MetroMart spend grew.** HSIC net spend fell from ₹85.7M to ₹68.9M while active cardholder spend rose from ₹296.3M to ₹353.8M. At FY25's SoW, FY26 HSIC spend would have been about ₹102M, so the gap is **about ₹33M** | Counterfactual at constant SoW | Measured (gap is derived) |
+| F13 | **Only frequency and spend persist** year to year (r = 0.44 for transaction count, 0.22 for net spend). These are the only behaviour variables allowed into segments | Persistence test | Measured |
 
 ---
 
-## 9. Business value & impact measurement
+## 6. USPs
 
-### Users
-| User | Need | Output | How often |
+Each USP exists because of a finding; none were added for show.
+
+| # | USP | Why it's different | Built on |
 |---|---|---|---|
-| HSIC co-brand portfolio / customer-value management team | Stop the SoW decline; run the programme | At-risk list, segments, NBO file with holdouts | Monthly |
-| Campaign operations | Send the right offer through the right channel | `campaign_assignments` (ID, offer, message, holdout) | Monthly |
-| MetroMart partnership team | Decide joint funding and the Prime bundle | Reward economics, category leakage | Quarterly |
-| Leadership | Decide where the money goes | Exec story, Impact Ledger | Quarterly |
-| Model risk / governance | Trust and monitoring | Model Lab, Failure Atlas, drift and calibration | Quarterly |
+| U1 | **The heterogeneity gate.** A three-test check (variance ratio, split-half, persistence) run before any segmentation | Most teams will cluster noise and present it confidently. We prove whether the clusters would be real, and the gate is reusable on any future data | X1, X2, X14 |
+| U2 | **Time-aware silent-attrition test.** Corrects a +21pp overstatement down to 0 | Shows why silent-attrition counts mislead during a portfolio-wide decline | X3 |
+| U3 | **Raw vs calendar-adjusted decay curve** (toggle on the dashboard) | The same chart tells two opposite stories, and the adjustment decides which is true | X4 |
+| U4 | **SoW Bridge.** An exact split of the −9.4pp into closures, stayers and new cards, broken down by destination method | Answers "is it mix or behaviour?" in one picture: it's behaviour | F2, F3 |
+| U5 | **"Target moments, not people."** Offers fire on the purchase (ticket size, basket), not on a customer label | Follows directly from the data: ticket size is the only behavioural signal, and customer traits don't persist | F6, X14 |
+| U6 | **Expected-vs-found log**, with 17 rejected ideas, each with its test and number | Shows judgement, not just output. No other team will put their failed hypotheses on a slide | §4 |
+| U7 | **Instant cashback at the till.** The same reward, credited at checkout instead of next month | Takes on UPI's immediacy at almost no extra cost. The brief's "credited next month" detail is the hint | F3, F4, F8 |
+| U8 | **Break-even-first economics.** Every offer shows the shift rate it needs to pay for itself, which needs no response assumption | No invented response rates in the headline | §8 |
 
-### Impact Ledger (`impact_ledger.csv`): every number is tagged
-| Type | Metric | Computation |
-|---|---|---|
-| **Measured** | HSIC spend lost FY25 → FY26; SoW pp lost | Real data, active windows |
-| **Measured** | MetroMart spend after closure that HSIC lost | Closed customers' transactions after their close date |
-| **Measured** | Missed cashback ("₹ left on the table") | Non-HSIC spend × the customer's rate |
-| **Measured (out-of-time)** | Targeting efficiency: % of closers in the top decile; contacts per closer reached vs random | C1 test snapshot |
-| **Measured (semi-synthetic)** | Detection precision and recall | C2 |
-| **Simulated** | Recovered HSIC spend and SoW +pp (conservative / base / optimistic) | Baseline × shift rate per segment |
-| **Simulated** | Campaign net value and ROI; retention (closers saved = captured × save rate) | C4 + assumptions |
-| **Assumed** | Interchange %, co-funding %, response rate, save rate | `ASSUMPTIONS`; sliders on the dashboard |
-| **Assumption-free** | **Break-even shift rate** (the uplift needed for ROI ≥ 0) | Costs ÷ value per ₹ shifted |
+Deliberately left out: GenAI/RAG assistants, AI-written marketing copy, uplift models (no treatment data), real-time streaming and deep-learning CLV. None has supporting data, and they would look like filler to judges hiring analysts.
 
-Headline claims use this form: *"₹X lost (measured). Recovering Y% pays for the programme (break-even). Base-case scenario: ₹Z (simulated, with the assumptions listed)."* We **never** say "we will recover ₹Z".
+---
+
+## 7. Segmentation (brief item 3)
+
+The brief asks for "segments using a model or method to identify low-SoW customers". We answer it in three steps on one slide.
+
+**Step 1: show the obvious method fails.** Run K-means on SoW features as a pre-registered negative control. Report:
+- bootstrap stability (ARI) across 20 resamples;
+- outcome separation: does the FY25 segment predict FY26 HSIC share?
+- the heterogeneity gate.
+
+Expected result: little or no separation. If it *does* separate, the gate has failed and we switch to a customer-level design. That rule goes into `selection_log.md` first.
+
+**Step 2: answer "who is low-SoW?" honestly.** Every cardholder's expected SoW is the portfolio's current level (15.6% in Q4 FY26). So the **whole book** is low-SoW, and the useful question becomes *where the most ₹ sits on other payment methods*. We rank customers by **₹ at stake** = expected MetroMart spend × (1 − current portfolio SoW). Expected spend is predictable because spend and frequency persist (F13). The notebook validates this out of time (FY25 rank → FY26 non-HSIC ₹, top-decile capture).
+
+**Step 3: segments built only from persistent traits** (rules applied in order; first match wins):
+
+| Segment | Rule | Size | Why it's real | Lever |
+|---|---|---|---|---|
+| A. Closed, still shopping | Card closed and MetroMart spend after closure | 6,227 | ₹91.2M of post-closure spend (F11) | Win-back (O6) |
+| B. First-year cardholders | Open card with tenure < 12 months | 6,297 of 30,519 open cards at 2026-07-31 | 3× the closure rate of mature cards (F10) | Onboarding protection (O7) |
+| C. High-frequency established | Tenure ≥ 12 months and top tercile of transaction count | Notebook | Frequency persists (r = 0.44); largest ₹ at stake | Threshold bonus (O8) |
+| D. Prime established | Tenure ≥ 12 months, Prime, not in C | Notebook | Prime status is a fixed attribute; ₹1.60M missed (F8) | Reward visibility (O3) |
+| E. Everyone else open | — | Notebook | — | Product fixes only (O1–O5), no paid targeting |
+| F. Non-cardholders | No card | 6,836 | — | Acquisition at checkout (stretch) |
+
+**Segment checks:** sizes add up to the universe; each segment's FY26 outcome (closure rate, ₹ at stake) differs from the others with a CI; customers move between segments at ±10% threshold changes (boundary sensitivity).
+
+---
+
+## 8. Offers & economics (brief item 4)
+
+| # | Offer | Layer | Who / trigger | Addresses | Cost model |
+|---|---|---|---|---|---|
+| O1 | **Instant cashback at the till**: reward applied at checkout, not on next month's statement | Product | All HSIC purchases | Immediacy vs UPI (F3, F4) | Same reward amount; cost = 1 month's time value + ops (Assumed) |
+| O2 | **HSIC card on UPI** (credit card linked to UPI) | Product (strategic) | All | Cash/UPI took 47% of the loss | Partnership and network cost (qualitative) |
+| O3 | **Reward visibility**: POS and receipt line "Pay with HSIC: earn ₹X on this basket"; monthly "₹ you left on the table" | Product | Prime G+E baskets first | Reward paradox (F8) | ≈ 0 incentive cost |
+| O4 | **No-cost EMI on baskets ≥ ₹3,000** at MetroMart | Moment | Basket ≥ ₹3k | Wallet holds ~half of capped tickets (F7); ticket-size signal (F6) | Subvention %, co-funded by MetroMart (Assumed) |
+| O5 | **Small-basket streak**: 5 HSIC purchases under ₹1,000 in a month earns a ₹50 bonus | Moment | Baskets < ₹1k | Lowest HSIC share (17.1%) | Bonus paid only above the threshold |
+| O6 | **Win-back**: instant re-approval and 5% on everything for 90 days (capped) | Segment A | 6,227 closers | ₹91.2M post-closure spend | Boost cost on recovered spend |
+| O7 | **First-year protection**: activation milestone (3 swipes in 60 days) plus a 3-month Prime trial for Non-Prime | Segment B | 6,297 new cards | 3× closure risk (F10) | Trial cost co-funded by MetroMart (Assumed) |
+| O8 | **Threshold bonus**: extra 1% only on HSIC spend above the customer's own trailing 3-month average | Segment C | High-frequency | Avoids paying for spend that would happen anyway | Bonus on the increment only |
+
+**Economics (per offer, in the notebook and the dashboard simulator)**
+- **Value per ₹ shifted to HSIC** = interchange % + other income % (Assumed, three scenarios).
+- **Cost** is split into incentive on *incremental* spend vs incentive on spend that would have happened anyway (cannibalisation).
+- **Break-even shift rate** = the share of eligible non-HSIC ₹ that must move for net value ≥ 0. This is assumption-light and is the headline number.
+- **Scenario range** (conservative / base / optimistic) is labelled **Simulated**.
+- **Headline wording:** "₹33M of HSIC spend lost (measured). Offer X pays back if Y% of eligible spend moves (break-even). Base case ₹Z (simulated)." Never "we will recover ₹Z".
 
 **Pilot design (turns simulated numbers into measured ones)**
-- A 10% randomised holdout per segment.
-- MDE calculated from the real SoW variance.
-- Read-out after 3 months on SoW, HSIC active rate, closure rate and net value.
-- **Scale up only if** the CI of the lift excludes 0 and ROI > 0.
-
-### Scalability, privacy, integration, constraints
-- **Scalability:** aggregations run in linear time and the models are light. The same logic carries over to SQL or Spark for millions of customers. The dashboard JSON is for the demo only; production would use the bank's BI tool.
-- **Privacy:** the data is synthetic, and the dashboard shows customer IDs only. In production:
-  - masked IDs and role-based access;
-  - data minimisation and purpose limitation in line with India's DPDP Act 2023;
-  - marketing-consent checks;
-  - Gender kept out of the models, with a fairness check of error rates by gender and age band.
-- **Integration:** the outputs are flat tables that mirror the production tables.
-- **Constraints:**
-  - No interchange, funding, response or redemption data.
-  - The ₹9,999.99 cap.
-  - Prime status is a snapshot.
-
-### When NOT to use it
-- Tenure under 6 months, or fewer than N rows: abstain and report "insufficient evidence".
-- Credit or underwriting decisions: this is not a credit-risk model.
-- Spend outside MetroMart.
-- After a change to the reward structure, until the model is retrained.
-- Causal claims about individual customers.
-- Customers whose Prime status has changed.
+- A randomised 10% holdout per offer and segment.
+- Because HSIC use behaves like a coin flip per purchase, the MDE has a closed form: MDE = 2.8·√(2p(1−p)/n) for n purchases per arm, at 80% power and α = 0.05. The notebook computes it per segment.
+- Read out after 3 months on SoW, active rate, closure rate and net value.
+- **Scale only if** the CI of the lift excludes 0 and net value > 0.
 
 ---
 
-## 10. USPs
+## 9. Assumptions & limitations
 
-### Prioritisation matrix
-Columns:
-- **Impact** — judge wow + business value, 1–5.
-- **Feas.** — how feasible within the hackathon timeline, 1–5.
-- **Data** — R = real data, H = real baseline + labelled assumptions, S = simulation.
-- **P** — P0 = must, P1 = build if on schedule, P2 = stretch, ✗ = cut.
+**Data**
+- Amounts are in ₹.
+- Prime status is a static snapshot.
+- Travel and Bill Payments earn the "other eligible" 1%.
+- A Return reduces the payment method on its own row. Returns are not linked to the original sale.
+- `Number_of_Transactions` counts purchases within a row and is used only for frequency.
+- Cards are active on both their open and close dates.
+- Non-cardholders are excluded from SoW and used only as a benchmark.
 
-| # | USP | Business thread | Impact | Feas. | Data | Effort | P |
-|---|---|---|---|---|---|---|---|
-| 1 | SoW Bridge | H1: why SoW fell → fund the right fix | 5 | 5 | R | 1.5h | P0 |
-| 2 | Reward paradox + ₹ left on the table | H3: awareness gap → personalised message | 5 | 5 | R | 1h | P0 |
-| 3 | Early-Warning Score (C1 winner) | H5: retention money goes to likely closers | 5 | 4 | R | 3h | P0 |
-| 4 | Pre-closure decay curve | H4: silent attrition comes first → the window to step in | 5 | 5 | R | 1h | P0 |
-| 5 | Payment-switching Sankey + journey | H2: which competitor won each customer | 4 | 5 | R | 1h | P0 |
-| 6 | Explainable segments (C3 winner) | H7: segments the business can act on | 4 | 4 | R | 2h | P0 |
-| 7 | Next-Best-Offer engine | Turns insight into a campaign file | 5 | 4 | H | 2h | P0 |
-| 8 | Reward economics what-if (cannibalisation, break-even, revenue at risk) | H8: stops blanket rate hikes | 5 | 4 | H | 2h | P1 |
-| 9 | SoW simulator | Which lever moves SoW the most | 4 | 5 | H | 1.5h | P1 |
-| 10 | Campaign test design + ROI (MDE from real variance) | Makes the recommendation measurable | 4 | 5 | H | 1h | P1 |
-| 11 | Customer 360 | Shows targeting at the level of one customer | 5 | 3 | R | 3h | P1 |
-| 12 | Onboarding cliff (vintage curves) | When new cardholders drop off → onboarding programme | 4 | 5 | R | 0.5h | P0 |
-| 13 | Big-ticket financing gap (0% EMI) | Uses the card's financing feature | 4 | 5 | R | 0.5h | P1 |
-| 14 | Campaign timing calendar | When to launch each offer | 3 | 5 | R | 0.5h | P1 |
-| 15 | Executive story dashboard | Delivers the story; memorable | 5 | 3 | R+H | 4h | P1 |
-| 20 | Data trust panel | Credibility | 3 | 5 | R | 0.5h | P0 |
-| 21 | Noise-adjusted silent attrition | H4: avoids over-reacting to noise (the naive figure is about 3× too high) | 5 | 5 | R | 0.5h | P0 |
-| 22 | Model Lab | Proves the chosen methods are better | 5 | 4 | R | in §7 | P0 |
-| 23 | Failure Atlas | Where *not* to trust the outputs; drives the iterations | — | — | R | in §8 | P0 |
-| 24 | Impact Ledger | Business claims that hold up to scrutiny | — | — | Mixed, labelled | in §9 | P0 |
-| 25 | Operating playbook | How the work fits real banking operations | — | — | Conceptual | 1 slide | P0 |
-| 16 | Prime + card bundle economics | Joint MetroMart–HSIC growth lever | 3 | 5 | H (the Prime fee is unknown) | 0.5h | P2 |
-| 17 | Non-cardholder acquisition lookalikes | Growth beyond retention | 3 | 5 | H | 0.5h | P2 |
-| 18 | Revenue at risk (folded into #8) | Expresses the problem in ₹ revenue | 4 | 5 | H | 0.5h | P1 |
-| 19 | Reward-credit timing study | Supports instant cashback vs wallet/UPI immediacy | 3 | 3 | R (may be null) | 1.5h | P2 |
-| ✗ | AI chatbot, maps, real-time streaming, deep-learning CLV, redemption analysis | No supporting data (no geography, balances or redemption events), or a gimmick | — | — | — | — | Cut |
+**Modelling**
+- 12-month lookback, 6-month horizon.
+- Customers can appear in several snapshots.
+- Calendar adjustment uses the portfolio's monthly HSIC row share.
 
-### Selected USP details (P0 + P1)
-| # | Purpose | Implementation | Data | Dependencies |
-|---|---|---|---|---|
-| 1 | Explain the 28.9% → 19.5% fall | Exact additive bridge (§6) + waterfall chart | Real | Active-window flags |
-| 2 | Show that Prime members ignore their rates; build a personal message | Category × membership heatmap; non-HSIC spend × the customer's rate | Real | Reward-rate mapping |
-| 3 | Rank customers by closure risk with reasons | C1 comparison; the winner is retrained and scores customers at 2026-07-31 | Real | `build_snapshot`, C2 features |
-| 4 | Show the window to step in before closure | Closures aligned on their close month vs the portfolio baseline | Real | Close dates |
-| 5 | Name where the spend went | Dominant-method transition matrix → ECharts Sankey; switch timing | Real | Bridge stayer set |
-| 6 | Explainable low-SoW segments | C3 comparison, with reasons per customer | Real | C2 shrinkage |
-| 7 | A campaign-ready offer per customer | Offer library + best expected net value + holdout | Real + assumptions | #3, #6, `ASSUMPTIONS` |
-| 8 | Avoid paying for spend we'd get anyway | C4 + live what-if sliders | Simulated on a real baseline | Segment baselines |
-| 9 | Show which lever moves SoW the most | SoW′ = (H + Σ xₘ·Sₘ) / T, per segment | Simulated on a real baseline | Segment baselines |
-| 10 | Make the recommendation measurable | MDE from real SoW standard deviation; holdout sizing; ROI | Real variance + assumptions | #6 |
-| 11 | Targeting at the level of one customer | Search by ID: profile, monthly spend by method, SoW line, derived rewards (earned vs credited), risk + reasons, offer | Real | #3, #6, #7 |
-| 12 | Shape an onboarding programme | SoW by months since opening | Real | Open dates |
-| 13 | Use the card's financing feature | HSIC share of big-ticket categories; cap flagged | Real | Category mapping |
-| 14 | Campaign timing | Monthly seasonality × segment | Real | #6 |
-| 15 | Tie the whole story together | 10-tab dashboard (§11) | Real + simulated | All exports |
-| 20–25 | Trust, proof, failure insight, impact, operations | §7–§9 | Real / labelled | Experiments |
+**Business (labelled Assumed)**
+- Interchange %, MetroMart co-funding %, cost of funds, EMI subvention %, response scenarios.
+
+**Limitations**
+- The ₹9,999.99 cap understates big-ticket spend. We disclose it and don't correct it.
+- There is no offer, response or redemption history, so all response figures are simulated until the pilot runs.
+- **Synthetic-data caveat:** the data behaves as if payment method is drawn per purchase from a probability that depends only on date and ticket size. Real portfolios usually have customer-level differences. This is why the heterogeneity gate is a *gate*, not a one-off finding: on real data, if the gate passes, customer-level targeting switches on automatically.
 
 ---
 
-## 11. Visualisations, website & deck
+## 10. Architecture
 
-### Charts (each tied to a hypothesis)
-1. **H1:** SoW trend with FY bands; Bridge waterfall.
-2. **H2:** Sankey; shift in method shares.
-3. **H3:** Category × Membership heatmap; missed cashback by segment.
-4. **H4:** observed vs null zero-HSIC rate; pre-closure decay curve; vintage curves.
-5. **C1:** PR and gain curves (B1 dashed); **forest plot of paired differences against B1**; calibration; permutation-importance dot matrix; error-type bars + slice heatmap.
-6. **C2:** F1 vs injected decline size; placebo false-positive bars; recall by activity level.
-7. **C3:** scorecard heatmap; explainer tree; boundary-sensitivity bars; segment contradiction rates.
-8. **C4:** net value by design; tornado sensitivity; break-even shift rate.
-9. **Impact:** ledger table with Measured / Simulated / Assumed badges; scenario range bar.
-10. **Story:** iteration timeline (0 → 1 → 2).
+```
+Synchrony-Hackthon-/
+├── README.md, PROJECT_PLAN.md, TASKS.md, requirements.txt
+├── data/                      # the 4 case CSVs (not committed unless the owner decides)
+├── analysis/
+│   ├── config.py              # paths, SEED=42, cutoffs, ASSUMPTIONS, gate thresholds
+│   ├── prep.py                # load, clean, enrich (§2 rules) + validation asserts
+│   ├── experiments.py         # X1–X17 and F1–F13, each a function returning a dict
+│   ├── closure_model.py       # out-of-time closure model (B0, B1, LR, HGB)
+│   ├── segments.py            # K-means negative control, ₹-at-stake ranking, rule segments
+│   ├── economics.py           # offer economics, break-even, scenarios, MDE
+│   ├── export.py              # outputs/*.csv, charts/*.png, key_numbers.md, dashboard JSON
+│   └── run_all.py             # one command rebuilds everything; fails loudly on any assert
+├── notebooks/story.ipynb      # narrative walk-through that imports analysis/ (no logic of its own)
+├── outputs/                   # key_numbers.md, impact_ledger.csv, experiment_log.csv, charts/, model_eval/
+└── dashboard/                 # React app (§11); reads dashboard/public/data/*.json
+```
 
-### Website (P1)
-Each tab follows the storyline. Load the `artifact-design` and `dataviz` skills before building.
-
-| Tab | Content |
-|---|---|
-| 1 Story | Problem → H1–H8 status chips (supported / rejected / partly) → evidence links → solution → impact; KPI tiles |
-| 2 Why SoW fell | Bridge, trend, paradox heatmap (H1–H3) |
-| 3 Attrition | Decay curve, vintage, attrition classes, #21 (H4) |
-| 4 Early warning | C1 winner: risk tiers, reliability diagram, reason codes, sortable at-risk list |
-| 5 Segments & offers | C3 winner, NBO, calendar |
-| 6 Model Lab | C1–C4 comparisons with a model toggle, Failure Atlas, iteration log |
-| 7 Customer 360 | Single-customer view (#11) |
-| 8 Simulators | SoW, reward what-if, campaign planner — **every output has a "Simulated" badge** |
-| 9 Impact & Operations | Ledger, pilot design, users / run-book diagram, when not to use |
-| 10 Methods & trust | Definitions, assumption ledger, validation, threshold sensitivity |
-
-**Design:** HSIC is the hero colour throughout. Supports light and dark themes and is usable on mobile.
-
-### Deck (about 18 slides + appendix; assembled by hand from `outputs/`, exported to PDF)
-| Arc | Slides |
-|---|---|
-| Problem | 1 Title · 2 Exec summary (3 findings, 3 actions, measured loss + break-even + simulated range) · 3 Data, definitions, assumptions |
-| Hypotheses | 4 H1–H8 on one slide |
-| Experiments & evidence | 5 Bridge (H1) · 6 Where the wallet went (H2) · 7 Reward paradox (H3) · 8 Silent attrition is real but about ⅓ of what it looks like + decay curve (H4) · 9 How we tested (protocol, leakage controls) · 10 C1: why our model beats the rule (forest plot) · 11 C2 + C3 comparison |
-| Insights from failure | 12 Failure Atlas: what it taught us that AUC couldn't · 13 Iteration timeline; approaches rejected and why |
-| Final solution | 14 Segments → NBO (with the "do not target" rule) · 15 Offer economics: threshold vs blanket |
-| Business impact | 16 Impact Ledger + pilot design · 17 Operating playbook (users, monthly run, monitoring, when not to use, privacy) · 18 Decisions asked of HSIC + dashboard link and screenshots |
-| Appendix | Full metric tables, slice metrics, selection log, sensitivity, limitations, assumption ledger |
-
-The PDF must stand on its own. The dashboard is a bonus: it gets a link and screenshots in the deck.
+- **Environment:** a dedicated conda env, `synchrony` (Python 3.12 + Node.js 20). Python packages are listed in `requirements.txt`; nothing is installed globally.
+- **No database.** The data is about 22MB of CSV.
+- **Single source of numbers.** `run_all.py` writes `key_numbers.md` and the dashboard JSON from the same objects, so the deck and the UI can't disagree.
 
 ---
 
-## 12. Pitfalls & controls
-| Pitfall | Control |
-|---|---|
-| Sparse-data noise | C2 detector + minimum-evidence abstention; portfolio ratio-of-sums for headline numbers |
-| Leakage | `build_snapshot` + date asserts + preprocessing inside Pipelines |
-| Class imbalance / few positives | PR-AUC and lift; class weights; small parameter grid; CIs |
-| Picking the winner after seeing results | Selection log written first |
-| Cluster metrics favour clustering methods | Outcome separation on future data is the main criterion |
-| Simulations presented as facts | Ledger badges on every number |
-| Survivorship (closed cards drop out of FY26 SoW) | Explicit attrition reported separately; a panel of cards open in both FYs |
-| Cards opening and closing mid-window | SoW on active rows only |
-| Reward timing | Cost lands in the following month; July rewards fall into the next FY |
-| ₹9,999.99 cap | Disclosed as a limitation |
-| Fairness | Gender excluded from features; checked by slice |
-| Overstating results | If B1 wins, ship B1 |
+## 11. Dashboard (UI)
+
+**Stack:** React 18.3 + Vite 5.4 + TypeScript + Tailwind 3.4 + ECharts 5.5 (`echarts-for-react`).
+- Static build with no backend. Every page reads precomputed JSON.
+- Light and dark themes; works at phone width.
+- Hosted as a private claude.ai Artifact or on GitHub Pages; the owner decides whether to share.
+- The deck carries the link and screenshots. **The PDF must stand on its own.**
+
+| # | Page | Content | Interaction |
+|---|---|---|---|
+| 1 | **Story** | The answer (§1), 4 KPI tiles (SoW 28.9 → 19.5%, ₹33M gap, ₹91.2M post-closure spend, closure rate 1.7 → 3.4%), 3 recommendations | Each tile links to its evidence page |
+| 2 | **The decline** | Monthly SoW with FY bands; Bridge waterfall; stayers' method shift | Toggle ₹ / pp |
+| 3 | **Is it a segment problem?** | Quarterly SoW lines for any slice: membership, age, limit, APR, vintage, category, gender, future closers | Dropdown: every slice gives the same overlapping lines |
+| 4 | **Noise check** | Real customers vs simulated customers who all share the same probability: dispersion, split-half scatter, FY25 vs FY26 scatter, variance ratio | Re-simulate button; slider for rows per customer |
+| 5 | **Attrition** | Closures per open card by quarter; closure rate by tenure; pre-closure curve; fixed vs time-aware silent-attrition null | **Raw / calendar-adjusted toggle** (U3) |
+| 6 | **Where the wallet went** | Method mix by ticket band and FY; Sankey of stayers' share shift; cardholders vs non-cardholders | Band filter |
+| 7 | **Expected vs found** | The 17 experiments as cards: belief → test → number → verdict chip; closure-model comparison table | Filter by source / verdict |
+| 8 | **Segments & offers** | Segment cards (size, ₹ at stake, closure rate, offer); offer library; K-means negative-control result | Click a segment to see its offer economics |
+| 9 | **Offer simulator** | Per offer: shift-rate slider → incremental ₹, cost (incremental vs cannibalised), net value, break-even line; MDE / holdout planner | Every output carries a **Simulated** badge; assumptions are editable |
+| 10 | **Customer lookup** | Search an ID: profile, segment, monthly spend by method, derived rewards (earned vs credited), offer | Lazy-loads a sharded JSON |
+| 11 | **Methods & assumptions** | Brief rules, assumptions, data checks, evaluation protocol, limitations | — |
+
+**JSON contract** (`dashboard/public/data/`). The analysis track exports these files. The UI track builds against mock files with the same shape from hour 1.
+- `kpis.json`
+- `sow_monthly.json` · `bridge.json` · `mix_shift.json` · `ticket_mix.json`
+- `slices.json` · `noise.json` (summary stats, 2k-point scatter samples, monthly p and the rows-per-customer distribution for live simulation)
+- `attrition.json` · `experiments.json` · `closure_model.json`
+- `segments.json` · `offers.json` (library, defaults, assumptions)
+- `customers/shard_XX.json` (50 shards keyed by `Customer_ID % 50`)
+- `assumptions.json`
+
+Total budget: < 12MB.
 
 ---
 
-## 13. Implementation phases, dependencies & cut lines
+## 12. Deck
 
-| Step | Work | Depends on | P | Est. |
-|---|---|---|---|---|
-| 1 | Notebook §0–7: core SoW, validation, Bridge, switching, paradox, #21, decay, vintage (H1–H4) | Data | P0 | 4h |
-| 2 | §8–10: snapshots, C2 + failure analysis, attrition classes | 1 | P0 | 2.5h |
-| 3 | §11: C1 (B0, B1, M1, M2) + failure analysis | 2 | P0 | 3h |
-| 4 | §12–13: C3 + failure analysis, NBO | 2, 3 | P0 | 2.5h |
-| 5 | §14–18: C4, Impact Ledger, iteration log, charts, exports | 3, 4 | P0 | 2.5h |
-| 6 | Deck → PDF: **freeze ≈ 5 PM IST**, email by 7 PM | 5 | P0 | 3h |
-| 7 | Dashboard tabs 1–6, 9, 10 | 5 | P1 | 4h |
-| 8 | Dashboard tabs 7–8; M3 and M4 models; P2 items | 7 | P1/P2 | 4h |
+About 12 slides plus an appendix. Built from `outputs/` only; every number comes from `key_numbers.md`.
 
-P0 ≈ 17.5h and everything ≈ 25.5h, which is more than the time available.
-- **Build the deck straight after the P0 analysis.** The dashboard comes only after the PDF is safe.
-- **Cut order:** P2 → M3/M4 → dashboard tabs 7–8 → the whole dashboard → C4 reduced to O0/O1/O3.
-- **Never cut:** M1–M5, C1–C3 with their failure analysis, the Impact Ledger, the iteration log, the deck.
+| # | Slide | Message |
+|---|---|---|
+| 1 | Title | — |
+| 2 | Executive summary | The 9.4pp drop is real; "at-risk customers" are not. 3 findings, 3 actions, measured loss + break-even |
+| 3 | Data, rules, assumptions | Brief compliance at a glance |
+| 4 | The decline | 28.9 → 19.5%; the Bridge shows that 100% of it comes from stayers |
+| 5 | Where it went | Cash/UPI 47%; every ticket band; Wallet owns big tickets |
+| 6 | The twist | Same decline in every slice + the heterogeneity gate |
+| 7 | Expected vs found | 8 strongest rejected ideas with their numbers + 3 lessons |
+| 8 | Attrition, corrected | Silent attrition is the trend (time-aware null); closures doubling and tenure-driven; ₹91.2M after closure |
+| 9 | Segments | K-means control fails → ₹-at-stake ranking → 6 persistent segments |
+| 10 | Offers | Product fixes + moment triggers + segment offers |
+| 11 | Economics & pilot | Break-even per offer, simulated range, holdout + MDE |
+| 12 | Roadmap & asks | What HSIC and MetroMart decide; dashboard link + screenshots |
+| App. | — | Full experiment log, closure-model table, gate details, assumptions, limitations |
+
+---
+
+## 13. Schedule, tracks & cut order
+
+Three tracks run in parallel. Hours are counted from the start of implementation.
+
+| Hours | Track A: Analysis | Track B: Dashboard | Track C: Deck |
+|---|---|---|---|
+| 0–1 | Env, `config.py`, `prep.py` + asserts, `selection_log.md` | Vite scaffold, theme, layout, mock JSON from §11 | Slide template, storyline, assumptions slide |
+| 1–4 | Reproduce F1–F13 and X1–X17 in `experiments.py` | Pages 1–3 on mock data | Slides 1–6 with placeholders |
+| 4–6 | Closure model; segments (K-means control, ₹ at stake, rules) | Pages 4–7 | Slides 7–9 |
+| 6–8 | Economics, MDE, `export.py`, charts, `key_numbers.md` | Pages 8–9, swap mocks for real JSON | Slides 10–12 |
+| 8–10 | Verification (§14), spot checks | Pages 10–11, mobile and dark-mode pass, publish | Insert real numbers and charts, appendix |
+| **Freeze ~5 PM IST, 24 Oct** | — | Screenshots for the deck | **Export the PDF; email by 7 PM** |
+
+**Cut order if behind:** page 10 (Customer lookup) → page 4's live simulation (keep static charts) → page 9 simulator (keep a static economics table) → the whole dashboard (screenshots of PNG charts only).
+
+**Never cut:** brief rules, F1–F13, the experiment log, segments, offers with break-even, assumptions, the deck.
 
 ---
 
 ## 14. Verification
-- **Restart & Run All**; every assert passes:
-  - the Bridge reconciles;
-  - leakage dates are correct;
-  - segment counts add up to the universe;
-  - the Impact Ledger has no untagged rows;
-  - every number on a slide appears in `key_numbers.md` or `impact_ledger.csv`.
-- `selection_log.md` is older than every results file, and the chosen methods match its rules.
+
+- `python analysis/run_all.py` passes every assert:
+  - row counts and data checks from §2;
+  - the Bridge reconciles to the reported FY SoW;
+  - segment sizes add up to the universe;
+  - no `impact_ledger.csv` row is missing a Measured / Simulated / Assumed tag;
+  - snapshot dates: max feature date ≤ cutoff < min label date.
+- **Reproduction checks** against the 23 Oct exploratory numbers. Tolerance ±0.2pp unless stated otherwise:
+  - SoW: 28.9 / 19.5%;
+  - Bridge: +0.26 / −9.54 / −0.15pp;
+  - Cash/UPI share of the loss: 47%;
+  - variance ratio: 1.00 ± 0.02;
+  - time-aware null excess: |x| < 1.5pp;
+  - closure LR test ROC-AUC: 0.62 ± 0.01;
+  - post-closure spend: ₹91.2M;
+  - missed cashback: ₹3.98M.
 - **Sanity checks:**
-  - B0 PR-AUC ≈ the base rate.
-  - D0's placebo false-positive rate is above D1's and D2's.
-  - Simulators at 0% shift reproduce the baseline.
-  - Break-even worked out by hand for one segment.
-- **Cross-checks:**
-  - FY25 = 28.9% and FY26 = 19.5%.
-  - #21 = 62.7% vs 43.5% at 2026-01-31.
-- **Spot checks:** 3 customers (silent, closed, loyal) checked by hand against their raw rows and Customer 360. Failure Atlas example IDs re-checked as well.
-- **Dashboard:** every tab renders, works at phone width and in dark mode, no console errors.
-- **Deck:** every slide maps to one stage of the storyline, and every hypothesis is marked supported, rejected or partly.
-
----
-
-## 15. Final deliverables
-| Deliverable | Required? | Location |
-|---|---|---|
-| Slide deck (PDF, about 18 slides + appendix) | **Yes** — email to the organisers by 8 PM IST, 24 Oct 2026; subject = roll number only | Built by hand from `outputs/` |
-| Analysis notebook | Supporting | `sow_analysis.ipynb` |
-| Customer scores, segment summary, Impact Ledger, model-evaluation files | Supporting | `outputs/` |
-| Interactive dashboard | Optional (P1) | `dashboard/`, private claude.ai Artifact link in the deck |
+  - random baseline PR-AUC ≈ the base rate;
+  - the simulator at 0% shift reproduces the baseline;
+  - break-even worked out by hand for one offer.
+- **Spot checks:** 3 customers (closed-and-shopping, first-year, high-frequency) traced through raw rows → segment → offer → dashboard lookup.
+- **Dashboard:** every page renders from real JSON, with no console errors, at phone width and in both themes.
+- **Deck:** every number appears in `key_numbers.md`, and every slide maps to one step of the storyline.
