@@ -2,14 +2,14 @@
 
 Our entry for the **Synchrony Analytics Hackathon 2026** case study. HSIC Bank and MetroMart issue a co-branded credit card, and cardholders are paying for more of their MetroMart shopping with other methods. We measure the loss in **Share of Wallet (SoW)**, test where it comes from, decide who to prioritise and design offers to win the spend back.
 
-> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline foundation, ML experiments, closure model, segmentation and `run_all.py` are done on the `devansh` branch (18 checks pass, 21 pending on teammates' modules). See [TASKS.md](TASKS.md) for progress.
+> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline, ML experiments, closure model and segmentation are done and merged to `main`; see [Progress](#progress) below and [TASKS.md](TASKS.md).
 > **Deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only.
 > **Full plan:** [PROJECT_PLAN.md](PROJECT_PLAN.md) · **Task board:** [TASKS.md](TASKS.md)
 
 ## The answer
 SoW fell from **28.9% (FY25) to 19.5% (FY26)**. Customers didn't shop less: MetroMart spend per card stayed flat while HSIC spend per card halved (₹356 → ₹167).
 
-**This is silent attrition, and it is universal.** Nearly every open card is quietly losing share at the same rate, whatever the customer type. Customers don't differ in how often they use the card: the spread between them is what coin flips would produce, and this year's share doesn't predict next year's. So the whole book is low-SoW, and HSIC has a **product problem, not a targeting problem**. The card is losing mainly to **Cash/UPI**, which took 47% of the lost share. HSIC lost ₹33M of spend. Net of the 1.39% in rewards HSIC pays, the margin on that spend is thin (₹0.04–0.43M at assumed rates), so the bank's real stake is retention and revolving balances.
+**This is silent attrition, and it is universal.** Nearly every open card is quietly losing share at the same rate, whatever the customer type. Customers don't differ in how often they use the card: the spread between them is what coin flips would produce, and this year's share doesn't predict next year's. So the whole book is low-SoW, and HSIC has a **product problem, not a targeting problem**. The card is losing mainly to **Cash/UPI**, which took 47% of the lost share. HSIC lost ₹33M of spend. Net of the 1.399% in rewards HSIC pays, the margin on that spend is thin (₹0.03–0.43M at assumed rates), so the bank's real stake is retention and revolving balances.
 
 Our recommendation:
 1. **Fix the product for everyone, starting with reward visibility.** No rival card matches HSIC's Grocery and Electronics rates, yet Prime members use the card like everyone else and left ₹1.60M of cashback on the table. Showing the reward at the till costs almost nothing. Next come instant cashback at the till and the card on UPI.
@@ -23,18 +23,40 @@ Why customers moved to Cash/UPI (immediacy?) and why Prime members ignore their 
 - **We measure silent attrition against the trend.** The usual count labels about 21pp of cardholders "silent attriters" who are behaving exactly like everyone else. Once the portfolio-wide trend is accounted for, the decline is universal, not concentrated.
 - **We show the common hypotheses we tested and what the data said:**
   - the pre-closure "decay curve" disappears after calendar adjustment;
-  - card usage doesn't predict closure (AUC 0.52);
+  - card usage adds nothing to closure prediction beyond card age, and card age alone (AUC 0.672) beats every learned model;
   - MetroMart's own Wallet isn't what is eating the card.
 - **We target moments, not people.** Ticket size is the only behavioural signal in the data, so offers fire at checkout.
 - **Break-even-first economics, net of rewards.** Every offer shows the shift rate it needs to pay for itself after the rewards HSIC funds, or says it never breaks even. Every ₹ figure is labelled Measured, Simulated or Assumed, and every "why" is labelled Hypothesis.
 
+## Progress
+As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TASKS.md](TASKS.md).
+
+**Done (Devansh)**
+
+| Piece | File | Result |
+|---|---|---|
+| Environment | `requirements.txt` | `synchrony` conda env, versions pinned (pandas 3.1, scikit-learn 1.9) |
+| Foundation | `analysis/config.py`, `analysis/prep.py` | Loads and validates the 4 CSVs and applies the brief's rules; shared helpers for SoW, the 6-month window, card age and purchase frequency. Interface: `analysis/INTERFACE.md` |
+| Decision rules | `outputs/model_eval/selection_log.md` | Every threshold fixed before the final run; later changes are listed in its change log |
+| Heterogeneity gate | `analysis/experiments_ml.py` | Customer SoW fails all three tests (variance ratio 1.00, split-half r −0.005, persistence r 0.004). X2, X7, X15 and X16 also done |
+| Closure model | `analysis/closure_model.py` | Card age alone (ROC-AUC 0.672) beats every learned model, so the card-age rule ships. Its top 10% riskiest cards close at 15.7% vs 6.2% overall. Usage adds nothing beyond card age |
+| Segmentation | `analysis/segments.py` | K-means looks stable (ARI 0.89) but explains 0.04% of next year's SoW. 2×2 boxes: SoW within 1.7pp; young cards close 7.7pp more often; high-frequency customers spend ₹2,255 more off-card |
+| Pipeline | `analysis/run_all.py`, `export.py`, `checks.py` | One command, about 3 minutes, deterministic. 39 reproduction checks: 18 pass, 0 fail, 21 pending on teammates' modules |
+| Handoffs | `HANDOFF_MAYANK.md`, `HANDOFF_SHREYASH.md` | What each teammate uses, from which file, for which slide |
+
+**In progress / next**
+- **Mayank:** `experiments_f.py` and `experiments_h.py` (F1–F14, X3, X4, X8–X14, X17), slides 4–7.
+- **Shreyash:** `style.py`, `economics.py` (with the 3 review fixes in his handoff), F12 and F15, slides 1–3 and 10–12, deck integration and submission.
+- **Devansh:** charts and content for slides 8–9; the final `run_all.py` once the teammates' modules land; the 4-page dashboard (optional, cut first).
+
 ## Repository structure
 ```
-├── README.md, PROJECT_PLAN.md, TASKS.md, requirements.txt
-├── data/            # the 4 case CSVs (see "Data handling")
-├── analysis/        # Python pipeline; run_all.py rebuilds every output
+├── README.md, PROJECT_PLAN.md, TASKS.md, TEAM_SPLIT.md, requirements.txt
+├── HANDOFF_MAYANK.md, HANDOFF_SHREYASH.md   # what each teammate uses and where
+├── data/            # the 4 case CSVs (gitignored; see "Data handling")
+├── analysis/        # Python pipeline; run_all.py rebuilds every output; INTERFACE.md lists helpers and key names
 ├── notebooks/       # story.ipynb: narrative walk-through, imports analysis/
-├── outputs/         # key_numbers.md, impact_ledger.csv, experiment_log.csv, charts/, model_eval/
+├── outputs/         # key_numbers.md/.json, impact_ledger.csv, experiment_log.csv, tables/, model_eval/, charts/
 └── dashboard/       # optional 4-page React + Vite + ECharts app; reads dashboard/public/data/*.json
 ```
 `synchrony_hackathon_strategy_blueprint.md` is an earlier brainstorm, kept for reference. Plan v5.3 supersedes it.
@@ -47,7 +69,7 @@ Why customers moved to Cash/UPI (immediacy?) and why Prime members ignore their 
    pip install -r requirements.txt
    ```
 2. **Add the data:** put `Customer Data.csv`, `Transactions Data.csv`, `Category Code.csv` and `Payment Code.csv` in `data/`, keeping the original file names.
-3. **Run the analysis:** `python analysis/run_all.py`. Every assert must pass. Outputs go to `outputs/` and `dashboard/public/data/`.
+3. **Run the analysis:** `python analysis/run_all.py` from the repo root, inside the `synchrony` env (about 3 minutes). It fails on any failed check; checks whose module doesn't exist yet show as pending. Outputs go to `outputs/`; the deck takes every number from `outputs/key_numbers.md`.
 4. **(Optional) run the dashboard:**
    ```bash
    cd dashboard
@@ -70,3 +92,4 @@ Why customers moved to Cash/UPI (immediacy?) and why Prime members ignore their 
 ## Data handling
 - Don't commit secrets, tokens, credentials or local tool settings (`.claude/`).
 - The case data is hackathon material. Check the organisers' rules before pushing it to a public repo.
+- **Only aggregate files go in `outputs/`.** No file with one row per customer: `run_all.py` fails if a new one appears, and `.gitignore` blocks `outputs/**/*customer*.csv`. The older `outputs/eda/customer_sow_segments.csv` is customer-level and should be removed.
