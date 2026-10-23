@@ -2,7 +2,7 @@
 
 Our entry for the **Synchrony Analytics Hackathon 2026** case study. HSIC Bank and MetroMart issue a co-branded credit card, and cardholders are paying for more of their MetroMart shopping with other methods. We measure the loss in **Share of Wallet (SoW)**, test where it comes from, decide who to prioritise and design offers to win the spend back.
 
-> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline, ML experiments, closure model and segmentation are done and merged to `main`; see [Progress](#progress) below and [TASKS.md](TASKS.md).
+> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline, ML experiments, closure model and segmentation are done and merged to `main`. The findings, hypothesis tests and slides 4–7 are done on the `mayank` branch, waiting to merge. See [Progress](#progress) below and [TASKS.md](TASKS.md).
 > **Deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only.
 > **Full plan:** [PROJECT_PLAN.md](PROJECT_PLAN.md) · **Task board:** [TASKS.md](TASKS.md)
 
@@ -44,8 +44,18 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
 | Pipeline | `analysis/run_all.py`, `export.py`, `checks.py` | One command, about 3 minutes, deterministic. 39 reproduction checks: 18 pass, 0 fail, 21 pending on teammates' modules |
 | Handoffs | `HANDOFF_MAYANK.md`, `HANDOFF_SHREYASH.md` | What each teammate uses, from which file, for which slide |
 
+**Done (Mayank, on the `mayank` branch, not merged yet)**
+
+| Piece | File | Result |
+|---|---|---|
+| Findings F1–F11, F13, F14 | `analysis/experiments_f.py` | Built on `prep.py`; 205 keys (with X tests) in `key_numbers.md`. All 19 of Mayank's reproduction checks in `checks.py` pass, so `run_all.py` now reports 37 pass, 0 fail, 2 pending (Shreyash's F12, F15) |
+| Hypothesis tests X3, X4, X8–X14, X17 | `analysis/experiments_h.py` | Each returns a verdict from `config.VERDICT`. Silent attrition is universal (time-aware excess +0.4 / 0.0 / −0.3pp vs +21pp by the usual count); no pre-closure decay after calendar adjustment (slope +0.08pp a month, CI −0.09 to +0.25) |
+| Verification (§14) | `analysis/verify.py`, `analysis/verify_second.py` | 0 blocking failures. Every 23 Oct stub checked; 4 misses have a found cause, and 7 can't be reproduced (what was tried is listed, the message is unchanged). 3 customers traced from raw rows to segment and offer. Independent rebuild from the raw CSVs, including Devansh's X1 band table: 91/91 |
+| Slides 4–7 and charts | `deck/slides_04-07.md`, `analysis/charts_story.py` | Drop-in slide content with a key for every number; 12 charts at 16:9 (`outputs/charts/04_*`–`07_*`), including the gate, band table and K-means control from Devansh's outputs |
+| Notebook | `notebooks/story.ipynb` | Walk-through of slides 4–7 that imports `analysis/`; runs without errors |
+
 **In progress / next**
-- **Mayank:** `experiments_f.py` and `experiments_h.py` (F1–F14, X3, X4, X8–X14, X17), slides 4–7.
+- **Mayank:** merge the `mayank` branch; swap the charts to Shreyash's `style.py` when it lands; tell Devansh F9 is 1.8% → 4.0% for slide 8.
 - **Shreyash:** `style.py`, `economics.py` (with the 3 review fixes in his handoff), F12 and F15, slides 1–3 and 10–12, deck integration and submission.
 - **Devansh:** charts and content for slides 8–9; the final `run_all.py` once the teammates' modules land; the 4-page dashboard (optional, cut first).
 
