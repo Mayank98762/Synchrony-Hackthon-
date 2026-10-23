@@ -2,7 +2,7 @@
 
 Our entry for the **Synchrony Analytics Hackathon 2026** case study. HSIC Bank and MetroMart issue a co-branded credit card, and cardholders are paying for more of their MetroMart shopping with other methods. We measure the loss in **Share of Wallet (SoW)**, test where it comes from, decide who to prioritise and design offers to win the spend back.
 
-> **Status:** plan v5.3 is final, and implementation is starting. Two independent EDAs agree on every core number.
+> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline foundation, ML experiments, closure model, segmentation and `run_all.py` are done on the `devansh` branch (18 checks pass, 21 pending on teammates' modules). See [TASKS.md](TASKS.md) for progress.
 > **Deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only.
 > **Full plan:** [PROJECT_PLAN.md](PROJECT_PLAN.md) · **Task board:** [TASKS.md](TASKS.md)
 
