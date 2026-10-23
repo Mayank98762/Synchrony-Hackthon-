@@ -38,13 +38,15 @@ Status as of 23 Oct, night: everything Mayank and Shreyash need from Devansh is 
 
 ## Mayank: analytics and the story
 
-| Task | Files |
-|---|---|
-| F1–F11, F13, F14: SoW trend, Bridge, payment-mix shift, DiD, ticket bands, ticket model, Wallet and capped tickets, reward paradox (₹1.60M), closures per card, closure-by-age table (F10), post-closure spend, persistence, per-card monthly view | `analysis/experiments_f.py` |
-| X3, X4, X8–X14, X17: silent attrition vs both nulls at 3 cutoffs, pre-closure decay (raw vs adjusted), Prime, category, credit limit, festive, Wallet, never-activated, ticket and category persistence, returns | `analysis/experiments_h.py` |
-| **§14 verification:** reproduction checks, exact EDA cross-checks, 3-customer spot checks | — |
-| **Slides 4, 5, 6, 7** and their charts (the decline; where it went; universal attrition; the three hypotheses) | deck |
-| Optional `notebooks/story.ipynb` (cut-order item 2) | `notebooks/` |
+Status as of 24 Oct: everything below is done on the local `mayank` branch, rebuilt on Devansh's `config.py` / `prep.py` and run through `run_all.py` (37 checks pass, 0 fail; the 2 pending are Shreyash's F12 and F15). Not merged to `main` yet.
+
+| Task | Files | Status |
+|---|---|---|
+| F1–F11, F13, F14: SoW trend, Bridge, payment-mix shift, DiD, ticket bands, ticket model, Wallet and capped tickets, reward paradox (₹1.60M), closures per card, closure-by-age table (F10), post-closure spend, persistence, per-card monthly view | `analysis/experiments_f.py` | ☑ keys `f1_`–`f14_` as in `INTERFACE.md`; F12 / F15 section left empty for Shreyash (`SHREYASH_FUNCS`) |
+| X3, X4, X8–X14, X17: silent attrition vs both nulls at 3 cutoffs, pre-closure decay (raw vs adjusted), Prime, category, credit limit, festive, Wallet, never-activated, ticket and category persistence, returns | `analysis/experiments_h.py` | ☑ every test returns `x<N>_verdict` from `config.VERDICT`; X3 "universal", the rest as in `selection_log.md` |
+| **§14 verification:** reproduction checks, exact EDA cross-checks, 3-customer spot checks | `analysis/verify.py`, `analysis/verify_second.py` → `outputs/verification/` | ☑ 0 blocking failures; 4 stub misses explained, 7 not reproducible (listed with what was tried); 3 customers traced raw rows → segment → offer; independent rebuild from the raw CSVs 91/91 |
+| **Slides 4, 5, 6, 7** and their charts (the decline; where it went; universal attrition; the three hypotheses) | `deck/slides_04-07.md`, `analysis/charts_story.py` → `outputs/charts/04_*`–`07_*` | ◐ content and 12 charts done, using Devansh's gate, band table and K-means; waiting for Shreyash's template and `style.py` |
+| Optional `notebooks/story.ipynb` (cut-order item 2) | `notebooks/` | ☑ imports `analysis/`, executed without errors |
 
 ## Shreyash: economics, offers, integration
 
@@ -78,6 +80,6 @@ Devansh carries the most code, so the dashboard goes first on the cut list; if h
 | Hour 0.5 | Devansh → Mayank | `prep.py` interface (function and column names) | ☑ `analysis/INTERFACE.md` |
 | Hour 1 | Devansh → all | working `prep.py` and `config.py` | ☑ |
 | Hour 1 | Shreyash → all | `style.py` and the slide template | ☐ |
-| Hour 4 | Mayank, Devansh → Shreyash | first `key_numbers` dict for the `[KN]` placeholders | ◐ Devansh's part in `outputs/key_numbers.md`; Mayank's keys pending |
-| Hour 8 | Mayank → Devansh | `experiments_f.py` and `experiments_h.py` ready for `run_all.py` | ☐ use the key names in `INTERFACE.md` |
+| Hour 4 | Mayank, Devansh → Shreyash | first `key_numbers` dict for the `[KN]` placeholders | ◐ Devansh's part in `outputs/key_numbers.md`; Mayank's 205 keys are in it on the `mayank` branch, reaching `main` at the merge |
+| Hour 8 | Mayank → Devansh | `experiments_f.py` and `experiments_h.py` ready for `run_all.py` | ◐ ready on the `mayank` branch with the `INTERFACE.md` key names; `run_all.py` picks them up (37 pass, 0 fail). Merge pending |
 | Hour 8 | Devansh → Shreyash | final `key_numbers.md` | ☐ after Mayank's modules |
