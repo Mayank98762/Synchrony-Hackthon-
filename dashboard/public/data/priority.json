@@ -1,0 +1,325 @@
+{
+ "meta": {
+  "generated": "2026-10-24 01:52",
+  "data_window": "2024-08-01 to 2026-07-31",
+  "customers": 45000,
+  "source": "outputs/key_numbers.json and outputs/tables (run_all.py)"
+ },
+ "boxes": [
+  {
+   "segment": "B",
+   "name": "Protect first",
+   "customers": 2226,
+   "sow": 0.16055501697032643,
+   "sow_lo": 0.14557765002117593,
+   "sow_hi": 0.1763512437543285,
+   "closure_6m": 0.11635220125786164,
+   "closure_lo": 0.10287511230907458,
+   "closure_hi": 0.1293912848158131,
+   "nonhsic_per_cust": 6234.728858939803,
+   "nonhsic_lo": 5949.724430480683,
+   "nonhsic_hi": 6507.069823674753,
+   "prime_share": 0.601078167115903,
+   "p_hsic": 0.15058199499042288,
+   "rows_3m": 1.5244833782569631
+  },
+  {
+   "segment": "C",
+   "name": "Activate",
+   "customers": 4942,
+   "sow": 0.1772792692223777,
+   "sow_lo": 0.16489472343457148,
+   "sow_hi": 0.1895607960175173,
+   "closure_6m": 0.12120598947794416,
+   "closure_lo": 0.11148826386078511,
+   "closure_hi": 0.1301092675030352,
+   "nonhsic_per_cust": 3976.295938891137,
+   "nonhsic_lo": 3826.355618575476,
+   "nonhsic_hi": 4127.837648269931,
+   "prime_share": 0.612505058680696,
+   "p_hsic": 0.1563971340839304,
+   "rows_3m": 0.9884662080129503
+  },
+  {
+   "segment": "D",
+   "name": "Grow",
+   "customers": 6744,
+   "sow": 0.1707933935840978,
+   "sow_lo": 0.16266256083015873,
+   "sow_hi": 0.17961741522713012,
+   "closure_6m": 0.041666666666666664,
+   "closure_lo": 0.03662514827995255,
+   "closure_hi": 0.04611506524317912,
+   "nonhsic_per_cust": 6393.2620937129295,
+   "nonhsic_lo": 6242.879341303382,
+   "nonhsic_hi": 6559.85897227165,
+   "prime_share": 0.5898576512455516,
+   "p_hsic": 0.15865722724928502,
+   "rows_3m": 1.5813315539739028
+  },
+  {
+   "segment": "E",
+   "name": "Nudge",
+   "customers": 15286,
+   "sow": 0.17171818816552892,
+   "sow_lo": 0.16463396197913832,
+   "sow_hi": 0.1781459077591119,
+   "closure_6m": 0.043176763051157925,
+   "closure_lo": 0.04003663482925553,
+   "closure_hi": 0.04631852675650922,
+   "nonhsic_per_cust": 4139.111048017794,
+   "nonhsic_lo": 4054.25514773322,
+   "nonhsic_hi": 4229.571243670679,
+   "prime_share": 0.5919795891665577,
+   "p_hsic": 0.16012579019991657,
+   "rows_3m": 1.0193314143660865
+  }
+ ],
+ "sizes": [
+  {
+   "segment": "A",
+   "customers": 4075,
+   "customers_at_score": 5903,
+   "name": "Closed, still shopping"
+  },
+  {
+   "segment": "B",
+   "customers": 2226,
+   "customers_at_score": 1961,
+   "name": "Protect first"
+  },
+  {
+   "segment": "C",
+   "customers": 4942,
+   "customers_at_score": 4352,
+   "name": "Activate"
+  },
+  {
+   "segment": "D",
+   "customers": 6744,
+   "customers_at_score": 7486,
+   "name": "Grow"
+  },
+  {
+   "segment": "E",
+   "customers": 15286,
+   "customers_at_score": 16720,
+   "name": "Nudge"
+  },
+  {
+   "segment": "F",
+   "customers": 6836,
+   "customers_at_score": 6836,
+   "name": "Non-cardholder"
+  },
+  {
+   "segment": "Z",
+   "customers": 4891,
+   "customers_at_score": 1742,
+   "name": "Unassigned"
+  }
+ ],
+ "young_split": [
+  {
+   "segment": "B",
+   "age_bin": "6-12m",
+   "customers": 1070,
+   "closure_6m": 0.07850467289719626,
+   "nonhsic_per_cust": 6376.531
+  },
+  {
+   "segment": "B",
+   "age_bin": "<6m",
+   "customers": 1156,
+   "closure_6m": 0.1513840830449827,
+   "nonhsic_per_cust": 6103.476012110727
+  },
+  {
+   "segment": "C",
+   "age_bin": "6-12m",
+   "customers": 2392,
+   "closure_6m": 0.09531772575250837,
+   "nonhsic_per_cust": 4044.3735075250834
+  },
+  {
+   "segment": "C",
+   "age_bin": "<6m",
+   "customers": 2550,
+   "closure_6m": 0.14549019607843136,
+   "nonhsic_per_cust": 3912.4365098039216
+  }
+ ],
+ "segment_a": {
+  "seg_A_n_score": {
+   "key": "seg_A_n_score",
+   "value": 5903,
+   "label": "Measured"
+  },
+  "seg_A_post_close_net": {
+   "key": "seg_A_post_close_net",
+   "value": 92282525.94999999,
+   "label": "Measured"
+  },
+  "f11_still_shopping": {
+   "key": "f11_still_shopping",
+   "value": 6227,
+   "label": "Measured"
+  },
+  "f11_post_close_net": {
+   "key": "f11_post_close_net",
+   "value": 91227701.08,
+   "label": "Measured"
+  }
+ },
+ "axes": {
+  "seg_young_top_share": {
+   "key": "seg_young_top_share",
+   "value": 0.310546875,
+   "label": "Measured"
+  },
+  "seg_mature_top_share": {
+   "key": "seg_mature_top_share",
+   "value": 0.3061280072628234,
+   "label": "Measured"
+  },
+  "seg_sow_max_gap_pp": {
+   "key": "seg_sow_max_gap_pp",
+   "value": 1.6724252252051264,
+   "label": "Measured"
+  },
+  "seg_age_closure_diff": {
+   "key": "seg_age_closure_diff",
+   "value": 0.0769841804600869,
+   "label": "Measured"
+  },
+  "seg_freq_nonhsic_diff": {
+   "key": "seg_freq_nonhsic_diff",
+   "value": 2254.58749595911,
+   "label": "Measured"
+  },
+  "seg_freq_cut": {
+   "key": "seg_freq_cut",
+   "value": 5.0,
+   "label": "Measured"
+  },
+  "seg_freq_cut_score": {
+   "key": "seg_freq_cut_score",
+   "value": 5.0,
+   "label": "Measured"
+  }
+ },
+ "offers": [
+  {
+   "id": "O3",
+   "name": "Reward visibility",
+   "layer": "Product",
+   "who": "Every basket; Prime Grocery + Electronics first",
+   "what": "A till and receipt line: \"Pay with HSIC: earn ₹X on this basket\", and a monthly \"₹ you left on the table\".",
+   "tests": "H-aware"
+  },
+  {
+   "id": "O1",
+   "name": "Instant cashback at the till",
+   "layer": "Product",
+   "who": "All HSIC purchases",
+   "what": "The same reward, applied at checkout instead of on next month's statement.",
+   "tests": "H-imm"
+  },
+  {
+   "id": "O2",
+   "name": "HSIC card on UPI",
+   "layer": "Product",
+   "who": "All cardholders",
+   "what": "Link the credit card to UPI, where Cash/UPI took 47% of the lost share.",
+   "tests": null
+  },
+  {
+   "id": "O4",
+   "name": "No-cost EMI on baskets of ₹3,000+",
+   "layer": "Moment",
+   "who": "Basket ≥ ₹3,000",
+   "what": "Subvention co-funded by MetroMart; the Wallet carries about half of capped tickets.",
+   "tests": null
+  },
+  {
+   "id": "O5",
+   "name": "Small-basket streak",
+   "layer": "Moment",
+   "who": "Baskets under ₹1,000",
+   "what": "5 HSIC purchases under ₹1,000 in a month earn a ₹50 bonus.",
+   "tests": null
+  },
+  {
+   "id": "O6",
+   "name": "Win-back",
+   "layer": "Segment A",
+   "who": "Closed, still shopping",
+   "what": "Instant re-approval and 3% on everything for 90 days, capped, co-funded by MetroMart.",
+   "tests": null
+  },
+  {
+   "id": "O7",
+   "name": "Young-card protection",
+   "layer": "Segments B, C",
+   "who": "Cards under 12 months",
+   "what": "An activation milestone (3 swipes in 60 days) plus a 3-month Prime trial for Non-Prime.",
+   "tests": null
+  },
+  {
+   "id": "O8",
+   "name": "Threshold bonus",
+   "layer": "Segment D",
+   "who": "High-frequency mature cards",
+   "what": "An extra 1% only on HSIC spend above the customer's own trailing 3-month average.",
+   "tests": null
+  }
+ ],
+ "economics": {},
+ "scenarios": {
+  "assumed_cofunding_base": {
+   "key": "assumed_cofunding_base",
+   "value": 0.5,
+   "label": "Assumed"
+  },
+  "assumed_cofunding_conservative": {
+   "key": "assumed_cofunding_conservative",
+   "value": 0.0,
+   "label": "Assumed"
+  },
+  "assumed_cofunding_optimistic": {
+   "key": "assumed_cofunding_optimistic",
+   "value": 0.5,
+   "label": "Assumed"
+  },
+  "assumed_interchange_base": {
+   "key": "assumed_interchange_base",
+   "value": 0.0175,
+   "label": "Assumed"
+  },
+  "assumed_interchange_conservative": {
+   "key": "assumed_interchange_conservative",
+   "value": 0.015,
+   "label": "Assumed"
+  },
+  "assumed_interchange_optimistic": {
+   "key": "assumed_interchange_optimistic",
+   "value": 0.02,
+   "label": "Assumed"
+  },
+  "assumed_revolve_income_base": {
+   "key": "assumed_revolve_income_base",
+   "value": 0.01,
+   "label": "Assumed"
+  },
+  "assumed_revolve_income_conservative": {
+   "key": "assumed_revolve_income_conservative",
+   "value": 0.0,
+   "label": "Assumed"
+  },
+  "assumed_revolve_income_optimistic": {
+   "key": "assumed_revolve_income_optimistic",
+   "value": 0.02,
+   "label": "Assumed"
+  }
+ }
+}

@@ -9,3 +9,6 @@ outputs/**/*customer*.csv
 .claude/
 __pycache__/
 .ipynb_checkpoints/
+
+# design-skill working files (direction sheet, screenshots)
+.taste-skill/

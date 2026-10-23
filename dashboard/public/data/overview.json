@@ -1,0 +1,321 @@
+{
+ "meta": {
+  "generated": "2026-10-24 01:52",
+  "data_window": "2024-08-01 to 2026-07-31",
+  "customers": 45000,
+  "source": "outputs/key_numbers.json and outputs/tables (run_all.py)"
+ },
+ "sow_quarterly": [
+  {
+   "quarter": "FY25 Q1",
+   "sow": 0.32728368278383674
+  },
+  {
+   "quarter": "FY25 Q2",
+   "sow": 0.2991831220285873
+  },
+  {
+   "quarter": "FY25 Q3",
+   "sow": 0.28175055642862584
+  },
+  {
+   "quarter": "FY25 Q4",
+   "sow": 0.2539904764038532
+  },
+  {
+   "quarter": "FY26 Q1",
+   "sow": 0.2331342713924466
+  },
+  {
+   "quarter": "FY26 Q2",
+   "sow": 0.20639693587909125
+  },
+  {
+   "quarter": "FY26 Q3",
+   "sow": 0.18517107410027125
+  },
+  {
+   "quarter": "FY26 Q4",
+   "sow": 0.15600709188623907
+  }
+ ],
+ "per_card_monthly": [
+  {
+   "month": "2024-08",
+   "net_per_card": 1036.7885535000466,
+   "hsic_per_card": 356.1510239843823,
+   "cards": 21514
+  },
+  {
+   "month": "2024-09",
+   "net_per_card": 1045.0168642603874,
+   "hsic_per_card": 337.4125375034094,
+   "cards": 21998
+  },
+  {
+   "month": "2024-10",
+   "net_per_card": 1026.7194180785948,
+   "hsic_per_card": 324.46420606759517,
+   "cards": 22546
+  },
+  {
+   "month": "2024-11",
+   "net_per_card": 1044.0341417165669,
+   "hsic_per_card": 311.43771023171047,
+   "cards": 23046
+  },
+  {
+   "month": "2024-12",
+   "net_per_card": 1075.7208702290077,
+   "hsic_per_card": 330.3087404580153,
+   "cards": 23580
+  },
+  {
+   "month": "2025-01",
+   "net_per_card": 994.8681322602058,
+   "hsic_per_card": 290.24001452041153,
+   "cards": 24104
+  },
+  {
+   "month": "2025-02",
+   "net_per_card": 912.9672217477939,
+   "hsic_per_card": 275.4318437639787,
+   "cards": 24591
+  },
+  {
+   "month": "2025-03",
+   "net_per_card": 1002.9332347077119,
+   "hsic_per_card": 272.14724419810193,
+   "cards": 25078
+  },
+  {
+   "month": "2025-04",
+   "net_per_card": 1051.7982134770048,
+   "hsic_per_card": 289.0804142265948,
+   "cards": 25614
+  },
+  {
+   "month": "2025-05",
+   "net_per_card": 1028.7433480497543,
+   "hsic_per_card": 278.64137400184273,
+   "cards": 26048
+  },
+  {
+   "month": "2025-06",
+   "net_per_card": 978.5179825686689,
+   "hsic_per_card": 245.9204097494718,
+   "cards": 26504
+  },
+  {
+   "month": "2025-07",
+   "net_per_card": 1009.2330920955064,
+   "hsic_per_card": 242.14810247664244,
+   "cards": 26972
+  },
+  {
+   "month": "2025-08",
+   "net_per_card": 985.2800353524309,
+   "hsic_per_card": 230.63801370362273,
+   "cards": 27438
+  },
+  {
+   "month": "2025-09",
+   "net_per_card": 1048.7020950091494,
+   "hsic_per_card": 244.36937892432994,
+   "cards": 27871
+  },
+  {
+   "month": "2025-10",
+   "net_per_card": 1111.3299434808719,
+   "hsic_per_card": 258.2995867038751,
+   "cards": 28309
+  },
+  {
+   "month": "2025-11",
+   "net_per_card": 1033.8131164848949,
+   "hsic_per_card": 213.16528833757275,
+   "cards": 28699
+  },
+  {
+   "month": "2025-12",
+   "net_per_card": 1008.2967629184549,
+   "hsic_per_card": 214.94830145922748,
+   "cards": 29125
+  },
+  {
+   "month": "2026-01",
+   "net_per_card": 940.8922605805751,
+   "hsic_per_card": 187.64746540965817,
+   "cards": 29488
+  },
+  {
+   "month": "2026-02",
+   "net_per_card": 964.2227849419035,
+   "hsic_per_card": 190.60282792665726,
+   "cards": 29778
+  },
+  {
+   "month": "2026-03",
+   "net_per_card": 950.4070970525756,
+   "hsic_per_card": 180.2644470260223,
+   "cards": 30128
+  },
+  {
+   "month": "2026-04",
+   "net_per_card": 1031.1976964520368,
+   "hsic_per_card": 174.9208196452037,
+   "cards": 30440
+  },
+  {
+   "month": "2026-05",
+   "net_per_card": 1028.9308620128813,
+   "hsic_per_card": 166.68962787066553,
+   "cards": 30742
+  },
+  {
+   "month": "2026-06",
+   "net_per_card": 927.4606693332473,
+   "hsic_per_card": 147.83088287474598,
+   "cards": 31001
+  },
+  {
+   "month": "2026-07",
+   "net_per_card": 969.312684352518,
+   "hsic_per_card": 142.00177704265158,
+   "cards": 31136
+  }
+ ],
+ "kpis": {
+  "f1_sow_fy25": {
+   "key": "f1_sow_fy25",
+   "value": 0.289095280596921,
+   "label": "Measured"
+  },
+  "f1_sow_fy26": {
+   "key": "f1_sow_fy26",
+   "value": 0.1948042888436566,
+   "label": "Measured"
+  },
+  "f1_sow_fy25_q1": {
+   "key": "f1_sow_fy25_q1",
+   "value": 0.32728368278383674,
+   "label": "Measured"
+  },
+  "f1_sow_fy26_q4": {
+   "key": "f1_sow_fy26_q4",
+   "value": 0.15600709188623907,
+   "label": "Measured"
+  },
+  "f1_slope_pp_per_quarter": {
+   "key": "f1_slope_pp_per_quarter",
+   "value": -2.3998969554580682,
+   "label": "Measured"
+  },
+  "f14_aug24_net_per_card": {
+   "key": "f14_aug24_net_per_card",
+   "value": 1036.7885535000466,
+   "label": "Measured"
+  },
+  "f14_may26_net_per_card": {
+   "key": "f14_may26_net_per_card",
+   "value": 1028.9308620128813,
+   "label": "Measured"
+  },
+  "f14_aug24_hsic_per_card": {
+   "key": "f14_aug24_hsic_per_card",
+   "value": 356.1510239843823,
+   "label": "Measured"
+  },
+  "f14_may26_hsic_per_card": {
+   "key": "f14_may26_hsic_per_card",
+   "value": 166.68962787066553,
+   "label": "Measured"
+  },
+  "f9_rate_first": {
+   "key": "f9_rate_first",
+   "value": 0.01667404456249078,
+   "label": "Measured"
+  },
+  "f9_rate_last": {
+   "key": "f9_rate_last",
+   "value": 0.033669016448472644,
+   "label": "Measured"
+  },
+  "f11_still_shopping": {
+   "key": "f11_still_shopping",
+   "value": 6227,
+   "label": "Measured"
+  },
+  "f11_post_close_net": {
+   "key": "f11_post_close_net",
+   "value": 91227701.08,
+   "label": "Measured"
+  },
+  "f12_gap": {
+   "key": "f12_gap",
+   "value": null,
+   "label": "Pending"
+  },
+  "f8_prime_ge_left_on_table": {
+   "key": "f8_prime_ge_left_on_table",
+   "value": 1603018.6419,
+   "label": "Measured"
+  },
+  "f8_rewards_earned_fy26": {
+   "key": "f8_rewards_earned_fy26",
+   "value": 964279.5058,
+   "label": "Measured"
+  }
+ },
+ "mix": [
+  {
+   "method": "HSIC",
+   "fy25": 0.28909528059692097,
+   "fy26": 0.1948042888436566
+  },
+  {
+   "method": "Cash/UPI",
+   "fy25": 0.18893794101208458,
+   "fy26": 0.2339630241432497
+  },
+  {
+   "method": "Wallet",
+   "fy25": 0.3439419789327836,
+   "fy26": 0.3568138516542914
+  },
+  {
+   "method": "Debit",
+   "fy25": 0.08754513225847568,
+   "fy26": 0.1065571705597481
+  },
+  {
+   "method": "Other CC",
+   "fy25": 0.09047966719973531,
+   "fy26": 0.10786166479905415
+  }
+ ],
+ "bridge": {
+  "leaver": 0.26314184551062825,
+  "stayer": -9.544634574329066,
+  "joiner": -0.14760644650800292,
+  "total": -9.429099175326442
+ },
+ "loss_share": [
+  {
+   "method": "Cash/UPI",
+   "share": 0.4678261364534854
+  },
+  {
+   "method": "Wallet",
+   "share": 0.13551263377258224
+  },
+  {
+   "method": "Debit",
+   "share": 0.20655936128504268
+  },
+  {
+   "method": "Other CC",
+   "share": 0.19010186848888935
+  }
+ ]
+}

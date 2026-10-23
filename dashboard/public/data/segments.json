@@ -1,0 +1,416 @@
+{
+ "meta": {
+  "generated": "2026-10-24 01:52",
+  "data_window": "2024-08-01 to 2026-07-31",
+  "customers": 45000,
+  "source": "outputs/key_numbers.json and outputs/tables (run_all.py)"
+ },
+ "slices": [
+  {
+   "dimension": "Membership",
+   "level": "Non-Prime",
+   "sow_fy25": 0.293227268277532,
+   "sow_fy26": 0.19118378981965084,
+   "change_pp": -10.204347845788114
+  },
+  {
+   "dimension": "Membership",
+   "level": "Prime",
+   "sow_fy25": 0.28620932276305683,
+   "sow_fy26": 0.1972610644865244,
+   "change_pp": -8.894825827653245
+  },
+  {
+   "dimension": "Age",
+   "level": "18-25",
+   "sow_fy25": 0.29296702617863435,
+   "sow_fy26": 0.19870387156843752,
+   "change_pp": -9.426315461019682
+  },
+  {
+   "dimension": "Age",
+   "level": "26-35",
+   "sow_fy25": 0.2903161872761869,
+   "sow_fy26": 0.19298933469507584,
+   "change_pp": -9.732685258111108
+  },
+  {
+   "dimension": "Age",
+   "level": "36-45",
+   "sow_fy25": 0.29266456000207186,
+   "sow_fy26": 0.19697985572139817,
+   "change_pp": -9.56847042806737
+  },
+  {
+   "dimension": "Age",
+   "level": "46-60",
+   "sow_fy25": 0.2818078743796238,
+   "sow_fy26": 0.19190734572675433,
+   "change_pp": -8.990052865286946
+  },
+  {
+   "dimension": "Credit limit",
+   "level": "Q1 low",
+   "sow_fy25": 0.29087943988405895,
+   "sow_fy26": 0.19660255701576362,
+   "change_pp": -9.427688286829532
+  },
+  {
+   "dimension": "Credit limit",
+   "level": "Q2",
+   "sow_fy25": 0.28562211481753197,
+   "sow_fy26": 0.19078255874916616,
+   "change_pp": -9.483955606836581
+  },
+  {
+   "dimension": "Credit limit",
+   "level": "Q3",
+   "sow_fy25": 0.2892221533579709,
+   "sow_fy26": 0.20123662124288857,
+   "change_pp": -8.798553211508233
+  },
+  {
+   "dimension": "Credit limit",
+   "level": "Q4 high",
+   "sow_fy25": 0.2907593832237869,
+   "sow_fy26": 0.19063163793186028,
+   "change_pp": -10.012774529192663
+  },
+  {
+   "dimension": "APR",
+   "level": "Q1 low",
+   "sow_fy25": 0.2860540969007572,
+   "sow_fy26": 0.19936970493650574,
+   "change_pp": -8.668439196425147
+  },
+  {
+   "dimension": "APR",
+   "level": "Q2",
+   "sow_fy25": 0.29226484306504,
+   "sow_fy26": 0.19122562869079493,
+   "change_pp": -10.103921437424509
+  },
+  {
+   "dimension": "APR",
+   "level": "Q3",
+   "sow_fy25": 0.28482882647950464,
+   "sow_fy26": 0.18999142732444835,
+   "change_pp": -9.483739915505629
+  },
+  {
+   "dimension": "APR",
+   "level": "Q4 high",
+   "sow_fy25": 0.2932669719691163,
+   "sow_fy26": 0.1987421012550724,
+   "change_pp": -9.452487071404386
+  },
+  {
+   "dimension": "Card vintage",
+   "level": "2021",
+   "sow_fy25": 0.2838143034375462,
+   "sow_fy26": 0.20172633005326548,
+   "change_pp": -8.208797338428072
+  },
+  {
+   "dimension": "Card vintage",
+   "level": "2022",
+   "sow_fy25": 0.29313026447784835,
+   "sow_fy26": 0.20006262601578895,
+   "change_pp": -9.30676384620594
+  },
+  {
+   "dimension": "Card vintage",
+   "level": "2023",
+   "sow_fy25": 0.2966710369554732,
+   "sow_fy26": 0.19390673148145254,
+   "change_pp": -10.276430547402066
+  },
+  {
+   "dimension": "Card vintage",
+   "level": "2024",
+   "sow_fy25": 0.28300452540448695,
+   "sow_fy26": 0.1951919328594193,
+   "change_pp": -8.781259254506764
+  },
+  {
+   "dimension": "Card vintage",
+   "level": "2025",
+   "sow_fy25": 0.2665726764392212,
+   "sow_fy26": 0.19373951857627547,
+   "change_pp": -7.283315786294575
+  },
+  {
+   "dimension": "Category",
+   "level": "Apparel",
+   "sow_fy25": 0.2785565049120698,
+   "sow_fy26": 0.2016881485956797,
+   "change_pp": -7.686835631639008
+  },
+  {
+   "dimension": "Category",
+   "level": "Beauty",
+   "sow_fy25": 0.2881307380989154,
+   "sow_fy26": 0.19750497320670057,
+   "change_pp": -9.06257648922148
+  },
+  {
+   "dimension": "Category",
+   "level": "Bill Payments",
+   "sow_fy25": 0.29371461520921766,
+   "sow_fy26": 0.19241684893372335,
+   "change_pp": -10.12977662754943
+  },
+  {
+   "dimension": "Category",
+   "level": "Electronics",
+   "sow_fy25": 0.29088366944577904,
+   "sow_fy26": 0.19539535136771627,
+   "change_pp": -9.548831807806277
+  },
+  {
+   "dimension": "Category",
+   "level": "Furniture",
+   "sow_fy25": 0.29977886648576335,
+   "sow_fy26": 0.1972163596203162,
+   "change_pp": -10.256250686544716
+  },
+  {
+   "dimension": "Category",
+   "level": "Grocery",
+   "sow_fy25": 0.2813375854986219,
+   "sow_fy26": 0.19056771354420945,
+   "change_pp": -9.076987195441246
+  },
+  {
+   "dimension": "Category",
+   "level": "Kids And Toys",
+   "sow_fy25": 0.29328321613797764,
+   "sow_fy26": 0.19296477906638826,
+   "change_pp": -10.031843707158938
+  },
+  {
+   "dimension": "Category",
+   "level": "Large Applicances",
+   "sow_fy25": 0.2851074025639709,
+   "sow_fy26": 0.1915785315856375,
+   "change_pp": -9.352887097833337
+  },
+  {
+   "dimension": "Category",
+   "level": "Outdoor",
+   "sow_fy25": 0.29563237838022294,
+   "sow_fy26": 0.18897779872257356,
+   "change_pp": -10.665457965764938
+  },
+  {
+   "dimension": "Category",
+   "level": "Travel",
+   "sow_fy25": 0.2826588269183357,
+   "sow_fy26": 0.19628224384511314,
+   "change_pp": -8.637658307322257
+  },
+  {
+   "dimension": "Closer",
+   "level": "closes in data",
+   "sow_fy25": 0.2889046901287083,
+   "sow_fy26": 0.21317425895702444,
+   "change_pp": -7.5730431171683845
+  },
+  {
+   "dimension": "Closer",
+   "level": "stays open",
+   "sow_fy25": 0.289120321488174,
+   "sow_fy26": 0.1936454234926869,
+   "change_pp": -9.54748979954871
+  }
+ ],
+ "gate": {
+  "x1_variance_ratio_fy25": {
+   "key": "x1_variance_ratio_fy25",
+   "value": 1.0009136345043785,
+   "label": "Measured"
+  },
+  "x1_variance_ratio_fy26": {
+   "key": "x1_variance_ratio_fy26",
+   "value": 0.9959614682543424,
+   "label": "Measured"
+  },
+  "x1_split_half_r": {
+   "key": "x1_split_half_r",
+   "value": -0.005090689735322454,
+   "label": "Measured"
+  },
+  "x1_split_half_ci_lo": {
+   "key": "x1_split_half_ci_lo",
+   "value": -0.021202467867705396,
+   "label": "Measured"
+  },
+  "x1_split_half_ci_hi": {
+   "key": "x1_split_half_ci_hi",
+   "value": 0.011023731877336294,
+   "label": "Measured"
+  },
+  "x1_split_half_n": {
+   "key": "x1_split_half_n",
+   "value": 14796,
+   "label": "Measured"
+  },
+  "x1_persistence_r": {
+   "key": "x1_persistence_r",
+   "value": 0.00372528122256921,
+   "label": "Measured"
+  },
+  "x1_persistence_ci_lo": {
+   "key": "x1_persistence_ci_lo",
+   "value": -0.015606546195158394,
+   "label": "Measured"
+  },
+  "x1_persistence_ci_hi": {
+   "key": "x1_persistence_ci_hi",
+   "value": 0.023054324581802697,
+   "label": "Measured"
+  },
+  "x1_persistence_n": {
+   "key": "x1_persistence_n",
+   "value": 10281,
+   "label": "Measured"
+  },
+  "f13_r_purchases": {
+   "key": "f13_r_purchases",
+   "value": 0.43170048658480775,
+   "label": "Measured"
+  },
+  "f13_r_net": {
+   "key": "f13_r_net",
+   "value": 0.22616214957795924,
+   "label": "Measured"
+  },
+  "x8_prime_logit_coef": {
+   "key": "x8_prime_logit_coef",
+   "value": -0.007125111263026254,
+   "label": "Measured"
+  },
+  "x8_prime_logit_ci_lo": {
+   "key": "x8_prime_logit_ci_lo",
+   "value": -0.026045682202858397,
+   "label": "Measured"
+  },
+  "x8_prime_logit_ci_hi": {
+   "key": "x8_prime_logit_ci_hi",
+   "value": 0.01179545967680589,
+   "label": "Measured"
+  }
+ },
+ "band_movement": [
+  {
+   "fy25_band": "Zero",
+   "Zero": 1032,
+   "Low": 745,
+   "Mid": 598,
+   "High": 446
+  },
+  {
+   "fy25_band": "Low",
+   "Zero": 1162,
+   "Low": 842,
+   "Mid": 678,
+   "High": 487
+  },
+  {
+   "fy25_band": "Mid",
+   "Zero": 1111,
+   "Low": 861,
+   "Mid": 700,
+   "High": 496
+  },
+  {
+   "fy25_band": "High",
+   "Zero": 1128,
+   "Low": 853,
+   "Mid": 691,
+   "High": 497
+  }
+ ],
+ "kmeans": {
+  "seg_kmeans_k": {
+   "key": "seg_kmeans_k",
+   "value": 8,
+   "label": "Measured"
+  },
+  "seg_kmeans_customers": {
+   "key": "seg_kmeans_customers",
+   "value": 12327,
+   "label": "Measured"
+  },
+  "seg_kmeans_ari": {
+   "key": "seg_kmeans_ari",
+   "value": 0.8891010807939892,
+   "label": "Measured"
+  },
+  "seg_kmeans_eta2": {
+   "key": "seg_kmeans_eta2",
+   "value": 0.00043461904772878714,
+   "label": "Measured"
+  },
+  "seg_kmeans_fy25_sow_spread_pp": {
+   "key": "seg_kmeans_fy25_sow_spread_pp",
+   "value": 78.70505402365005,
+   "label": "Measured"
+  },
+  "seg_kmeans_fy26_sow_spread_pp": {
+   "key": "seg_kmeans_fy26_sow_spread_pp",
+   "value": 2.266884102288505,
+   "label": "Measured"
+  }
+ },
+ "kmeans_clusters": [
+  {
+   "cluster": 0,
+   "customers": 883,
+   "sow_fy25": 0.7494710891087752,
+   "sow_fy26": 0.22416678729426795
+  },
+  {
+   "cluster": 1,
+   "customers": 1917,
+   "sow_fy25": 0.17655035889789344,
+   "sow_fy26": 0.2097208505862235
+  },
+  {
+   "cluster": 2,
+   "customers": 1106,
+   "sow_fy25": 0.27997632851381826,
+   "sow_fy26": 0.2204408066027496
+  },
+  {
+   "cluster": 3,
+   "customers": 1010,
+   "sow_fy25": 0.6006412318965507,
+   "sow_fy26": 0.21282154535475842
+  },
+  {
+   "cluster": 4,
+   "customers": 1882,
+   "sow_fy25": 0.41568495406640693,
+   "sow_fy26": 0.20959242325097296
+  },
+  {
+   "cluster": 5,
+   "customers": 2369,
+   "sow_fy25": 0.005758821681749596,
+   "sow_fy26": 0.2125932421408685
+  },
+  {
+   "cluster": 6,
+   "customers": 2375,
+   "sow_fy25": 0.15388350463171327,
+   "sow_fy26": 0.2088567027872536
+  },
+  {
+   "cluster": 7,
+   "customers": 785,
+   "sow_fy25": 0.7928093619182501,
+   "sow_fy26": 0.2014979462713829
+  }
+ ]
+}
