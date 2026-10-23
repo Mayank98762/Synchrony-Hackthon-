@@ -1,0 +1,9 @@
+# The case data is confidential and this repo is public: never commit it.
+*.csv
+*.pdf
+# aggregated results we do want to share
+!outputs/**/*.csv
+
+.claude/
+__pycache__/
+.ipynb_checkpoints/
