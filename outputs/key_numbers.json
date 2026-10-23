@@ -648,47 +648,47 @@
   "label": "Measured"
  },
  "f9_rate_2024q3": {
-  "value": 0.017657764005705574,
+  "value": 0.01667404456249078,
   "label": "Measured"
  },
  "f9_rate_2024q4": {
-  "value": 0.017096361309197294,
+  "value": 0.01595355640884988,
   "label": "Measured"
  },
  "f9_rate_2025q1": {
-  "value": 0.019498250703984983,
+  "value": 0.018090280740677533,
   "label": "Measured"
  },
  "f9_rate_2025q2": {
-  "value": 0.022038456906587452,
+  "value": 0.02027216892136004,
   "label": "Measured"
  },
  "f9_rate_2025q3": {
-  "value": 0.025572823650112094,
+  "value": 0.023634912794011476,
   "label": "Measured"
  },
  "f9_rate_2025q4": {
-  "value": 0.027670271638875827,
+  "value": 0.02524686222736644,
   "label": "Measured"
  },
  "f9_rate_2026q1": {
-  "value": 0.03270898369753729,
+  "value": 0.029795352063822406,
   "label": "Measured"
  },
  "f9_rate_2026q2": {
-  "value": 0.0401477005706613,
+  "value": 0.033669016448472644,
   "label": "Measured"
  },
  "f9_rate_first": {
-  "value": 0.017657764005705574,
+  "value": 0.01667404456249078,
   "label": "Measured"
  },
  "f9_rate_last": {
-  "value": 0.0401477005706613,
+  "value": 0.033669016448472644,
   "label": "Measured"
  },
  "f9_ratio": {
-  "value": 2.273657103905612,
+  "value": 2.019247119215036,
   "label": "Measured"
  },
  "seg_A_horizon_net": {
@@ -1284,11 +1284,11 @@
   "label": "Measured"
  },
  "x1_persistence_ci_hi": {
-  "value": 0.023054324581802694,
+  "value": 0.023054324581802697,
   "label": "Measured"
  },
  "x1_persistence_ci_lo": {
-  "value": -0.015606546195158395,
+  "value": -0.015606546195158394,
   "label": "Measured"
  },
  "x1_persistence_n": {
@@ -1296,7 +1296,7 @@
   "label": "Measured"
  },
  "x1_persistence_r": {
-  "value": 0.0037252812225692087,
+  "value": 0.00372528122256921,
   "label": "Measured"
  },
  "x1_sow_filter_n": {
@@ -1304,7 +1304,7 @@
   "label": "Measured"
  },
  "x1_sow_r_fy25_fy26": {
-  "value": 0.005749033960182852,
+  "value": 0.005749033960182846,
   "label": "Measured"
  },
  "x1_sow_values_clipped": {
@@ -1312,11 +1312,11 @@
   "label": "Measured"
  },
  "x1_split_half_ci_hi": {
-  "value": 0.0110237318773363,
+  "value": 0.011023731877336294,
   "label": "Measured"
  },
  "x1_split_half_ci_lo": {
-  "value": -0.021202467867705393,
+  "value": -0.021202467867705396,
   "label": "Measured"
  },
  "x1_split_half_n": {
@@ -1324,7 +1324,7 @@
   "label": "Measured"
  },
  "x1_split_half_r": {
-  "value": -0.00509068973532245,
+  "value": -0.005090689735322454,
   "label": "Measured"
  },
  "x1_variance_ratio_fy25": {

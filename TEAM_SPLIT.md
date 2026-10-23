@@ -34,11 +34,11 @@ Status as of 23 Oct, night: everything Mayank and Shreyash need from Devansh is 
 | Segmentation: K-means negative control (ARI, outcome separation), frequency × card-age 2×2, segments A–F, per-box table, boundary sensitivity | `analysis/segments.py` | ☑ |
 | `export.py`, `run_all.py` (one command rebuilds everything, fails on any assert), `key_numbers.md`, `experiment_log.csv`, `impact_ledger.csv` | `analysis/` | ◐ built and run (18 pass, 0 fail, 21 pending); final run after Mayank's and Shreyash's modules land |
 | **Dashboard** (§11): 4 pages, React + Vite + TS + Tailwind + ECharts, JSON contract. Built after charts exist; dropped if late | `dashboard/` | ☐ |
-| **Slides 8 and 9** and their charts (closures; who to prioritise) | deck | ☑ 6 charts in `outputs/charts/08_*`, `09_*` (`analysis/charts_ml.py`); content, layout, speaker notes and Q&A in `deck/slides_08_09.md`. Pasting into the template waits on Shreyash's template |
+| **Slides 8 and 9** and their charts (closures; who to prioritise) | deck | ☑ 5 charts in `outputs/charts/08_*`, `09_*` (K-means is on Mayank's slide 7) (`analysis/charts_ml.py`); content, layout, speaker notes and Q&A in `deck/slides_08_09.md`. Pasting into the template waits on Shreyash's template |
 
 ## Mayank: analytics and the story
 
-Status as of 24 Oct: everything below is done on the local `mayank` branch, rebuilt on Devansh's `config.py` / `prep.py` and run through `run_all.py` (37 checks pass, 0 fail; the 2 pending are Shreyash's F12 and F15). Not merged to `main` yet.
+Status as of 24 Oct: everything below is done and merged to `main`, rebuilt on Devansh's `config.py` / `prep.py` and run through `run_all.py` (37 checks pass, 0 fail; the 2 pending are Shreyash's F12 and F15). F9 fixed at the merge (numerator = cards open at the quarter start; 1.7% → 3.4%).
 
 | Task | Files | Status |
 |---|---|---|
@@ -80,6 +80,6 @@ Devansh carries the most code, so the dashboard goes first on the cut list; if h
 | Hour 0.5 | Devansh → Mayank | `prep.py` interface (function and column names) | ☑ `analysis/INTERFACE.md` |
 | Hour 1 | Devansh → all | working `prep.py` and `config.py` | ☑ |
 | Hour 1 | Shreyash → all | `style.py` and the slide template | ☐ |
-| Hour 4 | Mayank, Devansh → Shreyash | first `key_numbers` dict for the `[KN]` placeholders | ◐ Devansh's part in `outputs/key_numbers.md`; Mayank's 205 keys are in it on the `mayank` branch, reaching `main` at the merge |
-| Hour 8 | Mayank → Devansh | `experiments_f.py` and `experiments_h.py` ready for `run_all.py` | ◐ ready on the `mayank` branch with the `INTERFACE.md` key names; `run_all.py` picks them up (37 pass, 0 fail). Merge pending |
-| Hour 8 | Devansh → Shreyash | final `key_numbers.md` | ☐ after Mayank's modules |
+| Hour 4 | Mayank, Devansh → Shreyash | first `key_numbers` dict for the `[KN]` placeholders | ◐ Devansh's part in `outputs/key_numbers.md`; Mayank's keys are in it too (merged) |
+| Hour 8 | Mayank → Devansh | `experiments_f.py` and `experiments_h.py` ready for `run_all.py` | ☑ merged; `run_all.py` picks them up (37 pass, 0 fail) |
+| Hour 8 | Devansh → Shreyash | final `key_numbers.md` | ◐ Devansh's and Mayank's keys final on `main` (424 numbers); last run once Shreyash's F12, F15 and `economics.py` land |

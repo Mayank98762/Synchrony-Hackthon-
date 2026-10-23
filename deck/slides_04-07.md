@@ -91,8 +91,8 @@ Badges: **M** = Measured · **H** = Hypothesis. No slide names earlier plans or 
 ---
 
 ## Numbers that differ from the 23 Oct stubs (from `outputs/verification/verification_report.md`)
-Use the pipeline value in the deck. Only F9 changes a sentence:
-- **F9 (slide 8, Devansh):** closures per open card are **1.8% (Jul–Sep 2024) → 4.0% (Apr–Jun 2026)** by calendar quarter (`f9_rate_first`, `f9_rate_last`), not 1.7% → 3.4%. Say "more than doubled".
+Use the pipeline value in the deck:
+- **F9 (slide 8, Devansh):** closures per open card are **1.7% (Jul–Sep 2024) → 3.4% (Apr–Jun 2026)** by calendar quarter (`f9_rate_first`, `f9_rate_last`), as on 23 Oct. An earlier version counted cards opened and closed inside the same quarter (not in the denominator) and gave 1.8% → 4.0%; now fixed in the F9 code.
 - **F6:** HSIC is used on 25.6% of high tickets (the stub said 25.5%). The 23 Oct terciles put capped category-7 rows in the middle tercile.
 - **X13:** the chance level is 26.9%, not 25.7%. The stub used one pooled HSIC rate for all 24 months, which makes the result even closer to chance.
 - **X3:** the time-aware excess is +0.4 / 0.0 / −0.3pp (stub +0.7 / +0.1 / +0.0).

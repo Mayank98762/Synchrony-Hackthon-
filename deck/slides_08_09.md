@@ -28,9 +28,9 @@ Ready to paste into Shreyash's template. Every number below comes from `outputs/
 `08_closure_model_auc.png` belongs in the appendix (closure-model table). Swap it in for the quarterly chart only if the slide needs the model result more than the trend.
 
 ### Body (3 bullets)
-1. **Closures per open card doubled**, from 1.7% a quarter (Jul–Sep 2024) to 3.4% (Apr–Jun 2026). *(F9; chart `08_closures_per_quarter`)*
-2. **Cards under 6 months old close at 14.7% within six months**, 4.8× the 3.0% rate of cards over 3 years old. *(F10; chart `08_closure_by_card_age`)*
-3. **Closing the card doesn't mean leaving MetroMart:** 6,227 closed cardholders kept shopping and spent ₹91.2M there after closing. *(F11: `f11_post_close_net`; the plan's verified figure, until Mayank's key lands)*
+1. **Closures per open card doubled**, from 1.7% a quarter (Jul–Sep 2024) to 3.4% (Apr–Jun 2026). *(`f9_rate_first`, `f9_rate_last`; chart `08_closures_per_quarter`)*
+2. **Cards under 6 months old close at 14.7% within six months**, 4.8× the 3.0% rate of cards over 3 years old. *(`f10_2026_01_31_closure_lt6m`, `f10_2026_01_31_closure_3yplus`, `f10_2026_01_31_young_over_old`; chart `08_closure_by_card_age`)*
+3. **Closing the card doesn't mean leaving MetroMart:** 6,227 closed cardholders kept shopping and spent ₹91.2M there after closing. *(`f11_still_shopping`, `f11_post_close_net`)*
 
 ### Footer line (model result)
 No learned model beats card age alone: ROC-AUC 0.672 vs 0.669 for the best model *(`cm_b2_roc_auc`, `cm_lr_all_roc_auc`)*. Card-usage features add nothing beyond card age *(`x5_usage_increment_roc` ≈ 0)*, so we ship a simple rule: watch the youngest cards.
@@ -61,20 +61,20 @@ No learned model beats card age alone: ROC-AUC 0.672 vs 0.669 for the best model
 
 **Headline:** Low SoW is the whole book, so we prioritise by risk and value
 
-**Sub-headline:** The obvious method finds noise; card age and purchase frequency are what actually separate customers
+**Sub-headline:** SoW doesn't separate customers; card age and purchase frequency do
 
 ### Layout
 | Position | Content |
 |---|---|
-| Left, about 35% | `09_kmeans_control.png`, captioned "The obvious method: cluster on SoW" |
-| Right, about 65% | `09_priority_matrix.png`: the answer |
+| Left, about 45% | `09_box_outcomes.png`, captioned "SoW is the same in every box; risk and value are not" (the evidence) |
+| Right, about 55% | `09_priority_matrix.png`: the answer |
 | Footnote | Reconciles segment A with slide 8 (below) |
 
-`09_box_outcomes.png` shows the same evidence as bars with confidence intervals. Put it in the appendix ("Segment validation"), or use it instead of the matrix if the template needs a chart rather than a diagram.
+The K-means negative control lives on slide 7 (Mayank's `07_kmeans.png`), so this slide only refers back to it in one line.
 
 ### Body (3 bullets)
-1. **Clustering on SoW finds nothing that lasts:** 8 stable clusters that are 79 points apart in FY25 end up 2.3 points apart in FY26, and they explain 0.04% of next year's SoW. *(`seg_kmeans_fy25_sow_spread_pp`, `seg_kmeans_fy26_sow_spread_pp`, `seg_kmeans_eta2`; stability ARI 0.89, `seg_kmeans_ari`)*
-2. **So SoW can't separate customers, and the boxes prove it:** SoW is within 1.7 points in every box, while young cards close 7.7 points more often and high-frequency customers spend ₹2,255 more off-card. *(`seg_sow_max_gap_pp`, `seg_age_closure_diff`, `seg_freq_nonhsic_diff`)*
+1. **Slide 7 showed that clustering on SoW finds nothing that lasts** (the clusters explain 0.04% of next year's SoW, `seg_kmeans_eta2`), so we segment on the two traits that do predict: card age for closure risk, purchase frequency for value.
+2. **SoW can't separate customers, and the boxes prove it:** SoW is within 1.7 points in every box, while young cards close 7.7 points more often and high-frequency customers spend ₹2,255 more off-card. *(`seg_sow_max_gap_pp`, `seg_age_closure_diff`, `seg_freq_nonhsic_diff`)*
 3. **Protect first: young cards with high purchase frequency** (1,961 customers). They carry the same closure risk as other young cards (11.6% vs 12.1%) with 57% more off-card spend (₹6,235 vs ₹3,976). *(`seg_B_n_score`, `seg_B_closure_6m`, `seg_C_closure_6m`, `seg_B_nonhsic_per_cust`, `seg_C_nonhsic_per_cust`)*
 
 ### Box summary (if the template wants a table instead of the matrix)
@@ -95,8 +95,8 @@ Keys: `seg_<box>_n_score`, `seg_<box>_closure_6m`, `seg_<box>_nonhsic_per_cust`,
 - All numbers: **Measured**. Customer counts are as of 31 Jul 2026; closure and off-card spend come from boxes built on 31 Jan 2026 and measured Feb–Jul 2026.
 - Offers are named here only. Their economics live on slide 11 (some may not break even; don't promise payback on this slide).
 
-### Speaker notes (about 75 seconds)
-> The brief asks for segments that identify low-SoW customers. The obvious way is to cluster customers on their SoW, so we did that first. K-means finds eight clean, stable clusters, from almost zero to nearly 80% SoW. But follow the same customers into the next year and they all land between 20 and 22%. The clusters explain less than a tenth of a percent of next year's SoW. It's regression to the mean: last year's light users weren't light users, they were unlucky.
+### Speaker notes (about 60 seconds)
+> The brief asks for segments that identify low-SoW customers. As we saw two slides ago, clustering on SoW finds groups that vanish a year later, so SoW itself can't be the segmenting variable.
 > So the honest answer is that low SoW is the whole book: every open card is drifting off HSIC at the same rate. What does separate customers is risk and value. Card age predicts closure, as we saw on the last slide. Purchase frequency at MetroMart predicts how much spend is at stake, and it carries over from year to year. And the two are independent, which gives a clean two-by-two.
 > SoW is the same in all four boxes, within under two points. Closure risk and value are not. The top priority is young, high-frequency cards: the same risk as other young cards, but far more spend to lose. Mature high-frequency customers get a bonus only on spend above their own usual level, so we don't pay for spend we'd get anyway. The large low-frequency mature group gets the product fixes only, with no paid incentive.
 > Outside the grid are 5,903 people who closed the card but still spend at MetroMart: HSIC's share of their spend is zero, so they're the most literal low-SoW customers there are, and the win-back target.

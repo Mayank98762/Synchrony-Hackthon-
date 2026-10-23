@@ -1,7 +1,7 @@
-"""Charts for slides 8 (closures) and 9 (who to prioritise).
+"""Charts for slides 8 (closures) and 9 (who to prioritise). The K-means control is on slide 7 (charts_story).
 
-Reads the aggregate tables and key_numbers.json written by run_all, plus two small aggregates
-from prep (closure rate by card age, closures per open card by quarter). Writes PNGs to
+Reads the aggregate tables and key_numbers.json written by run_all, the closure rate by card age
+from prep, and F9 from experiments_f.closure_quarter_table. Writes PNGs to
 outputs/charts/. Uses Shreyash's analysis/style.py when it exists, else the fallback.
 
     python -m analysis.charts_ml        (after run_all)
@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.patches import FancyBboxPatch
 
-from analysis import config as C, prep
+from analysis import config as C, experiments_f as F, prep
 
 try:
     from analysis import style
@@ -77,18 +77,11 @@ def closure_by_card_age():
 
 
 def closures_per_quarter():
-    """F9 definition: cards closed in the calendar quarter ÷ cards open at its start."""
-    cust = prep.load().cust
-    cust = cust[cust.has_card]
-    rows = []
-    for q in pd.period_range("2024Q3", "2026Q2", freq="Q"):
-        start, end = q.start_time, q.end_time.normalize()
-        open_start = (cust.open_date < start) & (cust.close_date.isna() | (cust.close_date >= start))
-        closed = open_start & cust.close_date.between(start, end)
-        rows.append((q, closed.sum() / open_start.sum()))
-    s = pd.Series(dict(rows))
+    """F9 from Mayank's closure_quarter_table, so the chart and f9_* keys share one definition."""
+    t = F.closure_quarter_table()
+    s = pd.Series(t.rate.to_numpy(), index=pd.PeriodIndex(t.quarter, freq="Q"))
     fig, ax = _figure("Closures per open card doubled in two years",
-                      "Cards closed in the quarter ÷ cards open at the start of the quarter",
+                      "Share of cards open at the start of each quarter that closed during it",
                       "Calendar quarters. Measured.")
     x = np.arange(len(s))
     ax.plot(x, s.values, color=_c("hsic"), lw=2.2, marker="o", ms=7, mec=_c("bg"), mew=1.5, zorder=3)
@@ -134,34 +127,6 @@ def closure_model_auc():
 
 
 # ---------------------------------------------------------------- slide 9: who to prioritise
-def kmeans_control(kn):
-    k = pd.read_csv(TABLES / "segments_kmeans_clusters.csv")
-    fig, ax = _figure("SoW clusters don't survive a year",
-                      f"{len(k)} K-means clusters on FY25 card behaviour: each cluster's FY25 SoW vs the same customers' FY26 SoW",
-                      f"{k.customers.sum():,} customers with enough purchases in both years. Measured.")
-    for _, r in k.iterrows():
-        ax.plot([0, 1], [r.sow_fy25, r.sow_fy26], color=_c("hsic"), lw=1.8, alpha=0.75,
-                marker="o", ms=7, mec=_c("bg"), mew=1.2)
-    lo25, hi25 = k.sow_fy25.min(), k.sow_fy25.max()
-    lo26, hi26 = k.sow_fy26.min(), k.sow_fy26.max()
-    for xb, lo, hi, side, label in ((-0.09, lo25, hi25, "right", f"{kn['seg_kmeans_fy25_sow_spread_pp']:.0f}pp\nspread"),
-                                     (1.09, lo26, hi26, "left", f"{kn['seg_kmeans_fy26_sow_spread_pp']:.1f}pp\nspread")):
-        ax.plot([xb, xb], [lo, hi], color=_c("secondary"), lw=1.2)
-        for yv in (lo, hi):
-            ax.plot([xb - 0.012, xb + 0.012], [yv, yv], color=_c("secondary"), lw=1.2)
-        ax.text(xb + (-0.03 if side == "right" else 0.03), (lo + hi) / 2, label, ha=side, va="center",
-                fontsize=13, fontweight="bold", color=_c("ink"))
-    ax.text(0.5, 0.80, f"Next year's SoW explained by cluster: {kn['seg_kmeans_eta2'] * 100:.2f}%",
-            ha="center", fontsize=12, color=_c("secondary"))
-    ax.set_xticks([0, 1], ["FY25 (clusters built here)", "FY26 (same customers)"], fontsize=12)
-    ax.set_xlim(-0.35, 1.35)
-    ax.set_ylim(0, 0.88)
-    ax.yaxis.set_major_formatter(lambda v, _: f"{v * 100:.0f}%")
-    ax.set_ylabel("SoW")
-    ax.tick_params(axis="x", length=0)
-    return style.save(fig, 9, "kmeans_control"), {}
-
-
 def box_outcomes():
     t = pd.read_csv(TABLES / "segments_box_table.csv").set_index("segment").loc[list(BOXES)][::-1]
     fig, axes = _figure("SoW is the same in every box; risk and value are not",
@@ -241,7 +206,7 @@ def run():
     kn = _key_numbers()
     paths, info = [], {}
     for fn, args in ((closure_by_card_age, ()), (closures_per_quarter, ()), (closure_model_auc, ()),
-                     (kmeans_control, (kn,)), (box_outcomes, ()), (priority_matrix, (kn,))):
+                     (box_outcomes, ()), (priority_matrix, (kn,))):
         path, extra = fn(*args)
         plt.close("all")
         paths.append(path)

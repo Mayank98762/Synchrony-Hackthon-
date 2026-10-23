@@ -2,7 +2,7 @@
 
 Our entry for the **Synchrony Analytics Hackathon 2026** case study. HSIC Bank and MetroMart issue a co-branded credit card, and cardholders are paying for more of their MetroMart shopping with other methods. We measure the loss in **Share of Wallet (SoW)**, test where it comes from, decide who to prioritise and design offers to win the spend back.
 
-> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline, ML experiments, closure model and segmentation are done and merged to `main`. The findings, hypothesis tests and slides 4–7 are done on the `mayank` branch, waiting to merge. See [Progress](#progress) below and [TASKS.md](TASKS.md).
+> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline, ML experiments, closure model and segmentation are done and merged to `main`. Mayank's findings, hypothesis tests and slides 4–7 are merged too (`run_all.py`: 37 checks pass, 0 fail, 2 pending on Shreyash). See [Progress](#progress) below and [TASKS.md](TASKS.md).
 > **Deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only.
 > **Full plan:** [PROJECT_PLAN.md](PROJECT_PLAN.md) · **Task board:** [TASKS.md](TASKS.md)
 
@@ -44,7 +44,7 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
 | Pipeline | `analysis/run_all.py`, `export.py`, `checks.py` | One command, about 3 minutes, deterministic. 39 reproduction checks: 18 pass, 0 fail, 21 pending on teammates' modules |
 | Handoffs | `HANDOFF_MAYANK.md`, `HANDOFF_SHREYASH.md` | What each teammate uses, from which file, for which slide |
 
-**Done (Mayank, on the `mayank` branch, not merged yet)**
+**Done (Mayank, merged to `main` on 24 Oct)**
 
 | Piece | File | Result |
 |---|---|---|
@@ -55,7 +55,7 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
 | Notebook | `notebooks/story.ipynb` | Walk-through of slides 4–7 that imports `analysis/`; runs without errors |
 
 **In progress / next**
-- **Mayank:** merge the `mayank` branch; swap the charts to Shreyash's `style.py` when it lands; tell Devansh F9 is 1.8% → 4.0% for slide 8.
+- **Mayank:** swap the charts to Shreyash's `style.py` when it lands.
 - **Shreyash:** `style.py`, `economics.py` (with the 3 review fixes in his handoff), F12 and F15, slides 1–3 and 10–12, deck integration and submission.
 - **Devansh:** charts and content for slides 8–9; the final `run_all.py` once the teammates' modules land; the 4-page dashboard (optional, cut first).
 

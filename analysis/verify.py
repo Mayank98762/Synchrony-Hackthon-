@@ -72,8 +72,6 @@ VERDICTS = {"x3_verdict": "universal", "x4_verdict": "no decay beyond the calend
 
 # Stub misses whose cause was found and reproduced: key -> cause. The deck uses the pipeline value.
 CAUSES = {
-    "f9_rate_first": "the 23 Oct figure is the fiscal quarter Aug-Oct 2024 (reproduces 1.70%); the handoff and the pipeline use "
-                     "the calendar quarter Jul-Sep 2024 (1.77%)",
     "x11_index_min": "the 23 Oct index used gross Sale ₹ (reproduces 91.9-108.4); the pipeline follows the brief's net rule "
                      "(91.4-108.6). Verdict unchanged: no month above 115",
     "x11_index_max": "as x11_index_min",
@@ -87,8 +85,6 @@ CAUSES = {
 }
 # Stub misses whose 23 Oct definition was not recorded and no variant tried reproduces: reported, not blocking.
 UNRESOLVED = {
-    "f9_rate_last": "calendar Apr-Jun 2026 is 4.01% (the EDA agrees). 3.4% matches no calendar quarter; the nearest is "
-                    "fiscal Feb-Apr 2026 (3.34%). 'More than doubled' holds on every definition",
     "f6_auc_month": "AUCs move ±0.005 with the train/test split (random, by customer, purchases vs all active rows tried: "
                     "0.586-0.592 month only, 0.607-0.614 everything); the 23 Oct split was not recorded. "
                     "Message unchanged: the features add about 0.02 AUC",

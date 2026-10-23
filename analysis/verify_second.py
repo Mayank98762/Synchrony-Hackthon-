@@ -256,10 +256,14 @@ def eda_overlap(n):
     pairs = [("sow_fy25", "f1_sow_fy25", 1e-9), ("sow_fy26", "f1_sow_fy26", 1e-9), ("sow_first_month", "f14_aug24_sow", 1e-9),
              ("forgone_fy26_prime_grocery_electronics", "f8_prime_ge_left_on_table", 1e-6), ("forgone_fy26", "f8_all_left_on_table", 1e-6),
              ("rewards_fy26", "f8_rewards_earned_fy26", 1e-6), ("closed_cards", "f11_closed_cards", 0),
-             ("closed_still_shopping", "f11_still_shopping", 0), ("closure_hazard_first_q", "f9_rate_first", 1e-9),
-             ("closure_hazard_last_q", "f9_rate_last", 1e-9)]
+             ("closed_still_shopping", "f11_still_shopping", 0)]
     for ek, mk, tol in pairs:
         same(G, f"{mk} vs EDA {ek}", e[ek], n[mk], tol)
+    # the EDA's closure_hazard also counts cards opened inside the quarter, so compare it with closed_any, not F9
+    q = F.closure_quarter_table()
+    any_rate = q.closed_any / q.open_at_start
+    same(G, "closures incl. same-quarter cards, first quarter vs EDA closure_hazard_first_q", e["closure_hazard_first_q"], any_rate.iloc[0])
+    same(G, "closures incl. same-quarter cards, last quarter vs EDA closure_hazard_last_q", e["closure_hazard_last_q"], any_rate.iloc[-1])
     same(G, "Cash/UPI change, non-cardholders (pp) vs EDA (2dp)", e["bench_change_pp"]["Cash/UPI"], round(n["f4_cash_upi_change_pp_noncardholders"], 2))
     same(G, "Post-close Wallet share vs EDA (3dp)", e["post_close_mix"]["MetroMart Wallet"], round(n["f11_mix_wallet"], 3))
 

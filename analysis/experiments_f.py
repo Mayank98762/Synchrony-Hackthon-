@@ -198,14 +198,20 @@ def f8_reward_paradox():
 
 # ---------------------------------------------------------------- closures (F9-F11, slide 8)
 def closure_quarter_table():
-    """Calendar quarters: closures in the quarter ÷ cards open at its start."""
+    """Calendar quarters: closures of cards open at the quarter start ÷ cards open at its start.
+
+    The numerator is a subset of the denominator. `closed_any` also counts cards opened and closed inside the
+    quarter (193 in Apr-Jun 2026); the first EDA's closure_hazard used it, which gives 1.8% -> 4.0% instead.
+    """
     c = prep.load().cust
     c = c[c.has_card]
     rows = []
     for q in pd.period_range("2024Q3", "2026Q2", freq="Q"):
         start, end = q.start_time, q.end_time.normalize()
-        rows.append({"quarter": str(q), "closed": int(c.close_date.between(start, end).sum()),
-                     "open_at_start": int(((c.open_date < start) & (c.close_date.isna() | (c.close_date >= start))).sum())})
+        open_start = (c.open_date < start) & (c.close_date.isna() | (c.close_date >= start))
+        closed = c.close_date.between(start, end)
+        rows.append({"quarter": str(q), "closed": int((closed & open_start).sum()), "closed_any": int(closed.sum()),
+                     "open_at_start": int(open_start.sum())})
     return pd.DataFrame(rows).assign(rate=lambda t: t.closed / t.open_at_start)
 
 
