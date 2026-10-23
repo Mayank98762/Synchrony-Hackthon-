@@ -76,13 +76,29 @@ def gate(rows_a, rows_b, flag="is_hsic", min_rows=C.GATE["min_rows"]):
 
 # ---------------------------------------------------------------- X1: are customers different at all?
 def customer_sow_by_fy(act):
-    """Customer-level ₹ SoW per FY for customers passing the rule-9 filter (≥ 3 purchases in each FY)."""
+    """Customer-level ₹ SoW per FY for customers passing the rule-9 filter (≥ 3 purchases in each FY).
+
+    Clipped to [0, 1]: returns can push a customer's HSIC net below 0, and a near-zero total net
+    makes the ratio explode (one FY25 value is above 300). Clipping keeps those few rows from
+    driving correlations and clusters.
+    """
     buys = act[act.is_sale].groupby(["customer_id", "fy"]).size().unstack(fill_value=0)
     ok = buys.index[(buys[C.FISCAL_YEARS[0]] >= C.MIN_PURCHASES_PER_PERIOD) & (buys[C.FISCAL_YEARS[1]] >= C.MIN_PURCHASES_PER_PERIOD)]
     rows = act[act.customer_id.isin(ok)]
     tot = rows.groupby(["customer_id", "fy"]).net.sum().unstack()
     hs = rows[rows.is_hsic].groupby(["customer_id", "fy"]).net.sum().unstack().reindex(tot.index).fillna(0)
-    return (hs / tot.where(tot > 0)).dropna()
+    return (hs / tot.where(tot > 0)).dropna().clip(0, 1)
+
+
+def sow_clip_count(act):
+    """How many customer-FY SoW values the clip changes (reported, so the clip isn't hidden)."""
+    buys = act[act.is_sale].groupby(["customer_id", "fy"]).size().unstack(fill_value=0)
+    ok = buys.index[(buys[C.FISCAL_YEARS[0]] >= C.MIN_PURCHASES_PER_PERIOD) & (buys[C.FISCAL_YEARS[1]] >= C.MIN_PURCHASES_PER_PERIOD)]
+    rows = act[act.customer_id.isin(ok)]
+    tot = rows.groupby(["customer_id", "fy"]).net.sum().unstack()
+    hs = rows[rows.is_hsic].groupby(["customer_id", "fy"]).net.sum().unstack().reindex(tot.index).fillna(0)
+    raw = (hs / tot.where(tot > 0)).dropna()
+    return int(((raw < 0) | (raw > 1)).sum().sum())
 
 
 def sow_bands(sow):
@@ -119,6 +135,7 @@ def x1_heterogeneity():
         "x1_persistence_n": g["n_persistence"],
         "x1_gate_pass": bool(g["passes"]),
         "x1_sow_r_fy25_fy26": float(sow[fy_a].corr(sow[fy_b])), "x1_sow_filter_n": int(len(sow)),
+        "x1_sow_values_clipped": sow_clip_count(act),
         "x1_band_edges_low_mid": float(edges[0]), "x1_band_edges_mid_high": float(edges[1]),
         "x1_band_to_zero_min": float(to_zero.min()), "x1_band_to_zero_max": float(to_zero.max()),
         "x1_verdict": "customers differ" if g["passes"] else "no customer-level differences beyond chance",
