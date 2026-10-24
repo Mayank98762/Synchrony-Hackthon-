@@ -1996,11 +1996,11 @@
   "label": "Measured"
  },
  "x1_persistence_ci_hi": {
-  "value": 0.023054324581802694,
+  "value": 0.023054324581802697,
   "label": "Measured"
  },
  "x1_persistence_ci_lo": {
-  "value": -0.015606546195158395,
+  "value": -0.015606546195158394,
   "label": "Measured"
  },
  "x1_persistence_n": {
@@ -2008,7 +2008,7 @@
   "label": "Measured"
  },
  "x1_persistence_r": {
-  "value": 0.0037252812225692087,
+  "value": 0.00372528122256921,
   "label": "Measured"
  },
  "x1_sow_filter_n": {
@@ -2016,7 +2016,7 @@
   "label": "Measured"
  },
  "x1_sow_r_fy25_fy26": {
-  "value": 0.005749033960182852,
+  "value": 0.005749033960182846,
   "label": "Measured"
  },
  "x1_sow_values_clipped": {
@@ -2024,11 +2024,11 @@
   "label": "Measured"
  },
  "x1_split_half_ci_hi": {
-  "value": 0.0110237318773363,
+  "value": 0.011023731877336294,
   "label": "Measured"
  },
  "x1_split_half_ci_lo": {
-  "value": -0.021202467867705393,
+  "value": -0.021202467867705396,
   "label": "Measured"
  },
  "x1_split_half_n": {
@@ -2036,7 +2036,7 @@
   "label": "Measured"
  },
  "x1_split_half_r": {
-  "value": -0.00509068973532245,
+  "value": -0.005090689735322454,
   "label": "Measured"
  },
  "x1_variance_ratio_fy25": {
