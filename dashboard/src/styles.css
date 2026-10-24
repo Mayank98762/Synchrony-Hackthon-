@@ -1,50 +1,55 @@
-/* HSIC Card Insights. Style: achromatic ledger (taste-skill app sheet, seed 1954785064), built on the skill's app.css.
-   The chrome holds no colour; ink and greys carry everything, and the one hue (--hue, the deck's HSIC blue) marks the
-   HSIC card's own data on every chart: the card is the one subject, and every other payment method stays ink or grey.
+/* HSIC Card Insights. Style: accent ladder (taste-skill app sheet, seed 1749706179), the ladder built from the deck's HSIC blue.
+   The full hue goes only on small marks: the HSIC card's own series on every chart, the one primary button, the active
+   nav icon and the card drawn in the sidebar. Its pale tints do the area work: the active nav row, the selected box,
+   pills and tracks. Every other payment method stays ink or grey, so the card is the one subject on every screen.
+   Type: Archivo, one family in two widths; the wide cut (118) for the title, the lead figures and the card's wordmark.
 
-   Grid arithmetic at 1440: canvas 1440 - 256 sidebar = 1184; minus 2 x 32 padding = 1120 content.
-   12 columns, 11 gaps of 12: column = (1120 - 132) / 12 = 82.33. Span 8 = 742.67, span 4 = 365.33,
-   742.67 + 12 + 365.33 = 1120, so every row lands on both canvas edges. */
+   Grid arithmetic at 1440: canvas 1440 - 248 sidebar = 1192; minus 2 x 32 padding = 1128 content.
+   12 columns, 11 gaps of 24: column = (1128 - 264) / 12 = 72. Span 8 = 744, span 4 = 360,
+   744 + 24 + 360 = 1128, so every row lands on both canvas edges. */
 
 :root {
-  --ground: #f8f8f8;
+  --ground: #f6f9fc;            /* one step toward the hue's palest tint, so page and tints read as one family */
   --surface: #ffffff;
-  --raised: #f2f2f2;
-  --active: #ececec;
-  --border: #e6e6e6;
-  --rule: #f0f0f0;
-  --control: #d4d4d4;
-  --text: #0a0a0a;
-  --muted: #6b6b6b;
-  --faint: #6b6b6b;
-  --accent: #141414;            /* focus and the selected thing: ink */
-  --primary: #141414;
+  --raised: #f0f4f9;
+  --active: #e6effa;
+  --border: #e3e8ef;
+  --rule: #eef2f6;
+  --control: #cfd7e2;
+  --text: #0b0b0b;
+  --muted: #5b6270;
+  --faint: #5b6270;
+  --accent: #2470cc;            /* focus ring */
+  --primary: #2470cc;           /* the one filled button style */
   --primary-ink: #ffffff;
-  --hue: #2470cc;               /* the one chart hue: HSIC's own series; the deck's blue, darkened to 4.9:1 for white text on it */
-  --hue-pale: #e3eefb;          /* the same hue as an area: the selected box, the strip's HSIC part on a phone */
-  --chart-ink: #141414;
-  --chart-grey: #8a8a8a;
-  --chart-pale: #d6d6d6;
-  --positive: #2e7d32;
+  --hue: #2470cc;               /* the deck's HSIC blue (#2a78d6) darkened to 4.9:1 for white text on it */
+  --hue-ink: #123e75;           /* text set on the tints */
+  --hue-track: #d5e5f8;         /* tracks and the comparison series */
+  --hue-pale: #eef4fc;          /* areas: the active nav row, the selected box, accent pills */
+  --chart-ink: #0b0b0b;
+  --chart-grey: #8a909b;
+  --chart-pale: #d5e5f8;
+  --positive: #247b50;
   --negative: #c4242a;
   --warning: #92400e;
-  --pill-positive-bg: #dcfae5; --pill-positive-ink: #04250e;
+  --pill-positive-bg: #dcfce7; --pill-positive-ink: #14532d;
   --pill-negative-bg: #ffedea; --pill-negative-ink: #831c1e;
   --pill-warning-bg: #fffbeb; --pill-warning-ink: #92400e;
-  --pill-neutral-bg: #eeeeee; --pill-neutral-ink: #3d3d3d;
-  --grid: #ececec;
+  --pill-neutral-bg: #eef4fc; --pill-neutral-ink: #123e75;
+  --grid: #e9edf2;
 
-  --font: "Geist", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --fs-title: 24px; --fs-section: 16px; --fs-kpi: 24px; --fs-lead: 30px; --fs-body: 14px; --fs-small: 12px;
+  --font: "Archivo", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --wide: 118;                  /* font-stretch % for the wide cut */
+  --fs-title: 32px; --fs-section: 18px; --fs-kpi: 24px; --fs-lead: 36px; --fs-body: 14px; --fs-small: 12px;
 
-  --sidebar-width: 256px;
+  --sidebar-width: 248px;
   --pad: 32px;
-  --gap: 12px;
-  --card-pad: 20px;
+  --gap: 24px;
+  --card-pad: 24px;
   --radius-card: 8px;
   --radius-control: 6px;
   --control-height: 36px;
-  --row-height: 44px;
+  --row-height: 45px;
   --nav-row: 32px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -69,20 +74,27 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- shell: open plane, the sidebar on the page ground ---------- */
 .app { display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); min-height: 100svh; }
-.sidebar { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; gap: 2px; padding: 20px 12px 16px; overflow: auto; }
+.sidebar { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; gap: 2px; padding: 24px 12px 16px; overflow: auto; }
 .brand { display: flex; align-items: center; gap: 10px; padding: 0 8px; margin-bottom: 4px; }
 .brand svg { width: 28px; height: 28px; flex: none; }
 .brand b { display: block; font-size: 15px; line-height: 20px; font-weight: 600; }
 .brand span { display: block; font-size: var(--fs-small); line-height: 16px; color: var(--muted); }
-.scope { margin: 14px 0 6px; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); }
-.scope b { display: block; font-weight: 500; }
-.scope span { display: block; font-size: var(--fs-small); color: var(--muted); }
+/* the product's mark: the co-branded card itself, flat, at its real 1.586 aspect */
+.paycard { position: relative; display: grid; grid-template-rows: auto 1fr auto; aspect-ratio: 1.586; margin: 0 4px; padding: 14px 16px 13px; border-radius: 12px; background: var(--hue); color: #fff; overflow: hidden; }
+.paycard .top { display: flex; justify-content: space-between; align-items: baseline; }
+.paycard .issuer { font-size: 20px; line-height: 22px; font-weight: 700; font-stretch: 125%; letter-spacing: 0.02em; }
+.paycard .partner { font-size: 13px; line-height: 16px; font-weight: 600; font-stretch: calc(var(--wide) * 1%); }
+.paycard .chip { align-self: center; width: 64px; height: 26px; }
+.paycard .holder { display: flex; justify-content: space-between; align-items: end; gap: 8px; font-size: 12px; line-height: 15px; }
+.paycard .holder b { display: block; font-size: 15px; line-height: 18px; font-weight: 600; font-stretch: calc(var(--wide) * 1%); font-variant-numeric: tabular-nums; }
+.scope-line { margin: 10px 8px 0; font-size: var(--fs-small); line-height: 16px; color: var(--muted); }
 .sidebar .group-label { margin: 22px 8px 6px; font-size: var(--fs-small); color: var(--muted); }
 .nav-item { display: flex; align-items: center; gap: 10px; height: var(--nav-row); padding: 0 8px; border-radius: 8px; color: var(--muted); transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
 .nav-item + .nav-item { margin-top: 2px; }
 .nav-item svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .nav-item:hover { background: var(--raised); color: var(--text); }
-.nav-item[aria-current="page"] { background: var(--active); color: var(--text); }
+.nav-item[aria-current="page"] { background: var(--active); color: var(--hue-ink); font-weight: 500; }
+.nav-item[aria-current="page"] svg { stroke: var(--hue); }
 .sidebar .bottom { margin-top: auto; padding: 0 8px; display: grid; gap: 6px; font-size: var(--fs-small); color: var(--muted); }
 .sidebar .bottom a { color: var(--text); font-weight: 500; }
 .sidebar .bottom a:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -90,9 +102,9 @@ a { color: inherit; text-decoration: none; }
 .phone-bar { display: none; }
 
 /* ---------- title block and filters ---------- */
-.title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
-.title-row h1 { font-size: var(--fs-title); line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; }
-.title-row .sub { margin-top: 6px; max-width: 72ch; font-size: 15px; line-height: 22px; color: var(--muted); }
+.title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+.title-row h1 { font-size: var(--fs-title); line-height: 1.1; font-weight: 700; font-stretch: calc(var(--wide) * 1%); letter-spacing: -0.02em; }
+.title-row .sub { margin-top: 10px; max-width: 74ch; font-size: 16px; line-height: 24px; color: var(--muted); }
 .title-row .actions { display: flex; align-items: center; gap: 12px; flex: none; }
 .stamp { color: var(--muted); font-size: var(--fs-small); white-space: nowrap; }
 .filters { display: flex; align-items: center; gap: 12px; margin-bottom: var(--gap); flex-wrap: wrap; }
@@ -104,10 +116,10 @@ a { color: inherit; text-decoration: none; }
 .s4 { grid-column: span 4; } .s5 { grid-column: span 5; } .s6 { grid-column: span 6; } .s7 { grid-column: span 7; } .s8 { grid-column: span 8; } .s12 { grid-column: span 12; }
 .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--card-pad); min-width: 0; display: flex; flex-direction: column; }
 .panel > header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-.panel h2 { font-size: var(--fs-section); line-height: 22px; font-weight: 600; }
+.panel h2 { font-size: var(--fs-section); line-height: 24px; font-weight: 600; }
 .panel .meta { color: var(--muted); font-size: var(--fs-small); white-space: nowrap; }
 .panel .lede { margin: -6px 0 12px; color: var(--muted); }
-.panel .foot { margin-top: auto; padding-top: 12px; color: var(--muted); font-size: var(--fs-small); }
+.panel .foot { margin-top: auto; padding-top: 14px; color: var(--muted); font-size: 13px; line-height: 18px; }
 .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: var(--fs-small); color: var(--muted); }
 .legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
 .legend i.line { width: 14px; height: 2px; border-radius: 0; vertical-align: 3px; }
@@ -127,10 +139,10 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- KPIs: one divided strip, a label above a number ---------- */
 .kpis { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.kpi { padding: 16px var(--card-pad); min-width: 0; }
+.kpi { padding: 18px var(--card-pad); min-width: 0; }
 .kpi + .kpi { border-left: 1px solid var(--border); }
 .kpi-label { color: var(--muted); }
-.kpi-value { margin-top: 6px; font-size: var(--fs-kpi); line-height: 1.15; font-weight: 500; letter-spacing: -0.01em; }
+.kpi-value { margin-top: 6px; font-size: var(--fs-kpi); line-height: 1.15; font-weight: 600; font-stretch: calc(var(--wide) * 1%); letter-spacing: -0.01em; }
 .kpi-value.lead { font-size: var(--fs-lead); }
 .kpi-value small { font-size: 14px; color: var(--muted); font-weight: 400; margin-left: 3px; letter-spacing: 0; }
 .delta { margin-top: 6px; font-size: 13px; line-height: 18px; color: var(--muted); }
@@ -155,17 +167,17 @@ td .sub { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; c
 .btn:hover { background: var(--raised); }
 .btn:active { transform: translateY(1px); }
 .btn.primary { background: var(--primary); color: var(--primary-ink); border-color: transparent; }
-.btn.primary:hover { background: #2b2b2b; }
+.btn.primary:hover { background: #1d5fb0; }
 .btn.ghost { border-color: transparent; background: transparent; }
 .tabs { display: flex; gap: 24px; border-bottom: 1px solid var(--border); margin-bottom: 16px; overflow-x: auto; scrollbar-width: none; }
 .tabs button { position: relative; flex: none; padding: 10px 0; border: 0; background: none; color: var(--muted); cursor: pointer; transition: color var(--t-hover) ease; }
 .tabs button:hover { color: var(--text); }
 .tabs button[aria-selected="true"] { color: var(--text); }
-.tabs button[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--text); }
+.tabs button[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--hue); }
 .segmented { display: inline-flex; width: max-content; max-width: 100%; padding: 2px; border-radius: 8px; background: var(--raised); }
 .segmented button { height: 30px; padding: 0 12px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: var(--muted); cursor: pointer; transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
 .segmented button:hover { color: var(--text); }
-.segmented button[aria-pressed="true"] { background: var(--surface); color: var(--text); border-color: var(--border); }
+.segmented button[aria-pressed="true"] { background: var(--surface); color: var(--hue-ink); border-color: var(--border); font-weight: 500; }
 
 .range { width: 100%; accent-color: var(--hue); height: 24px; cursor: pointer; }  /* the one control allowed the hue: it drives the simulated data */
 
@@ -174,18 +186,30 @@ td .sub { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; c
 .error { padding: 16px; color: var(--text); }
 .error b { color: var(--negative); font-weight: 500; }
 
+/* ---------- the lead block: the screen's answer in rupees, beside the ₹100 strip that shows it ---------- */
+.lead { margin-bottom: var(--gap); }
+.lead-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 24px 48px; }
+.lead-fig { margin-top: 4px; font-size: 44px; line-height: 48px; font-weight: 700; font-stretch: calc(var(--wide) * 1%); letter-spacing: -0.02em; color: var(--hue); font-variant-numeric: tabular-nums; }
+.lead-bridge { margin-top: 14px; border-top: 1px solid var(--border); }
+.lead-bridge .row { min-height: 0; padding: 9px 0; }
+.lead-strip { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.lead .strip-bar { height: 56px; }
+.lead .strip-seg { font-size: 13px; }
+.lead .strip-seg.hsic { font-size: 14px; }
+.lead-note { margin-top: 14px; }
+
 /* ---------- the ₹100 strip: how every ₹100 spent at MetroMart was paid ---------- */
 .strip { display: grid; gap: 14px; }
 .strip-row { display: grid; grid-template-columns: 52px minmax(0, 1fr); align-items: center; gap: 12px; }
 .strip-row > span { color: var(--muted); }
-.strip-bar { display: flex; height: 40px; gap: 2px; }
+.strip-bar { display: flex; height: 44px; gap: 2px; }
 .strip-seg { position: relative; min-width: 0; display: flex; align-items: center; padding: 0 8px; border-radius: 3px; overflow: hidden; white-space: nowrap; font-size: var(--fs-small); font-variant-numeric: tabular-nums; }
 .strip-seg b { font-weight: 500; }
 .strip-seg.hsic { background: var(--hue); color: #fff; }
-.strip-seg.m1 { background: #3d3d3d; color: #fff; }
-.strip-seg.m2 { background: #6b6b6b; color: #fff; }
-.strip-seg.m3 { background: #b9b9b9; color: #0a0a0a; }
-.strip-seg.m4 { background: #dcdcdc; color: #0a0a0a; }
+.strip-seg.m1 { background: #2e3138; color: #fff; }
+.strip-seg.m2 { background: #5e646e; color: #fff; }
+.strip-seg.m3 { background: #aeb4bd; color: #0b0b0b; }
+.strip-seg.m4 { background: #d7dce3; color: #0b0b0b; }
 .strip-key { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 4px; padding-left: 64px; font-size: var(--fs-small); color: var(--muted); }
 .strip-key i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
 /* the change per ₹100, one cell per method, in the strip's order */
@@ -199,7 +223,7 @@ td .sub { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; c
 .barlist { display: grid; gap: 14px; }
 .barlist .lab { display: flex; justify-content: space-between; gap: 12px; }
 .barlist .lab b { font-weight: 500; font-variant-numeric: tabular-nums; }
-.barlist .track { margin-top: 6px; height: 6px; border-radius: 3px; background: var(--raised); }
+.barlist .track { margin-top: 6px; height: 6px; border-radius: 3px; background: var(--hue-pale); }
 .barlist .fill { height: 100%; border-radius: 3px; background: var(--chart-grey); }
 .barlist .first .fill { background: var(--chart-ink); }
 
@@ -210,12 +234,18 @@ td .sub { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; c
 .box { display: grid; align-content: start; gap: 4px; min-height: 0; padding: 14px; text-align: left; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); cursor: pointer; transition: border-color var(--t-hover) ease, background-color var(--t-hover) ease; }
 .box:hover { border-color: var(--control); }
 .box[aria-pressed="true"] { background: var(--hue-pale); border-color: var(--hue); }
+.box[aria-pressed="true"] .name { color: var(--hue-ink); }
 .box .name { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-weight: 600; }
 .box .name .pill { font-weight: 500; }
 .box .count { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); }
-.box dl { display: grid; grid-template-columns: auto auto; justify-content: space-between; gap: 4px 12px; margin-top: 8px; font-size: 13px; line-height: 18px; }
-.box dt { color: var(--muted); }
-.box dd { text-align: right; font-variant-numeric: tabular-nums; }
+/* each figure in a box with a thin bar under it, one scale per metric across the boxes: risk differs, SoW does not */
+.box .metrics { display: grid; gap: 8px; margin-top: 10px; }
+.metric { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; row-gap: 4px; font-size: 13px; line-height: 18px; }
+.metric span { color: var(--muted); }
+.metric b { font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+.metric i { grid-column: 1 / -1; height: 4px; border-radius: 2px; background: var(--hue-pale); overflow: hidden; }
+.metric s { display: block; height: 100%; border-radius: 2px; background: var(--hue); text-decoration: none; }
+.box[aria-pressed="true"] .metric i { background: #ffffff; }
 .box.outside { border-style: dashed; }
 
 /* ---------- simulator ---------- */
@@ -228,14 +258,15 @@ td .sub { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; c
 .compare > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; row-gap: 4px; }
 .compare span { font-size: 13px; line-height: 18px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .compare b { font-size: 13px; line-height: 18px; font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
-.compare i { grid-column: 1 / -1; height: 8px; border-radius: 2px; background: var(--chart-pale); }
+.compare i { grid-column: 1 / -1; height: 8px; border-radius: 2px; background: #c3c9d2; }
 .compare .on span { color: var(--text); }
 .compare .on i { background: var(--hue); }
-.sim-out .v { margin-top: 4px; font-size: 20px; line-height: 26px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.sim-out .v { margin-top: 4px; font-size: 22px; line-height: 28px; font-weight: 600; font-stretch: calc(var(--wide) * 1%); font-variant-numeric: tabular-nums; }
 
 /* ---------- phone and tablet: the navigation folds into a 48px bar with a full-screen sheet ---------- */
 @media (max-width: 1100px) {
   .s4, .s5, .s6, .s7, .s8 { grid-column: span 12; }
+  .lead-grid { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 860px) {
   .app { grid-template-columns: minmax(0, 1fr); }
@@ -251,6 +282,8 @@ td .sub { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; c
   .panel > header { flex-wrap: wrap; }
   .panel .meta { white-space: normal; }
   .title-row { flex-wrap: wrap; align-items: flex-start; }
+  .title-row h1 { font-size: 24px; }
+  .lead-fig { font-size: 36px; line-height: 40px; }
   .title-row .actions { width: 100%; justify-content: space-between; }
   .kpis { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kpi + .kpi { border-left: 0; }
@@ -277,7 +310,7 @@ td .sub { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; c
   .segmented { display: flex; width: 100%; }
   .segmented button { flex: 1; padding: 0 6px; }
   .strip-seg { padding: 0 4px; }
-  .strip-seg .wide, .strip-seg.narrow > * { display: none; }
+  .strip-seg .wide-label, .strip-seg.narrow > * { display: none; }
   .strip-change { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .strip-change > div + div { border-left: 0; }
   .strip-change > div:nth-child(n + 2) { border-top: 1px solid var(--border); }

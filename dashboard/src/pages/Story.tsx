@@ -12,6 +12,7 @@ const STRIP_CLASS: Record<string, string> = { HSIC: "hsic", Wallet: "m1", "Cash/
 const STRIP_SWATCH: Record<string, string> = { HSIC: C.hue, Wallet: "#3d3d3d", "Cash/UPI": "#6b6b6b", Debit: "#b9b9b9", "Other CC": "#dcdcdc" };
 
 const r1 = (v: number) => Math.round(v * 10) / 10;
+const signedRupee = (v: number) => `${v < 0 ? "−" : "+"}₹${Math.abs(v).toFixed(1)}`;
 
 export default function Story() {
   const { data, error } = usePageData<Overview>("overview");
@@ -34,6 +35,12 @@ export default function Story() {
   ];
   const shown = bridgeRows.map((r) => Number(r.v.toFixed(2)));
   const bridgeTotal = shown.reduce((s, v) => s + v, 0);
+  // a change per ₹100 is the difference of the two values the strip shows, so the figure, the bars and the row agree
+  const stripChange = (m: string) => {
+    const row = data.mix.find((x) => x.method === m)!;
+    return Number((row.fy26 * 100).toFixed(1)) - Number((row.fy25 * 100).toFixed(1));
+  };
+  const hsicStripChange = stripChange("HSIC");
 
   return (
     <>
@@ -47,14 +54,67 @@ export default function Story() {
         </>}
       />
 
+      <section className="panel lead" aria-label="Of every ₹100 spent at MetroMart">
+        <header>
+          <h2>Of every ₹100 spent at MetroMart</h2>
+          <span className="meta">Active cards · net of returns</span>
+        </header>
+        <div className="lead-grid">
+          <div className="lead-answer">
+            <div className="kpi-label">Paid on the HSIC card, FY26</div>
+            <div className="lead-fig">₹{sow26.toFixed(1)}</div>
+            <div className="delta"><Bad>{signedRupee(hsicStripChange)}</Bad> from ₹{sow25.toFixed(1)} in FY25</div>
+            <div className="rows lead-bridge" aria-label={`The ${pp(bridgeTotal, 2)} change, split`}>
+              {bridgeRows.map((r, i) => (
+                <div className="row" key={r.label}>
+                  <div className="grow">{r.label}<div className="note">{r.sub}</div></div>
+                  <span className="fig">{pp(shown[i], 2)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lead-strip">
+            <div className="strip">
+              {(["fy25", "fy26"] as const).map((fy) => (
+                <div className="strip-row" key={fy}>
+                  <span>{fy === "fy25" ? "FY25" : "FY26"}</span>
+                  <div className="strip-bar" role="img" aria-label={`${fy.toUpperCase()}: ` + STRIP_ORDER.map((m) =>
+                    `${METHOD_NAME[m]} ₹${(data.mix.find((x) => x.method === m)![fy] * 100).toFixed(1)}`).join(", ")}>
+                    {STRIP_ORDER.map((m) => {
+                      const v = data.mix.find((x) => x.method === m)![fy] * 100;
+                      return (
+                        <div key={m} className={`strip-seg ${STRIP_CLASS[m]}${v < 12 ? " narrow" : ""}`} style={{ flexBasis: `${v}%` }} title={`${METHOD_NAME[m]}: ₹${v.toFixed(1)} of every ₹100`}>
+                          {m === "HSIC" ? <b><span className="wide-label">HSIC </span>₹{v.toFixed(1)}</b> : <span>₹{v.toFixed(1)}</span>}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="strip-key">
+              {STRIP_ORDER.map((m) => <span key={m}><i style={{ background: STRIP_SWATCH[m] }} />{METHOD_NAME[m]}</span>)}
+            </div>
+            <div className="strip-change" aria-label="Change per ₹100, FY25 to FY26">
+              {STRIP_ORDER.map((m) => (
+                <div key={m}>
+                  <span>{METHOD_NAME[m]}</span>
+                  <b className={m === "HSIC" ? "neg" : undefined}>{signedRupee(stripChange(m))}</b>
+                </div>
+              ))}
+            </div>
+            <p className="note lead-note">The same cardholders, the same MetroMart basket: {pct(lossRows[0].share, 0)} of the share HSIC lost on cards open both
+              years went to Cash/UPI.</p>
+          </div>
+        </div>
+      </section>
+
       <div className="kpis">
-        <Kpi lead label="HSIC share of MetroMart spend, FY26" value={`${sow26}%`}
-          delta={<><Bad>{pp(sow26 - sow25)}</Bad> from {sow25}% in FY25</>} />
         <Kpi label="HSIC spend per card, May 2026" value={inr(hsicMay)} unit="/month"
           delta={<><Bad>{signedInr(hsicMay - hsicAug)}</Bad> from {inr(hsicAug)} in Aug 2024</>} />
         <Kpi label="MetroMart spend per card, May 2026" value={inr(netMay)} unit="/month"
           delta={<>{signedInr(netMay - netAug)} from {inr(netAug)} in Aug 2024</>} />
-        <Kpi label="Closures per open card, Apr–Jun 2026" value={`${clLast}%`} unit="a quarter"
+        <Kpi label="Closure rate, Apr–Jun 2026" value={`${clLast}%`}
           delta={<><Bad>{pp(clLast - clFirst)}</Bad> from {clFirst}% in Jul–Sep 2024</>} />
         <Kpi label="Spent at MetroMart after closing" value={inrM(num(k.f11_post_close_net))}
           delta={<>by {count(num(k.f11_still_shopping))} cardholders who closed the card</>} />
@@ -76,56 +136,6 @@ export default function Story() {
             ))}
           </div>
           <p className="foot">Why Cash/UPI? Immediacy is a <b>hypothesis</b> (H-imm); the instant-cashback pilot arm tests it.</p>
-        </Panel>
-      </div>
-
-      <div className="grid">
-        <Panel span="s8" title="How every ₹100 spent at MetroMart was paid" meta="Active cards · net of returns">
-          <div className="strip">
-            {(["fy25", "fy26"] as const).map((fy) => (
-              <div className="strip-row" key={fy}>
-                <span>{fy === "fy25" ? "FY25" : "FY26"}</span>
-                <div className="strip-bar" role="img" aria-label={`${fy.toUpperCase()}: ` + STRIP_ORDER.map((m) =>
-                  `${METHOD_NAME[m]} ₹${(data.mix.find((x) => x.method === m)![fy] * 100).toFixed(1)}`).join(", ")}>
-                  {STRIP_ORDER.map((m) => {
-                    const v = data.mix.find((x) => x.method === m)![fy] * 100;
-                    return (
-                      <div key={m} className={`strip-seg ${STRIP_CLASS[m]}${v < 12 ? " narrow" : ""}`} style={{ flexBasis: `${v}%` }} title={`${METHOD_NAME[m]}: ₹${v.toFixed(1)} of every ₹100`}>
-                        {m === "HSIC" ? <b><span className="wide">HSIC </span>₹{v.toFixed(1)}</b> : <>₹{v.toFixed(1)}</>}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="strip-key">
-            {STRIP_ORDER.map((m) => <span key={m}><i style={{ background: STRIP_SWATCH[m] }} />{METHOD_NAME[m]}</span>)}
-          </div>
-          <div className="strip-change" aria-label="Change per ₹100, FY25 to FY26">
-            {STRIP_ORDER.map((m) => {
-              // the difference of the two values shown in the strip, so the row agrees with the bars
-              const row = data.mix.find((x) => x.method === m)!;
-              const change = Number((row.fy26 * 100).toFixed(1)) - Number((row.fy25 * 100).toFixed(1));
-              return (
-                <div key={m}>
-                  <span>{METHOD_NAME[m]}</span>
-                  <b className={m === "HSIC" ? "neg" : undefined}>{change < 0 ? "−" : "+"}₹{Math.abs(change).toFixed(1)}</b>
-                </div>
-              );
-            })}
-          </div>
-        </Panel>
-        <Panel span="s4" title={`The ${pp(bridgeTotal, 2)} change, split`} meta="FY25 → FY26">
-          <div className="rows">
-            {bridgeRows.map((r, i) => (
-              <div className="row" key={r.label}>
-                <div className="grow">{r.label}<div className="note">{r.sub}</div></div>
-                <span className="fig">{pp(shown[i], 2)}</span>
-              </div>
-            ))}
-          </div>
-          <p className="foot">All of the fall comes from cards that stayed open: a change in how cardholders pay, not in who they are.</p>
         </Panel>
       </div>
 

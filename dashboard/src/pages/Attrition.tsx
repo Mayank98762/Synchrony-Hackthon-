@@ -18,7 +18,7 @@ export default function Attrition() {
   const decay = useMemo(() => data && decayOption(data, mode), [data, mode]);
   const age = useMemo(() => data && ageOption(data), [data]);
   const quarters = useMemo(() => data && quarterOption(data), [data]);
-  if (!data || !decay || !age || !quarters) return <PageState title="Attrition & closures" error={error} />;
+  if (!data || !decay || !age || !quarters) return <PageState title="Attrition and closures" error={error} />;
 
   const f = data.figures;
   const d = [...data.decay].sort((a, b) => b.months_before - a.months_before);
@@ -30,7 +30,7 @@ export default function Attrition() {
   return (
     <>
       <TitleRow
-        title="Attrition & closures"
+        title="Attrition and closures"
         sub={<>Silent attrition is real and universal: measured against the portfolio&rsquo;s own decline, no extra cardholders go quiet.
           Closures doubled, and cards under six months close at {(young / old).toFixed(1)}× the rate of cards over three years.</>}
       />

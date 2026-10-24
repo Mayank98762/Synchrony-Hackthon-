@@ -15,7 +15,7 @@ export default function Priorities() {
   const { data, error } = usePageData<Priority>("priority");
   const [sel, setSel] = useState("B");
   const [shift, setShift] = useState(5);
-  if (!data) return <PageState title="Priorities & offers" error={error} />;
+  if (!data) return <PageState title="Priorities and offers" error={error} />;
 
   const now = Object.fromEntries(data.sizes.map((s) => [s.segment, s.customers_at_score]));
   const box = Object.fromEntries(data.boxes.map((b) => [b.segment, b]));
@@ -34,6 +34,18 @@ export default function Priorities() {
   const ax = data.axes;
   const econ = data.economics;
 
+  // bars in the boxes share one scale per metric: the largest value across the five boxes fills the track
+  const grid4 = data.boxes;
+  const maxClose = Math.max(...grid4.map((b) => b.closure_6m));
+  const maxOff = Math.max(...grid4.map((b) => b.nonhsic_per_cust), num(a.seg_A_horizon_net_per_cust)!);
+  const maxSow = Math.max(...grid4.map((b) => b.sow));
+  const Metric = ({ label, value, share }: { label: string; value: string; share?: number }) => (
+    <div className="metric">
+      <span>{label}</span><b>{value}</b>
+      {share != null && <i><s style={{ width: `${Math.max(0, Math.min(1, share)) * 100}%` }} /></i>}
+    </div>
+  );
+
   const Cell = ({ id, area }: { id: "B" | "C" | "D" | "E"; area: string }) => {
     const b = box[id];
     return (
@@ -41,11 +53,11 @@ export default function Priorities() {
         <span className="name">{id} · {b.name}</span>
         {id === "B" && <span className="pill" style={{ justifySelf: "start" }}>Highest priority</span>}
         <span className="count">{count(now[id])} customers</span>
-        <dl>
-          <dt>6-month closure</dt><dd>{pct(b.closure_6m)}</dd>
-          <dt>Off-card spend</dt><dd>{inr(b.nonhsic_per_cust)}</dd>
-          <dt>FY26 SoW</dt><dd>{pct(b.sow)}</dd>
-        </dl>
+        <div className="metrics">
+          <Metric label="6-month closure" value={pct(b.closure_6m)} share={b.closure_6m / maxClose} />
+          <Metric label="Off-card spend" value={inr(b.nonhsic_per_cust)} share={b.nonhsic_per_cust / maxOff} />
+          <Metric label="FY26 SoW" value={pct(b.sow)} share={b.sow / maxSow} />
+        </div>
       </button>
     );
   };
@@ -53,7 +65,7 @@ export default function Priorities() {
   return (
     <>
       <TitleRow
-        title="Priorities & offers"
+        title="Priorities and offers"
         sub={<>SoW is within {num(ax.seg_sow_max_gap_pp)!.toFixed(1)} points in every box, so low SoW is the whole book.
           We prioritise by closure risk (card age) and value (purchase frequency). Select a box to size an offer for it.</>}
       />
@@ -70,11 +82,11 @@ export default function Priorities() {
             <button className="box outside" style={{ gridArea: "a" }} aria-pressed={sel === "A"} onClick={() => setSel("A")}>
               <span className="name">A · Closed, still shopping</span>
               <span className="count">{count(num(a.seg_A_n_score))} customers</span>
-              <dl>
-                <dt>Spent after closing</dt><dd>{inrM(num(a.seg_A_post_close_net))}</dd>
-                <dt>Off-card spend</dt><dd>{inr(num(a.seg_A_horizon_net_per_cust))}</dd>
-                <dt>HSIC SoW</dt><dd>0.0%</dd>
-              </dl>
+              <div className="metrics">
+                <Metric label="Spent after closing" value={inrM(num(a.seg_A_post_close_net))} />
+                <Metric label="Off-card spend" value={inr(num(a.seg_A_horizon_net_per_cust))} share={num(a.seg_A_horizon_net_per_cust)! / maxOff} />
+                <Metric label="HSIC SoW" value="0.0%" share={0} />
+              </div>
               <span className="note" style={{ marginTop: 8 }}>The most literal low-SoW group: HSIC gets none of their MetroMart spend.</span>
             </button>
           </div>
@@ -90,7 +102,7 @@ export default function Priorities() {
           <input id="shift" className="range" type="range" min={0} max={20} step={1} value={shift} onChange={(e) => setShift(Number(e.target.value))} />
           <div className="sim-out">
             <div><span className="muted">Spend moved to HSIC, 6 months</span><div className="v">{inrM(moved, 2)}</div></div>
-            <div><span className="muted">The box&rsquo;s SoW</span><div className="v">{pct(s.sow)} → {pct(sowAfter)}</div></div>
+            <div><span className="muted">The box&rsquo;s SoW after</span><div className="v">{pct(sowAfter)}</div><div className="note">from {pct(s.sow)} today</div></div>
           </div>
           <h3 className="sim-h">The same {shift}% shift in every box</h3>
           <div className="compare">

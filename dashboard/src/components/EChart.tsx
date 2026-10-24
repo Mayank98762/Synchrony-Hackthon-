@@ -9,10 +9,10 @@ echarts.use([BarChart, CustomChart, LineChart, ScatterChart, GridComponent, Mark
   TooltipComponent, SVGRenderer]);
 
 export const C = {
-  hue: "#2470cc", ink: "#141414", grey: "#8a8a8a", pale: "#d6d6d6", grid: "#ececec", axis: "#c8c8c8",
-  label: "#6b6b6b", text: "#0a0a0a",
+  hue: "#2470cc", ink: "#0b0b0b", grey: "#8a909b", pale: "#c4dbf5", grid: "#e9edf2", axis: "#c3cad4",
+  label: "#5b6270", text: "#0b0b0b",
 };
-const FONT = '"Geist", Inter, system-ui, sans-serif';
+const FONT = '"Archivo", Inter, system-ui, sans-serif';
 
 /** The app-screen chart rules as a base: 3-5 faint horizontal gridlines, no y-axis line, ticks in grey at 12px,
  *  flat x labels, a plain tooltip box, no animation (motion on app screens is feedback only). */
@@ -24,7 +24,7 @@ export function base(extra: EChartsCoreOption = {}): EChartsCoreOption {
     tooltip: {
       trigger: "axis",
       backgroundColor: "#ffffff",
-      borderColor: "#e6e6e6",
+      borderColor: "#e3e8ef",
       borderWidth: 1,
       padding: [6, 10],
       textStyle: { color: C.text, fontSize: 12, fontFamily: FONT },
@@ -64,7 +64,7 @@ export function EChart({ option, height, label }: { option: EChartsCoreOption; h
     chart.current = echarts.init(el.current, undefined, { renderer: "svg" });
     const ro = new ResizeObserver(() => chart.current?.resize());
     ro.observe(el.current);
-    // lay labels out again once Geist has loaded, so measured text widths are the real ones
+    // lay labels out again once Archivo has loaded, so measured text widths are the real ones
     document.fonts?.ready.then(() => chart.current?.resize());
     return () => { ro.disconnect(); chart.current?.dispose(); chart.current = null; };
   }, []);
