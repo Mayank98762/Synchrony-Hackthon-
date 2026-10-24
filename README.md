@@ -2,7 +2,7 @@
 
 Our entry for the **Synchrony Analytics Hackathon 2026** case study. HSIC Bank and MetroMart issue a co-branded credit card, and cardholders are paying for more of their MetroMart shopping with other methods. We measure the loss in **Share of Wallet (SoW)**, test where it comes from, decide who to prioritise and design offers to win the spend back.
 
-> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline, ML experiments, closure model and segmentation are done and merged to `main`. Mayank's findings, hypothesis tests and slides 4–7 are merged too (`run_all.py`: 37 checks pass, 0 fail, 2 pending on Shreyash). See [Progress](#progress) below and [TASKS.md](TASKS.md).
+> **Status:** plan v5.3 is final, and implementation is under way. Two independent EDAs agree on every core number. The pipeline, ML experiments, closure model and segmentation are done and merged to `main`. Mayank's findings, hypothesis tests and slides 4–7 are merged too, and so are Shreyash's style guide, economics, F12, F15 and the 6-slide deck draft (`run_all.py`: 39 checks pass, 0 fail). See [Progress](#progress) below and [TASKS.md](TASKS.md).
 > **Deliverable:** slides as a PDF, emailed to analyticshiring@syf.com by **8:00 PM IST, 24 Oct 2026**. The subject line is the roll number only.
 > **Full plan:** [PROJECT_PLAN.md](PROJECT_PLAN.md) · **Task board:** [TASKS.md](TASKS.md)
 
@@ -41,7 +41,7 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
 | Heterogeneity gate | `analysis/experiments_ml.py` | Customer SoW fails all three tests (variance ratio 1.00, split-half r −0.005, persistence r 0.004). X2, X7, X15 and X16 also done |
 | Closure model | `analysis/closure_model.py` | Card age alone (ROC-AUC 0.672) beats every learned model, so the card-age rule ships. Its top 10% riskiest cards close at 15.7% vs 6.2% overall. Usage adds nothing beyond card age |
 | Segmentation | `analysis/segments.py` | K-means looks stable (ARI 0.89) but explains 0.04% of next year's SoW. 2×2 boxes: SoW within 1.7pp; young cards close 7.7pp more often; high-frequency customers spend ₹2,255 more off-card |
-| Pipeline | `analysis/run_all.py`, `export.py`, `checks.py` | One command, about 3 minutes, deterministic. 39 reproduction checks: 37 pass, 0 fail, 2 pending on Shreyash's F12, F15 |
+| Pipeline | `analysis/run_all.py`, `export.py`, `checks.py` | One command, about 3 minutes, deterministic. 39 reproduction checks: 39 pass, 0 fail |
 | Slides 8–9 | `deck/slides_08_09.md`, `analysis/charts_ml.py` | Content, layout, speaker notes and judge Q&A; 5 charts in `outputs/charts/08_*`, `09_*` |
 | Dashboard | `dashboard/`, `analysis/dashboard_data.py` | 4 pages (share of wallet, segments, attrition & closures, priorities & offers) in React + Vite + TypeScript + ECharts, styled to the taste-skill app rules. Data: 35 kB of JSON rebuilt by `run_all.py`. Passes the skill's lint and browser inspector (0 fail) at 1440, 768 and 390px |
 | Handoffs | `HANDOFF_MAYANK.md`, `HANDOFF_SHREYASH.md` | What each teammate uses, from which file, for which slide |
@@ -58,7 +58,7 @@ As of 24 Oct. Owners and task IDs are in [TEAM_SPLIT.md](TEAM_SPLIT.md) and [TAS
 
 **In progress / next**
 - **Mayank:** swap the charts to Shreyash's `style.py` when it lands.
-- **Shreyash:** `style.py`, `economics.py` (with the 3 review fixes in his handoff), F12 and F15, slides 1–3 and 10–12, deck integration and submission.
+- **Shreyash:** `style.py`, `economics.py`, F12 and F15 are merged. The 6-slide deck draft is `deck/HSIC_SoW_deck.pptx`, built from `key_numbers.json` by `deck/build_deck.js`. Next: team review of the deck, a pass on the softest assumptions (50% co-funding, revolve income), PDF export and submission.
 - **Devansh:** the final `run_all.py` once Shreyash's modules land (the dashboard's break-even column fills in then); publish the dashboard and take screenshots for slide 12.
 
 ## Repository structure

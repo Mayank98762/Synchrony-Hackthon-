@@ -394,6 +394,8 @@ Synchrony-Hackthon-/
 
 About 12 slides plus an appendix. Built from `outputs/` only; every number comes from `key_numbers.md`. **Never name v4 or the blueprint, and never claim pre-registration.**
 
+**Scope change (24 Oct):** the main deck is 6 slides, to fit the organizers' 5–6 slide limit (to confirm). `deck/build_deck.js` condenses the outline below into 6 slides; the appendix is optional (`DECK_APPENDIX=1`).
+
 | # | Slide | Message |
 |---|---|---|
 | 1 | Title | — |

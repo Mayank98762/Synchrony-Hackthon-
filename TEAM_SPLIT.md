@@ -50,7 +50,7 @@ Status as of 24 Oct: everything below is done and merged to `main`, rebuilt on D
 
 ## Shreyash: economics, offers, integration
 
-Status as of 24 Oct, late morning: `style.py`, F12, F15 and `economics.py` done on the `shreyash` branch and run through `run_all.py` (39 checks pass, 0 fail, 0 pending; 602 numbers). Slide content for 1–3, 10–12 and the appendix is in `deck/slides_01-03_10-12.md`. The deck is condensed to 6 slides (organizers' limit, to confirm) and built by `deck/build_deck.js`.
+Status as of 24 Oct, 1 PM: `style.py`, F12, F15 and `economics.py` merged to `main` and run through `run_all.py` (39 checks pass, 0 fail, 0 pending; 602 numbers). Slide content for 1–3, 10–12 and the appendix is in `deck/slides_01-03_10-12.md`. The deck is condensed to 6 slides (organizers' limit, to confirm); `deck/build_deck.js` builds the draft `deck/HSIC_SoW_deck.pptx`.
 
 | Task | Files |
 |---|---|
