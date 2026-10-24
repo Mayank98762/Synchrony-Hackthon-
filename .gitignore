@@ -12,3 +12,7 @@ __pycache__/
 
 # design-skill working files (direction sheet, screenshots)
 .taste-skill/
+
+# junk from a broken notify hook, and TypeScript build caches
+*claude-notify-signals*
+*.tsbuildinfo
