@@ -271,7 +271,34 @@ def run():
 
 
 # ---------------------------------------------------------------- F12, F15 (Shreyash)
-SHREYASH_FUNCS = []      # list f12_* / f15_* functions here; run() picks them up
+def f12_counterfactual_gap():
+    """HSIC spend in FY26 vs what FY25's SoW would have given on FY26's active spend (constant-SoW counterfactual)."""
+    act = prep.active(prep.load().txn)
+    g = act.assign(h=act.net.where(act.is_hsic, 0.0)).groupby("fy")[["h", "net"]].sum()
+    at_fy25_sow = g.net[FY_B] * g.h[FY_A] / g.net[FY_A]
+    return {"f12_hsic_fy25": g.h[FY_A], "f12_hsic_fy26": g.h[FY_B], "f12_total_fy25": g.net[FY_A],
+            "f12_total_fy26": g.net[FY_B], "f12_hsic_fy26_at_fy25_sow": at_fy25_sow, "f12_gap": at_fy25_sow - g.h[FY_B]}
+
+
+def f15_bank_terms():
+    """F12's gap in the bank's terms: gross interchange at the assumed range, less the rewards HSIC would have paid at
+    the measured FY26 effective rate, with HSIC funding all rewards or MetroMart co-funding half. No revolve income."""
+    d = prep.load()
+    act = prep.active(d.txn)
+    h26 = act[(act.fy == FY_B) & act.is_hsic]
+    rate = h26.reward.sum() / h26.net.sum()
+    gap = f12_counterfactual_gap()["f12_gap"]
+    lo, hi = C.SCENARIOS["conservative"]["interchange"], C.SCENARIOS["optimistic"]["interchange"]
+    out = {"f15_gross_lo": gap * lo, "f15_gross_hi": gap * hi, "f15_rewards_on_gap": gap * rate}
+    for tag, share in (("nocofund", 0.0), ("cofund", C.SCENARIOS["base"]["cofunding"])):
+        out[f"f15_net_margin_lo_{tag}"] = gap * (lo - rate * (1 - share))
+        out[f"f15_net_margin_hi_{tag}"] = gap * (hi - rate * (1 - share))
+    cardholders = int(d.cust.has_card.sum())     # the dataset is a sample: also show each figure per 10,000 cardholders
+    out |= {f"{k}_per10k": v * 10_000 / cardholders for k, v in out.items()}
+    return out | {"f15_reward_rate_fy26": rate, "f15_cardholders": cardholders}
+
+
+SHREYASH_FUNCS = [f12_counterfactual_gap, f15_bank_terms]
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-10-24 02:00",
+  "generated": "2026-10-24 11:14",
   "data_window": "2024-08-01 to 2026-07-31",
   "customers": 45000,
   "source": "outputs/key_numbers.json and outputs/tables (run_all.py)"
@@ -237,17 +237,17 @@
   },
   "x1_split_half_r": {
    "key": "x1_split_half_r",
-   "value": -0.005090689735322454,
+   "value": -0.00509068973532245,
    "label": "Measured"
   },
   "x1_split_half_ci_lo": {
    "key": "x1_split_half_ci_lo",
-   "value": -0.021202467867705396,
+   "value": -0.021202467867705393,
    "label": "Measured"
   },
   "x1_split_half_ci_hi": {
    "key": "x1_split_half_ci_hi",
-   "value": 0.011023731877336294,
+   "value": 0.0110237318773363,
    "label": "Measured"
   },
   "x1_split_half_n": {
@@ -257,17 +257,17 @@
   },
   "x1_persistence_r": {
    "key": "x1_persistence_r",
-   "value": 0.00372528122256921,
+   "value": 0.0037252812225692087,
    "label": "Measured"
   },
   "x1_persistence_ci_lo": {
    "key": "x1_persistence_ci_lo",
-   "value": -0.015606546195158394,
+   "value": -0.015606546195158395,
    "label": "Measured"
   },
   "x1_persistence_ci_hi": {
    "key": "x1_persistence_ci_hi",
-   "value": 0.023054324581802697,
+   "value": 0.023054324581802694,
    "label": "Measured"
   },
   "x1_persistence_n": {

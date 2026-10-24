@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-10-24 02:00",
+  "generated": "2026-10-24 11:14",
   "data_window": "2024-08-01 to 2026-07-31",
   "customers": 45000,
   "source": "outputs/key_numbers.json and outputs/tables (run_all.py)"
@@ -284,7 +284,460 @@
    "tests": null
   }
  ],
- "economics": {},
+ "economics": {
+  "mde_B": {
+   "value": 0.0610843129524345,
+   "label": "Simulated"
+  },
+  "mde_B_p": {
+   "value": 0.15058199499042288,
+   "label": "Simulated"
+  },
+  "mde_B_purchases_3m": {
+   "value": 2989.5119047619046,
+   "label": "Simulated"
+  },
+  "mde_B_rel": {
+   "value": 0.40565482583969953,
+   "label": "Simulated"
+  },
+  "mde_C": {
+   "value": 0.05171787167545313,
+   "label": "Simulated"
+  },
+  "mde_C_p": {
+   "value": 0.1563971340839304,
+   "label": "Simulated"
+  },
+  "mde_C_purchases_3m": {
+   "value": 4301.80493727236,
+   "label": "Simulated"
+  },
+  "mde_C_rel": {
+   "value": 0.33068298839605825,
+   "label": "Simulated"
+  },
+  "mde_D": {
+   "value": 0.03135902974012308,
+   "label": "Simulated"
+  },
+  "mde_D_p": {
+   "value": 0.15865722724928502,
+   "label": "Simulated"
+  },
+  "mde_D_purchases_3m": {
+   "value": 11837.848013048637,
+   "label": "Simulated"
+  },
+  "mde_D_rel": {
+   "value": 0.1976527025198242,
+   "label": "Simulated"
+  },
+  "mde_E": {
+   "value": 0.026232791493775567,
+   "label": "Simulated"
+  },
+  "mde_E_p": {
+   "value": 0.16012579019991657,
+   "label": "Simulated"
+  },
+  "mde_E_purchases_3m": {
+   "value": 17043.221248200967,
+   "label": "Simulated"
+  },
+  "mde_E_rel": {
+   "value": 0.16382614856122804,
+   "label": "Simulated"
+  },
+  "mde_grid": {
+   "value": 0.017928292012793886,
+   "label": "Simulated"
+  },
+  "mde_grid_purchases_3m": {
+   "value": 36172.38610328387,
+   "label": "Simulated"
+  },
+  "mde_z": {
+   "value": 2.8015852181129683,
+   "label": "Simulated"
+  },
+  "o1_breakeven_base": {
+   "value": 0.000551510770598779,
+   "label": "Simulated"
+  },
+  "o1_breakeven_conservative": {
+   "value": 0.024635608934644747,
+   "label": "Simulated"
+  },
+  "o1_breakeven_optimistic": {
+   "value": 0.0003423388775397164,
+   "label": "Simulated"
+  },
+  "o1_breakeven_revolve": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o1_breakeven_revolve_nocofund": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o1_unit_base": {
+   "value": 0.020457987479408392,
+   "label": "Simulated"
+  },
+  "o1_unit_conservative": {
+   "value": 0.0009159749588167747,
+   "label": "Simulated"
+  },
+  "o1_unit_optimistic": {
+   "value": 0.03295798747940839,
+   "label": "Simulated"
+  },
+  "o1_value_per_1pct_base": {
+   "value": 55066.82740327855,
+   "label": "Simulated"
+  },
+  "o1_value_per_1pct_conservative": {
+   "value": -3819.083665442944,
+   "label": "Simulated"
+  },
+  "o1_value_per_1pct_optimistic": {
+   "value": 90677.05817577853,
+   "label": "Simulated"
+  },
+  "o2_breakeven_base": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o2_breakeven_conservative": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o2_breakeven_optimistic": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o2_breakeven_revolve": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o2_breakeven_revolve_nocofund": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o2_unit_base": {
+   "value": 0.02050462332391562,
+   "label": "Simulated"
+  },
+  "o2_unit_conservative": {
+   "value": 0.0010092466478312332,
+   "label": "Simulated"
+  },
+  "o2_unit_optimistic": {
+   "value": 0.03300462332391562,
+   "label": "Simulated"
+  },
+  "o2_value_per_1pct_base": {
+   "value": 16973.145885567046,
+   "label": "Simulated"
+  },
+  "o2_value_per_1pct_conservative": {
+   "value": 835.4257631340784,
+   "label": "Simulated"
+  },
+  "o2_value_per_1pct_optimistic": {
+   "value": 27320.291513067048,
+   "label": "Simulated"
+  },
+  "o3_breakeven_base": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o3_breakeven_conservative": {
+   "value": "never",
+   "label": "Simulated"
+  },
+  "o3_breakeven_optimistic": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o3_breakeven_revolve": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o3_breakeven_revolve_nocofund": {
+   "value": 0.016332296116176787,
+   "label": "Simulated"
+  },
+  "o3_other_breakeven_base": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o3_other_breakeven_conservative": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o3_other_breakeven_optimistic": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o3_other_breakeven_revolve": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o3_other_breakeven_revolve_nocofund": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o3_other_unit_base": {
+   "value": 0.022500000000000003,
+   "label": "Simulated"
+  },
+  "o3_other_unit_conservative": {
+   "value": 0.004999999999999999,
+   "label": "Simulated"
+  },
+  "o3_other_unit_optimistic": {
+   "value": 0.035,
+   "label": "Simulated"
+  },
+  "o3_other_value_per_1pct_base": {
+   "value": 53437.61976525002,
+   "label": "Simulated"
+  },
+  "o3_other_value_per_1pct_conservative": {
+   "value": 11875.0266145,
+   "label": "Simulated"
+  },
+  "o3_other_value_per_1pct_optimistic": {
+   "value": 83125.18630150003,
+   "label": "Simulated"
+  },
+  "o3_unit_base": {
+   "value": 0.01058385194191161,
+   "label": "Simulated"
+  },
+  "o3_unit_conservative": {
+   "value": -0.01883229611617679,
+   "label": "Simulated"
+  },
+  "o3_unit_optimistic": {
+   "value": 0.023083851941911607,
+   "label": "Simulated"
+  },
+  "o3_value_per_1pct_base": {
+   "value": 5014.76811025,
+   "label": "Simulated"
+  },
+  "o3_value_per_1pct_conservative": {
+   "value": -8922.989335500002,
+   "label": "Simulated"
+  },
+  "o3_value_per_1pct_optimistic": {
+   "value": 10937.432346499998,
+   "label": "Simulated"
+  },
+  "o4_breakeven_base": {
+   "value": 0.6857604329009722,
+   "label": "Simulated"
+  },
+  "o4_breakeven_conservative": {
+   "value": "never",
+   "label": "Simulated"
+  },
+  "o4_breakeven_optimistic": {
+   "value": 0.20966019703122646,
+   "label": "Simulated"
+  },
+  "o4_breakeven_revolve": {
+   "value": 0.004495376676084382,
+   "label": "Simulated"
+  },
+  "o4_breakeven_revolve_nocofund": {
+   "value": 0.026490753352168765,
+   "label": "Simulated"
+  },
+  "o4_unit_base": {
+   "value": 0.00550462332391562,
+   "label": "Simulated"
+  },
+  "o4_unit_conservative": {
+   "value": -0.028990753352168767,
+   "label": "Simulated"
+  },
+  "o4_unit_optimistic": {
+   "value": 0.01800462332391562,
+   "label": "Simulated"
+  },
+  "o4_value_per_1pct_base": {
+   "value": -755097.7082478107,
+   "label": "Simulated"
+  },
+  "o4_value_per_1pct_conservative": {
+   "value": -1591392.9389756215,
+   "label": "Simulated"
+  },
+  "o4_value_per_1pct_optimistic": {
+   "value": -729723.4824728108,
+   "label": "Simulated"
+  },
+  "o5_breakeven_base": {
+   "value": "no one qualifies",
+   "label": "Simulated"
+  },
+  "o5_breakeven_conservative": {
+   "value": "no one qualifies",
+   "label": "Simulated"
+  },
+  "o5_breakeven_optimistic": {
+   "value": "no one qualifies",
+   "label": "Simulated"
+  },
+  "o5_max_small_hsic_purchases_in_a_month": {
+   "value": 3,
+   "label": "Simulated"
+  },
+  "o5_reach_customer_months": {
+   "value": 0,
+   "label": "Simulated"
+  },
+  "o6_breakeven_base": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o6_breakeven_conservative": {
+   "value": "never",
+   "label": "Simulated"
+  },
+  "o6_breakeven_optimistic": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o6_breakeven_revolve": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o6_breakeven_revolve_nocofund": {
+   "value": 0.0004930650141265723,
+   "label": "Simulated"
+  },
+  "o6_unit_base": {
+   "value": 0.018503467492936715,
+   "label": "Simulated"
+  },
+  "o6_unit_conservative": {
+   "value": -0.0029930650141265745,
+   "label": "Simulated"
+  },
+  "o6_unit_optimistic": {
+   "value": 0.031003467492936716,
+   "label": "Simulated"
+  },
+  "o6_value_per_1pct_base": {
+   "value": 11419.38339079931,
+   "label": "Simulated"
+  },
+  "o6_value_per_1pct_conservative": {
+   "value": -1847.164966401382,
+   "label": "Simulated"
+  },
+  "o6_value_per_1pct_optimistic": {
+   "value": 19133.737062049313,
+   "label": "Simulated"
+  },
+  "o7_breakeven_saved_base": {
+   "value": 0.03959872067925054,
+   "label": "Simulated"
+  },
+  "o7_breakeven_saved_conservative": {
+   "value": "never",
+   "label": "Simulated"
+  },
+  "o7_breakeven_saved_optimistic": {
+   "value": 0.024601306419050235,
+   "label": "Simulated"
+  },
+  "o7_first_use_60d_share": {
+   "value": 0.15073607100091568,
+   "label": "Simulated"
+  },
+  "o7_milestone_reach": {
+   "value": 0.0009861238289779531,
+   "label": "Simulated"
+  },
+  "o7_new_cards_observed": {
+   "value": 14197,
+   "label": "Simulated"
+  },
+  "o7_trial_cost_per_card_base": {
+   "value": 1.9282521470923732,
+   "label": "Simulated"
+  },
+  "o7_trial_cost_per_card_conservative": {
+   "value": 3.8565042941847465,
+   "label": "Simulated"
+  },
+  "o7_trial_cost_per_card_optimistic": {
+   "value": 1.9282521470923732,
+   "label": "Simulated"
+  },
+  "o7_value_per_saved_card_base": {
+   "value": 48.69480917606422,
+   "label": "Simulated"
+  },
+  "o7_value_per_saved_card_conservative": {
+   "value": 2.396780089610518,
+   "label": "Simulated"
+  },
+  "o7_value_per_saved_card_optimistic": {
+   "value": 78.38007113310107,
+   "label": "Simulated"
+  },
+  "o8_breakeven_base": {
+   "value": 0.08090177263501172,
+   "label": "Simulated"
+  },
+  "o8_breakeven_conservative": {
+   "value": "never",
+   "label": "Simulated"
+  },
+  "o8_breakeven_optimistic": {
+   "value": 0.04479087243682794,
+   "label": "Simulated"
+  },
+  "o8_breakeven_revolve": {
+   "value": 0.0,
+   "label": "Simulated"
+  },
+  "o8_breakeven_revolve_nocofund": {
+   "value": 0.006490753352168765,
+   "label": "Simulated"
+  },
+  "o8_unit_base": {
+   "value": 0.015504623323915619,
+   "label": "Simulated"
+  },
+  "o8_unit_conservative": {
+   "value": -0.008990753352168767,
+   "label": "Simulated"
+  },
+  "o8_unit_optimistic": {
+   "value": 0.02800462332391562,
+   "label": "Simulated"
+  },
+  "o8_value_per_1pct_base": {
+   "value": -113606.44646196757,
+   "label": "Simulated"
+  },
+  "o8_value_per_1pct_conservative": {
+   "value": -268550.4353759351,
+   "label": "Simulated"
+  },
+  "o8_value_per_1pct_optimistic": {
+   "value": -100688.46444571756,
+   "label": "Simulated"
+  }
+ },
  "scenarios": {
   "assumed_cofunding_base": {
    "key": "assumed_cofunding_base",
@@ -299,6 +752,16 @@
   "assumed_cofunding_optimistic": {
    "key": "assumed_cofunding_optimistic",
    "value": 0.5,
+   "label": "Assumed"
+  },
+  "assumed_cost_of_funds": {
+   "key": "assumed_cost_of_funds",
+   "value": 0.08,
+   "label": "Assumed"
+  },
+  "assumed_emi_subvention": {
+   "key": "assumed_emi_subvention",
+   "value": 0.03,
    "label": "Assumed"
   },
   "assumed_interchange_base": {

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-10-24 02:00",
+  "generated": "2026-10-24 11:14",
   "data_window": "2024-08-01 to 2026-07-31",
   "customers": 45000,
   "source": "outputs/key_numbers.json and outputs/tables (run_all.py)"
@@ -253,8 +253,8 @@
   },
   "f12_gap": {
    "key": "f12_gap",
-   "value": null,
-   "label": "Pending"
+   "value": 33360574.8722094,
+   "label": "Measured"
   },
   "f8_prime_ge_left_on_table": {
    "key": "f8_prime_ge_left_on_table",

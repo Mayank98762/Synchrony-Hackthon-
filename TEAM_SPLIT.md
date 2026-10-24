@@ -50,6 +50,8 @@ Status as of 24 Oct: everything below is done and merged to `main`, rebuilt on D
 
 ## Shreyash: economics, offers, integration
 
+Status as of 24 Oct, late morning: `style.py`, F12, F15 and `economics.py` done on the `shreyash` branch and run through `run_all.py` (39 checks pass, 0 fail, 0 pending; 602 numbers). Slide content for 1–3, 10–12 and the appendix is in `deck/slides_01-03_10-12.md`. The deck is condensed to 6 slides (organizers' limit, to confirm) and built by `deck/build_deck.js`.
+
 | Task | Files |
 |---|---|
 | Chart style guide (palette, fonts, 16:9 sizes), hour 1 | `analysis/style.py` |
@@ -79,7 +81,7 @@ Devansh carries the most code, so the dashboard goes first on the cut list; if h
 |---|---|---|---|
 | Hour 0.5 | Devansh → Mayank | `prep.py` interface (function and column names) | ☑ `analysis/INTERFACE.md` |
 | Hour 1 | Devansh → all | working `prep.py` and `config.py` | ☑ |
-| Hour 1 | Shreyash → all | `style.py` and the slide template | ☐ |
+| Hour 1 | Shreyash → all | `style.py` and the slide template | ◐ `style.py` done (on `shreyash`); the deck is being built as 6 slides + an optional appendix |
 | Hour 4 | Mayank, Devansh → Shreyash | first `key_numbers` dict for the `[KN]` placeholders | ◐ Devansh's part in `outputs/key_numbers.md`; Mayank's keys are in it too (merged) |
 | Hour 8 | Mayank → Devansh | `experiments_f.py` and `experiments_h.py` ready for `run_all.py` | ☑ merged; `run_all.py` picks them up (37 pass, 0 fail) |
 | Hour 8 | Devansh → Shreyash | final `key_numbers.md` | ◐ Devansh's and Mayank's keys final on `main` (424 numbers); last run once Shreyash's F12, F15 and `economics.py` land |

@@ -11,6 +11,14 @@
   "value": 0.5,
   "label": "Assumed"
  },
+ "assumed_cost_of_funds": {
+  "value": 0.08,
+  "label": "Assumed"
+ },
+ "assumed_emi_subvention": {
+  "value": 0.03,
+  "label": "Assumed"
+ },
  "assumed_interchange_base": {
   "value": 0.0175,
   "label": "Assumed"
@@ -243,6 +251,170 @@
   "value": -0.0028530069941448133,
   "label": "Measured"
  },
+ "econ_margin_general_base": {
+  "value": 0.02050462332391562,
+  "label": "Simulated"
+ },
+ "econ_margin_general_conservative": {
+  "value": 0.0010092466478312332,
+  "label": "Simulated"
+ },
+ "econ_margin_general_optimistic": {
+  "value": 0.03300462332391562,
+  "label": "Simulated"
+ },
+ "econ_margin_one_pct_base": {
+  "value": 0.022500000000000003,
+  "label": "Simulated"
+ },
+ "econ_margin_one_pct_conservative": {
+  "value": 0.004999999999999999,
+  "label": "Simulated"
+ },
+ "econ_margin_one_pct_optimistic": {
+  "value": 0.035,
+  "label": "Simulated"
+ },
+ "econ_margin_prime_electronics_base": {
+  "value": 0.012500000000000004,
+  "label": "Simulated"
+ },
+ "econ_margin_prime_electronics_conservative": {
+  "value": -0.015,
+  "label": "Simulated"
+ },
+ "econ_margin_prime_electronics_optimistic": {
+  "value": 0.025,
+  "label": "Simulated"
+ },
+ "econ_margin_prime_grocery_base": {
+  "value": 0.0025000000000000022,
+  "label": "Simulated"
+ },
+ "econ_margin_prime_grocery_conservative": {
+  "value": -0.035,
+  "label": "Simulated"
+ },
+ "econ_margin_prime_grocery_optimistic": {
+  "value": 0.015,
+  "label": "Simulated"
+ },
+ "econin_big_hsic": {
+  "value": 51084783.510000005,
+  "label": "Measured"
+ },
+ "econin_big_nonhsic": {
+  "value": 202993806.2,
+  "label": "Measured"
+ },
+ "econin_card_years": {
+  "value": 29022.242299794663,
+  "label": "Measured"
+ },
+ "econin_cash_upi": {
+  "value": 82777165.02000001,
+  "label": "Measured"
+ },
+ "econin_hsic": {
+  "value": 68922629.22,
+  "label": "Measured"
+ },
+ "econin_hsic_per_card_year": {
+  "value": 2374.8209565629477,
+  "label": "Measured"
+ },
+ "econin_nonhsic": {
+  "value": 284881846.18,
+  "label": "Measured"
+ },
+ "econin_np_electronics_per_card_year": {
+  "value": 510.29756063425214,
+  "label": "Measured"
+ },
+ "econin_np_grocery_per_card_year": {
+  "value": 130.50164910134853,
+  "label": "Measured"
+ },
+ "econin_o1_eligible": {
+  "value": 284881846.18,
+  "label": "Measured"
+ },
+ "econin_o2_eligible": {
+  "value": 82777165.02000001,
+  "label": "Measured"
+ },
+ "econin_o3_eligible": {
+  "value": 47381313.88999999,
+  "label": "Measured"
+ },
+ "econin_o3_other_eligible": {
+  "value": 237500532.29000002,
+  "label": "Measured"
+ },
+ "econin_o4_eligible": {
+  "value": 202993806.2,
+  "label": "Measured"
+ },
+ "econin_o6_customers": {
+  "value": 5903,
+  "label": "Measured"
+ },
+ "econin_o6_eligible": {
+  "value": 61714829.370000005,
+  "label": "Measured"
+ },
+ "econin_o7_closure_12m": {
+  "value": 0.2250695520517777,
+  "label": "Measured"
+ },
+ "econin_o7_nonprime_share": {
+  "value": 0.3779502613654364,
+  "label": "Measured"
+ },
+ "econin_o7_young_cards": {
+  "value": 6313,
+  "label": "Measured"
+ },
+ "econin_o8_customers": {
+  "value": 6744,
+  "label": "Measured"
+ },
+ "econin_o8_eligible": {
+  "value": 103343856.13,
+  "label": "Measured"
+ },
+ "econin_o8_hsic": {
+  "value": 28461683.52,
+  "label": "Measured"
+ },
+ "econin_o8_noise": {
+  "value": 25925904.416666668,
+  "label": "Measured"
+ },
+ "econin_o8_noise_share": {
+  "value": 0.9109055126148303,
+  "label": "Measured"
+ },
+ "econin_other_1pct": {
+  "value": 237500532.29000002,
+  "label": "Measured"
+ },
+ "econin_prime_electronics": {
+  "value": 38302352.629999995,
+  "label": "Measured"
+ },
+ "econin_prime_grocery": {
+  "value": 9078961.26,
+  "label": "Measured"
+ },
+ "econin_reward_rate": {
+  "value": 0.013990753352168766,
+  "label": "Measured"
+ },
+ "econin_small_nonhsic": {
+  "value": 15183417.629999999,
+  "label": "Measured"
+ },
  "f10_2025_07_31_cards": {
   "value": 26749,
   "label": "Measured"
@@ -335,6 +507,30 @@
   "value": 6227,
   "label": "Measured"
  },
+ "f12_gap": {
+  "value": 33360574.8722094,
+  "label": "Measured"
+ },
+ "f12_hsic_fy25": {
+  "value": 85671725.46,
+  "label": "Measured"
+ },
+ "f12_hsic_fy26": {
+  "value": 68922629.22,
+  "label": "Measured"
+ },
+ "f12_hsic_fy26_at_fy25_sow": {
+  "value": 102283204.0922094,
+  "label": "Measured"
+ },
+ "f12_total_fy25": {
+  "value": 296344254.68,
+  "label": "Measured"
+ },
+ "f12_total_fy26": {
+  "value": 353804475.4,
+  "label": "Measured"
+ },
  "f13_n": {
   "value": 18111,
   "label": "Measured"
@@ -377,6 +573,70 @@
  },
  "f14_may26_sow": {
   "value": 0.16200274870225315,
+  "label": "Measured"
+ },
+ "f15_cardholders": {
+  "value": 38164,
+  "label": "Measured"
+ },
+ "f15_gross_hi": {
+  "value": 667211.497444188,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_gross_hi_per10k": {
+  "value": 174827.4545236841,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_gross_lo": {
+  "value": 500408.623083141,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_gross_lo_per10k": {
+  "value": 131120.59089276305,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_net_margin_hi_cofund": {
+  "value": 433841.7100823676,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_net_margin_hi_cofund_per10k": {
+  "value": 113678.25963797496,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_net_margin_hi_nocofund": {
+  "value": 200471.92272054724,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_net_margin_hi_nocofund_per10k": {
+  "value": 52529.06475226581,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_net_margin_lo_cofund": {
+  "value": 267038.8357213206,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_net_margin_lo_cofund_per10k": {
+  "value": 69971.39600705392,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_net_margin_lo_nocofund": {
+  "value": 33669.04835950021,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_net_margin_lo_nocofund_per10k": {
+  "value": 8822.201121344777,
+  "label": "Measured \u00d7 Assumed"
+ },
+ "f15_reward_rate_fy26": {
+  "value": 0.013990753352168766,
+  "label": "Measured"
+ },
+ "f15_rewards_on_gap": {
+  "value": 466739.57472364075,
+  "label": "Measured"
+ },
+ "f15_rewards_on_gap_per10k": {
+  "value": 122298.38977141828,
   "label": "Measured"
  },
  "f1_slope_pp_per_quarter": {
@@ -690,6 +950,458 @@
  "f9_ratio": {
   "value": 2.019247119215036,
   "label": "Measured"
+ },
+ "mde_B": {
+  "value": 0.0610843129524345,
+  "label": "Simulated"
+ },
+ "mde_B_p": {
+  "value": 0.15058199499042288,
+  "label": "Simulated"
+ },
+ "mde_B_purchases_3m": {
+  "value": 2989.5119047619046,
+  "label": "Simulated"
+ },
+ "mde_B_rel": {
+  "value": 0.40565482583969953,
+  "label": "Simulated"
+ },
+ "mde_C": {
+  "value": 0.05171787167545313,
+  "label": "Simulated"
+ },
+ "mde_C_p": {
+  "value": 0.1563971340839304,
+  "label": "Simulated"
+ },
+ "mde_C_purchases_3m": {
+  "value": 4301.80493727236,
+  "label": "Simulated"
+ },
+ "mde_C_rel": {
+  "value": 0.33068298839605825,
+  "label": "Simulated"
+ },
+ "mde_D": {
+  "value": 0.03135902974012308,
+  "label": "Simulated"
+ },
+ "mde_D_p": {
+  "value": 0.15865722724928502,
+  "label": "Simulated"
+ },
+ "mde_D_purchases_3m": {
+  "value": 11837.848013048637,
+  "label": "Simulated"
+ },
+ "mde_D_rel": {
+  "value": 0.1976527025198242,
+  "label": "Simulated"
+ },
+ "mde_E": {
+  "value": 0.026232791493775567,
+  "label": "Simulated"
+ },
+ "mde_E_p": {
+  "value": 0.16012579019991657,
+  "label": "Simulated"
+ },
+ "mde_E_purchases_3m": {
+  "value": 17043.221248200967,
+  "label": "Simulated"
+ },
+ "mde_E_rel": {
+  "value": 0.16382614856122804,
+  "label": "Simulated"
+ },
+ "mde_grid": {
+  "value": 0.017928292012793886,
+  "label": "Simulated"
+ },
+ "mde_grid_purchases_3m": {
+  "value": 36172.38610328387,
+  "label": "Simulated"
+ },
+ "mde_z": {
+  "value": 2.8015852181129683,
+  "label": "Simulated"
+ },
+ "o1_breakeven_base": {
+  "value": 0.000551510770598779,
+  "label": "Simulated"
+ },
+ "o1_breakeven_conservative": {
+  "value": 0.024635608934644747,
+  "label": "Simulated"
+ },
+ "o1_breakeven_optimistic": {
+  "value": 0.0003423388775397164,
+  "label": "Simulated"
+ },
+ "o1_breakeven_revolve": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o1_breakeven_revolve_nocofund": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o1_unit_base": {
+  "value": 0.020457987479408392,
+  "label": "Simulated"
+ },
+ "o1_unit_conservative": {
+  "value": 0.0009159749588167747,
+  "label": "Simulated"
+ },
+ "o1_unit_optimistic": {
+  "value": 0.03295798747940839,
+  "label": "Simulated"
+ },
+ "o1_value_per_1pct_base": {
+  "value": 55066.82740327855,
+  "label": "Simulated"
+ },
+ "o1_value_per_1pct_conservative": {
+  "value": -3819.083665442944,
+  "label": "Simulated"
+ },
+ "o1_value_per_1pct_optimistic": {
+  "value": 90677.05817577853,
+  "label": "Simulated"
+ },
+ "o2_breakeven_base": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o2_breakeven_conservative": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o2_breakeven_optimistic": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o2_breakeven_revolve": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o2_breakeven_revolve_nocofund": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o2_unit_base": {
+  "value": 0.02050462332391562,
+  "label": "Simulated"
+ },
+ "o2_unit_conservative": {
+  "value": 0.0010092466478312332,
+  "label": "Simulated"
+ },
+ "o2_unit_optimistic": {
+  "value": 0.03300462332391562,
+  "label": "Simulated"
+ },
+ "o2_value_per_1pct_base": {
+  "value": 16973.145885567046,
+  "label": "Simulated"
+ },
+ "o2_value_per_1pct_conservative": {
+  "value": 835.4257631340784,
+  "label": "Simulated"
+ },
+ "o2_value_per_1pct_optimistic": {
+  "value": 27320.291513067048,
+  "label": "Simulated"
+ },
+ "o3_breakeven_base": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o3_breakeven_conservative": {
+  "value": "never",
+  "label": "Simulated"
+ },
+ "o3_breakeven_optimistic": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o3_breakeven_revolve": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o3_breakeven_revolve_nocofund": {
+  "value": 0.016332296116176787,
+  "label": "Simulated"
+ },
+ "o3_other_breakeven_base": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o3_other_breakeven_conservative": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o3_other_breakeven_optimistic": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o3_other_breakeven_revolve": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o3_other_breakeven_revolve_nocofund": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o3_other_unit_base": {
+  "value": 0.022500000000000003,
+  "label": "Simulated"
+ },
+ "o3_other_unit_conservative": {
+  "value": 0.004999999999999999,
+  "label": "Simulated"
+ },
+ "o3_other_unit_optimistic": {
+  "value": 0.035,
+  "label": "Simulated"
+ },
+ "o3_other_value_per_1pct_base": {
+  "value": 53437.61976525002,
+  "label": "Simulated"
+ },
+ "o3_other_value_per_1pct_conservative": {
+  "value": 11875.0266145,
+  "label": "Simulated"
+ },
+ "o3_other_value_per_1pct_optimistic": {
+  "value": 83125.18630150003,
+  "label": "Simulated"
+ },
+ "o3_unit_base": {
+  "value": 0.01058385194191161,
+  "label": "Simulated"
+ },
+ "o3_unit_conservative": {
+  "value": -0.01883229611617679,
+  "label": "Simulated"
+ },
+ "o3_unit_optimistic": {
+  "value": 0.023083851941911607,
+  "label": "Simulated"
+ },
+ "o3_value_per_1pct_base": {
+  "value": 5014.76811025,
+  "label": "Simulated"
+ },
+ "o3_value_per_1pct_conservative": {
+  "value": -8922.989335500002,
+  "label": "Simulated"
+ },
+ "o3_value_per_1pct_optimistic": {
+  "value": 10937.432346499998,
+  "label": "Simulated"
+ },
+ "o4_breakeven_base": {
+  "value": 0.6857604329009722,
+  "label": "Simulated"
+ },
+ "o4_breakeven_conservative": {
+  "value": "never",
+  "label": "Simulated"
+ },
+ "o4_breakeven_optimistic": {
+  "value": 0.20966019703122646,
+  "label": "Simulated"
+ },
+ "o4_breakeven_revolve": {
+  "value": 0.004495376676084382,
+  "label": "Simulated"
+ },
+ "o4_breakeven_revolve_nocofund": {
+  "value": 0.026490753352168765,
+  "label": "Simulated"
+ },
+ "o4_unit_base": {
+  "value": 0.00550462332391562,
+  "label": "Simulated"
+ },
+ "o4_unit_conservative": {
+  "value": -0.028990753352168767,
+  "label": "Simulated"
+ },
+ "o4_unit_optimistic": {
+  "value": 0.01800462332391562,
+  "label": "Simulated"
+ },
+ "o4_value_per_1pct_base": {
+  "value": -755097.7082478107,
+  "label": "Simulated"
+ },
+ "o4_value_per_1pct_conservative": {
+  "value": -1591392.9389756215,
+  "label": "Simulated"
+ },
+ "o4_value_per_1pct_optimistic": {
+  "value": -729723.4824728108,
+  "label": "Simulated"
+ },
+ "o5_breakeven_base": {
+  "value": "no one qualifies",
+  "label": "Simulated"
+ },
+ "o5_breakeven_conservative": {
+  "value": "no one qualifies",
+  "label": "Simulated"
+ },
+ "o5_breakeven_optimistic": {
+  "value": "no one qualifies",
+  "label": "Simulated"
+ },
+ "o5_max_small_hsic_purchases_in_a_month": {
+  "value": 3,
+  "label": "Simulated"
+ },
+ "o5_reach_customer_months": {
+  "value": 0,
+  "label": "Simulated"
+ },
+ "o6_breakeven_base": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o6_breakeven_conservative": {
+  "value": "never",
+  "label": "Simulated"
+ },
+ "o6_breakeven_optimistic": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o6_breakeven_revolve": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o6_breakeven_revolve_nocofund": {
+  "value": 0.0004930650141265723,
+  "label": "Simulated"
+ },
+ "o6_unit_base": {
+  "value": 0.018503467492936715,
+  "label": "Simulated"
+ },
+ "o6_unit_conservative": {
+  "value": -0.0029930650141265745,
+  "label": "Simulated"
+ },
+ "o6_unit_optimistic": {
+  "value": 0.031003467492936716,
+  "label": "Simulated"
+ },
+ "o6_value_per_1pct_base": {
+  "value": 11419.38339079931,
+  "label": "Simulated"
+ },
+ "o6_value_per_1pct_conservative": {
+  "value": -1847.164966401382,
+  "label": "Simulated"
+ },
+ "o6_value_per_1pct_optimistic": {
+  "value": 19133.737062049313,
+  "label": "Simulated"
+ },
+ "o7_breakeven_saved_base": {
+  "value": 0.03959872067925054,
+  "label": "Simulated"
+ },
+ "o7_breakeven_saved_conservative": {
+  "value": "never",
+  "label": "Simulated"
+ },
+ "o7_breakeven_saved_optimistic": {
+  "value": 0.024601306419050235,
+  "label": "Simulated"
+ },
+ "o7_first_use_60d_share": {
+  "value": 0.15073607100091568,
+  "label": "Simulated"
+ },
+ "o7_milestone_reach": {
+  "value": 0.0009861238289779531,
+  "label": "Simulated"
+ },
+ "o7_new_cards_observed": {
+  "value": 14197,
+  "label": "Simulated"
+ },
+ "o7_trial_cost_per_card_base": {
+  "value": 1.9282521470923732,
+  "label": "Simulated"
+ },
+ "o7_trial_cost_per_card_conservative": {
+  "value": 3.8565042941847465,
+  "label": "Simulated"
+ },
+ "o7_trial_cost_per_card_optimistic": {
+  "value": 1.9282521470923732,
+  "label": "Simulated"
+ },
+ "o7_value_per_saved_card_base": {
+  "value": 48.69480917606422,
+  "label": "Simulated"
+ },
+ "o7_value_per_saved_card_conservative": {
+  "value": 2.396780089610518,
+  "label": "Simulated"
+ },
+ "o7_value_per_saved_card_optimistic": {
+  "value": 78.38007113310107,
+  "label": "Simulated"
+ },
+ "o8_breakeven_base": {
+  "value": 0.08090177263501172,
+  "label": "Simulated"
+ },
+ "o8_breakeven_conservative": {
+  "value": "never",
+  "label": "Simulated"
+ },
+ "o8_breakeven_optimistic": {
+  "value": 0.04479087243682794,
+  "label": "Simulated"
+ },
+ "o8_breakeven_revolve": {
+  "value": 0.0,
+  "label": "Simulated"
+ },
+ "o8_breakeven_revolve_nocofund": {
+  "value": 0.006490753352168765,
+  "label": "Simulated"
+ },
+ "o8_unit_base": {
+  "value": 0.015504623323915619,
+  "label": "Simulated"
+ },
+ "o8_unit_conservative": {
+  "value": -0.008990753352168767,
+  "label": "Simulated"
+ },
+ "o8_unit_optimistic": {
+  "value": 0.02800462332391562,
+  "label": "Simulated"
+ },
+ "o8_value_per_1pct_base": {
+  "value": -113606.44646196757,
+  "label": "Simulated"
+ },
+ "o8_value_per_1pct_conservative": {
+  "value": -268550.4353759351,
+  "label": "Simulated"
+ },
+ "o8_value_per_1pct_optimistic": {
+  "value": -100688.46444571756,
+  "label": "Simulated"
  },
  "seg_A_horizon_net": {
   "value": 24209826.15,
@@ -1284,11 +1996,11 @@
   "label": "Measured"
  },
  "x1_persistence_ci_hi": {
-  "value": 0.023054324581802697,
+  "value": 0.023054324581802694,
   "label": "Measured"
  },
  "x1_persistence_ci_lo": {
-  "value": -0.015606546195158394,
+  "value": -0.015606546195158395,
   "label": "Measured"
  },
  "x1_persistence_n": {
@@ -1296,7 +2008,7 @@
   "label": "Measured"
  },
  "x1_persistence_r": {
-  "value": 0.00372528122256921,
+  "value": 0.0037252812225692087,
   "label": "Measured"
  },
  "x1_sow_filter_n": {
@@ -1304,7 +2016,7 @@
   "label": "Measured"
  },
  "x1_sow_r_fy25_fy26": {
-  "value": 0.005749033960182846,
+  "value": 0.005749033960182852,
   "label": "Measured"
  },
  "x1_sow_values_clipped": {
@@ -1312,11 +2024,11 @@
   "label": "Measured"
  },
  "x1_split_half_ci_hi": {
-  "value": 0.011023731877336294,
+  "value": 0.0110237318773363,
   "label": "Measured"
  },
  "x1_split_half_ci_lo": {
-  "value": -0.021202467867705396,
+  "value": -0.021202467867705393,
   "label": "Measured"
  },
  "x1_split_half_n": {
@@ -1324,7 +2036,7 @@
   "label": "Measured"
  },
  "x1_split_half_r": {
-  "value": -0.005090689735322454,
+  "value": -0.00509068973532245,
   "label": "Measured"
  },
  "x1_variance_ratio_fy25": {

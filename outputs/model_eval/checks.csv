@@ -36,5 +36,5 @@ x3_excess_time_2025_07_31,"Time-aware silent-attrition excess, 2025-07-31",0.0,-
 x3_excess_time_2026_01_31,"Time-aware silent-attrition excess, 2026-01-31",0.0,-0.002664801690304505,0.015,pass
 f11_post_close_net,Post-closure net spend,91200000.0,91227701.08,50000.0,pass
 f8_prime_ge_left_on_table,"Prime G+E cashback left on the table, FY26",1600000.0,1603018.6419,5000.0,pass
-f15_reward_rate_fy26,FY26 effective reward rate on HSIC spend,0.01399,,0.0001,pending
-f12_gap,HSIC spend gap at constant SoW,33400000.0,,500000.0,pending
+f15_reward_rate_fy26,FY26 effective reward rate on HSIC spend,0.01399,0.013990753352168766,0.0001,pass
+f12_gap,HSIC spend gap at constant SoW,33400000.0,33360574.8722094,500000.0,pass

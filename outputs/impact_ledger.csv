@@ -1,8 +1,14 @@
 metric,value,unit,type,source_key
 SoW FY25,0.289095280596921,share,Measured,f1_sow_fy25
 SoW FY26,0.1948042888436566,share,Measured,f1_sow_fy26
+HSIC spend gap at constant SoW,33360574.8722094,₹,Measured,f12_gap
 Post-closure MetroMart spend (closers still shopping),91227701.08,₹,Measured,f11_post_close_net
 "Prime G+E cashback left on the table, FY26",1603018.6419,₹,Measured,f8_prime_ge_left_on_table
+FY26 effective reward rate on HSIC spend,0.013990753352168766,share,Measured,f15_reward_rate_fy26
+"Net margin lost, no co-funding (low)",33669.04835950021,₹,Measured × Assumed,f15_net_margin_lo_nocofund
+"Net margin lost, no co-funding (high)",200471.92272054724,₹,Measured × Assumed,f15_net_margin_hi_nocofund
+"Net margin lost, 50% co-funding (low)",267038.8357213206,₹,Measured × Assumed,f15_net_margin_lo_cofund
+"Net margin lost, 50% co-funding (high)",433841.7100823676,₹,Measured × Assumed,f15_net_margin_hi_cofund
 "Segment A spend after closure (5,903 customers)",92282525.94999999,₹,Measured,seg_A_post_close_net
 Closers caught in top decile by card age,0.25514174541411894,share,Measured,cm_b2_top_decile
 interchange conservative,0.015,share,Assumed,assumed_interchange_conservative
@@ -14,3 +20,130 @@ cofunding base,0.5,share,Assumed,assumed_cofunding_base
 interchange optimistic,0.02,share,Assumed,assumed_interchange_optimistic
 revolve income optimistic,0.02,share,Assumed,assumed_revolve_income_optimistic
 cofunding optimistic,0.5,share,Assumed,assumed_cofunding_optimistic
+cost of funds,0.08,share,Assumed,assumed_cost_of_funds
+emi subvention,0.03,share,Assumed,assumed_emi_subvention
+econ_margin_general_base,0.02050462332391562,,Simulated,econ_margin_general_base
+econ_margin_general_conservative,0.0010092466478312332,,Simulated,econ_margin_general_conservative
+econ_margin_general_optimistic,0.03300462332391562,,Simulated,econ_margin_general_optimistic
+econ_margin_one_pct_base,0.022500000000000003,,Simulated,econ_margin_one_pct_base
+econ_margin_one_pct_conservative,0.004999999999999999,,Simulated,econ_margin_one_pct_conservative
+econ_margin_one_pct_optimistic,0.035,,Simulated,econ_margin_one_pct_optimistic
+econ_margin_prime_electronics_base,0.012500000000000004,,Simulated,econ_margin_prime_electronics_base
+econ_margin_prime_electronics_conservative,-0.015,,Simulated,econ_margin_prime_electronics_conservative
+econ_margin_prime_electronics_optimistic,0.025,,Simulated,econ_margin_prime_electronics_optimistic
+econ_margin_prime_grocery_base,0.0025000000000000022,,Simulated,econ_margin_prime_grocery_base
+econ_margin_prime_grocery_conservative,-0.035,,Simulated,econ_margin_prime_grocery_conservative
+econ_margin_prime_grocery_optimistic,0.015,,Simulated,econ_margin_prime_grocery_optimistic
+mde_B,0.0610843129524345,,Simulated,mde_B
+mde_B_p,0.15058199499042288,,Simulated,mde_B_p
+mde_B_purchases_3m,2989.5119047619046,,Simulated,mde_B_purchases_3m
+mde_B_rel,0.40565482583969953,,Simulated,mde_B_rel
+mde_C,0.05171787167545313,,Simulated,mde_C
+mde_C_p,0.1563971340839304,,Simulated,mde_C_p
+mde_C_purchases_3m,4301.80493727236,,Simulated,mde_C_purchases_3m
+mde_C_rel,0.33068298839605825,,Simulated,mde_C_rel
+mde_D,0.03135902974012308,,Simulated,mde_D
+mde_D_p,0.15865722724928502,,Simulated,mde_D_p
+mde_D_purchases_3m,11837.848013048637,,Simulated,mde_D_purchases_3m
+mde_D_rel,0.1976527025198242,,Simulated,mde_D_rel
+mde_E,0.026232791493775567,,Simulated,mde_E
+mde_E_p,0.16012579019991657,,Simulated,mde_E_p
+mde_E_purchases_3m,17043.221248200967,,Simulated,mde_E_purchases_3m
+mde_E_rel,0.16382614856122804,,Simulated,mde_E_rel
+mde_grid,0.017928292012793886,,Simulated,mde_grid
+mde_grid_purchases_3m,36172.38610328387,,Simulated,mde_grid_purchases_3m
+mde_z,2.8015852181129683,,Simulated,mde_z
+o1_breakeven_base,0.000551510770598779,,Simulated,o1_breakeven_base
+o1_breakeven_conservative,0.024635608934644747,,Simulated,o1_breakeven_conservative
+o1_breakeven_optimistic,0.0003423388775397164,,Simulated,o1_breakeven_optimistic
+o1_breakeven_revolve,0.0,,Simulated,o1_breakeven_revolve
+o1_breakeven_revolve_nocofund,0.0,,Simulated,o1_breakeven_revolve_nocofund
+o1_unit_base,0.020457987479408392,,Simulated,o1_unit_base
+o1_unit_conservative,0.0009159749588167747,,Simulated,o1_unit_conservative
+o1_unit_optimistic,0.03295798747940839,,Simulated,o1_unit_optimistic
+o1_value_per_1pct_base,55066.82740327855,,Simulated,o1_value_per_1pct_base
+o1_value_per_1pct_conservative,-3819.083665442944,,Simulated,o1_value_per_1pct_conservative
+o1_value_per_1pct_optimistic,90677.05817577853,,Simulated,o1_value_per_1pct_optimistic
+o2_breakeven_base,0.0,,Simulated,o2_breakeven_base
+o2_breakeven_conservative,0.0,,Simulated,o2_breakeven_conservative
+o2_breakeven_optimistic,0.0,,Simulated,o2_breakeven_optimistic
+o2_breakeven_revolve,0.0,,Simulated,o2_breakeven_revolve
+o2_breakeven_revolve_nocofund,0.0,,Simulated,o2_breakeven_revolve_nocofund
+o2_unit_base,0.02050462332391562,,Simulated,o2_unit_base
+o2_unit_conservative,0.0010092466478312332,,Simulated,o2_unit_conservative
+o2_unit_optimistic,0.03300462332391562,,Simulated,o2_unit_optimistic
+o2_value_per_1pct_base,16973.145885567046,,Simulated,o2_value_per_1pct_base
+o2_value_per_1pct_conservative,835.4257631340784,,Simulated,o2_value_per_1pct_conservative
+o2_value_per_1pct_optimistic,27320.291513067048,,Simulated,o2_value_per_1pct_optimistic
+o3_breakeven_base,0.0,,Simulated,o3_breakeven_base
+o3_breakeven_conservative,never,,Simulated,o3_breakeven_conservative
+o3_breakeven_optimistic,0.0,,Simulated,o3_breakeven_optimistic
+o3_breakeven_revolve,0.0,,Simulated,o3_breakeven_revolve
+o3_breakeven_revolve_nocofund,0.016332296116176787,,Simulated,o3_breakeven_revolve_nocofund
+o3_other_breakeven_base,0.0,,Simulated,o3_other_breakeven_base
+o3_other_breakeven_conservative,0.0,,Simulated,o3_other_breakeven_conservative
+o3_other_breakeven_optimistic,0.0,,Simulated,o3_other_breakeven_optimistic
+o3_other_breakeven_revolve,0.0,,Simulated,o3_other_breakeven_revolve
+o3_other_breakeven_revolve_nocofund,0.0,,Simulated,o3_other_breakeven_revolve_nocofund
+o3_other_unit_base,0.022500000000000003,,Simulated,o3_other_unit_base
+o3_other_unit_conservative,0.004999999999999999,,Simulated,o3_other_unit_conservative
+o3_other_unit_optimistic,0.035,,Simulated,o3_other_unit_optimistic
+o3_other_value_per_1pct_base,53437.61976525002,,Simulated,o3_other_value_per_1pct_base
+o3_other_value_per_1pct_conservative,11875.0266145,,Simulated,o3_other_value_per_1pct_conservative
+o3_other_value_per_1pct_optimistic,83125.18630150003,,Simulated,o3_other_value_per_1pct_optimistic
+o3_unit_base,0.01058385194191161,,Simulated,o3_unit_base
+o3_unit_conservative,-0.01883229611617679,,Simulated,o3_unit_conservative
+o3_unit_optimistic,0.023083851941911607,,Simulated,o3_unit_optimistic
+o3_value_per_1pct_base,5014.76811025,,Simulated,o3_value_per_1pct_base
+o3_value_per_1pct_conservative,-8922.989335500002,,Simulated,o3_value_per_1pct_conservative
+o3_value_per_1pct_optimistic,10937.432346499998,,Simulated,o3_value_per_1pct_optimistic
+o4_breakeven_base,0.6857604329009722,,Simulated,o4_breakeven_base
+o4_breakeven_conservative,never,,Simulated,o4_breakeven_conservative
+o4_breakeven_optimistic,0.20966019703122646,,Simulated,o4_breakeven_optimistic
+o4_breakeven_revolve,0.004495376676084382,,Simulated,o4_breakeven_revolve
+o4_breakeven_revolve_nocofund,0.026490753352168765,,Simulated,o4_breakeven_revolve_nocofund
+o4_unit_base,0.00550462332391562,,Simulated,o4_unit_base
+o4_unit_conservative,-0.028990753352168767,,Simulated,o4_unit_conservative
+o4_unit_optimistic,0.01800462332391562,,Simulated,o4_unit_optimistic
+o4_value_per_1pct_base,-755097.7082478107,,Simulated,o4_value_per_1pct_base
+o4_value_per_1pct_conservative,-1591392.9389756215,,Simulated,o4_value_per_1pct_conservative
+o4_value_per_1pct_optimistic,-729723.4824728108,,Simulated,o4_value_per_1pct_optimistic
+o5_breakeven_base,no one qualifies,,Simulated,o5_breakeven_base
+o5_breakeven_conservative,no one qualifies,,Simulated,o5_breakeven_conservative
+o5_breakeven_optimistic,no one qualifies,,Simulated,o5_breakeven_optimistic
+o5_max_small_hsic_purchases_in_a_month,3,,Simulated,o5_max_small_hsic_purchases_in_a_month
+o5_reach_customer_months,0,,Simulated,o5_reach_customer_months
+o6_breakeven_base,0.0,,Simulated,o6_breakeven_base
+o6_breakeven_conservative,never,,Simulated,o6_breakeven_conservative
+o6_breakeven_optimistic,0.0,,Simulated,o6_breakeven_optimistic
+o6_breakeven_revolve,0.0,,Simulated,o6_breakeven_revolve
+o6_breakeven_revolve_nocofund,0.0004930650141265723,,Simulated,o6_breakeven_revolve_nocofund
+o6_unit_base,0.018503467492936715,,Simulated,o6_unit_base
+o6_unit_conservative,-0.0029930650141265745,,Simulated,o6_unit_conservative
+o6_unit_optimistic,0.031003467492936716,,Simulated,o6_unit_optimistic
+o6_value_per_1pct_base,11419.38339079931,,Simulated,o6_value_per_1pct_base
+o6_value_per_1pct_conservative,-1847.164966401382,,Simulated,o6_value_per_1pct_conservative
+o6_value_per_1pct_optimistic,19133.737062049313,,Simulated,o6_value_per_1pct_optimistic
+o7_breakeven_saved_base,0.03959872067925054,,Simulated,o7_breakeven_saved_base
+o7_breakeven_saved_conservative,never,,Simulated,o7_breakeven_saved_conservative
+o7_breakeven_saved_optimistic,0.024601306419050235,,Simulated,o7_breakeven_saved_optimistic
+o7_first_use_60d_share,0.15073607100091568,,Simulated,o7_first_use_60d_share
+o7_milestone_reach,0.0009861238289779531,,Simulated,o7_milestone_reach
+o7_new_cards_observed,14197,,Simulated,o7_new_cards_observed
+o7_trial_cost_per_card_base,1.9282521470923732,,Simulated,o7_trial_cost_per_card_base
+o7_trial_cost_per_card_conservative,3.8565042941847465,,Simulated,o7_trial_cost_per_card_conservative
+o7_trial_cost_per_card_optimistic,1.9282521470923732,,Simulated,o7_trial_cost_per_card_optimistic
+o7_value_per_saved_card_base,48.69480917606422,,Simulated,o7_value_per_saved_card_base
+o7_value_per_saved_card_conservative,2.396780089610518,,Simulated,o7_value_per_saved_card_conservative
+o7_value_per_saved_card_optimistic,78.38007113310107,,Simulated,o7_value_per_saved_card_optimistic
+o8_breakeven_base,0.08090177263501172,,Simulated,o8_breakeven_base
+o8_breakeven_conservative,never,,Simulated,o8_breakeven_conservative
+o8_breakeven_optimistic,0.04479087243682794,,Simulated,o8_breakeven_optimistic
+o8_breakeven_revolve,0.0,,Simulated,o8_breakeven_revolve
+o8_breakeven_revolve_nocofund,0.006490753352168765,,Simulated,o8_breakeven_revolve_nocofund
+o8_unit_base,0.015504623323915619,,Simulated,o8_unit_base
+o8_unit_conservative,-0.008990753352168767,,Simulated,o8_unit_conservative
+o8_unit_optimistic,0.02800462332391562,,Simulated,o8_unit_optimistic
+o8_value_per_1pct_base,-113606.44646196757,,Simulated,o8_value_per_1pct_base
+o8_value_per_1pct_conservative,-268550.4353759351,,Simulated,o8_value_per_1pct_conservative
+o8_value_per_1pct_optimistic,-100688.46444571756,,Simulated,o8_value_per_1pct_optimistic
